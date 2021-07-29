@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import Link from 'next/link'
 
 export default function Login() {
     return (
@@ -38,7 +39,7 @@ export default function Login() {
 
                     {/*<a href="#"><small>Forgot password?</small></a>*/}
                     {/*<p className="text-muted text-center"><small>Do not have an account?</small></p>*/}
-                    <a className="btn btn-sm btn-white btn-block" href="register.html">Create an account</a>
+                    <Link className="btn btn-sm btn-white btn-block" href="register.html">Create an account</Link>
                 </form>
             </div>
         </div>
