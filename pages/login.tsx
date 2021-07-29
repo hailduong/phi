@@ -39,7 +39,7 @@ export default function Login() {
 
                     {/*<a href="#"><small>Forgot password?</small></a>*/}
                     {/*<p className="text-muted text-center"><small>Do not have an account?</small></p>*/}
-                    <Link className="btn btn-sm btn-white btn-block" href="register.html">Create an account</Link>
+                    <Link href=""><a className="btn btn-sm btn-white btn-block">Create an account</a></Link>
                 </form>
             </div>
         </div>
