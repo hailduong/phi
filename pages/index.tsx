@@ -26,7 +26,6 @@ export default function Home() {
 
             <main className={styles.main}>
                 <div id="wrapper">
-
                     <nav className="navbar-default navbar-static-side" role="navigation">
                         <div className="sidebar-collapse">
                             <ul className="nav metismenu" id="side-menu">
@@ -75,51 +74,73 @@ export default function Home() {
 
                     <div id="page-wrapper" className="gray-bg">
                         <div className="row border-bottom">
-                            <nav className="navbar navbar-static-top white-bg" role="navigation"
-                                 style={{marginBottom: 0}}>
+                            <nav className="navbar navbar-static-top  mb-0" role="navigation">
                                 <div className="navbar-header">
-                                    <span className="navbar-minimalize minimalize-styl-2 btn btn-primary "><i
-                                        className="fa fa-bars"/> </span>
-                                    <form role="search" className="navbar-form-custom" method="post" action="#">
+                                    <a className="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#">
+                                        <i className="fa fa-bars"/>
+                                    </a>
+                                    <form role="search" className="navbar-form-custom" action="search_results.html">
                                         <div className="form-group">
                                             <input type="text" placeholder="Search for something..."
-                                                   className="form-control" name="top-search" id="top-search"/>
+                                                   className="form-control"
+                                                   name="top-search" id="top-search"/>
                                         </div>
                                     </form>
                                 </div>
-                                <ul className="nav navbar-top-links navbar-right">
-                                    <li>
-                                        <Link href="#">
-                                            <a>
-                                                <i className="fa fa-sign-out"></i> Log out
-                                            </a>
-                                        </Link>
-
-                                    </li>
-                                </ul>
 
                             </nav>
                         </div>
-                        <div className="wrapper wrapper-content animated fadeInRight">
-                            <div className="row">
-                                <div className="col-lg-12">
-                                    <div className="text-center m-t-lg">
-                                        <h1>
-                                            PHI
-                                        </h1>
-                                        <small>
-                                            This is a short deScription
-                                        </small>
-                                    </div>
-                                </div>
+                        <div className="row wrapper border-bottom white-bg page-heading">
+                            <div className="col-sm-4">
+                                <h2>Project list</h2>
+                                <ol className="breadcrumb">
+                                    <li className="breadcrumb-item">
+                                        <a href="index.html">Home</a>
+                                    </li>
+                                    <li className="breadcrumb-item active">
+                                        <strong>Project list</strong>
+                                    </li>
+                                </ol>
                             </div>
                         </div>
-                        <div className="footer">
-                            <div className="pull-right">
-                                10GB of <strong>250GB</strong> Free.
-                            </div>
-                            <div>
-                                <strong>Copyright</strong> Example Company &copy; 2014-2018
+                        <div className="wrapper wrapper-content animated fadeInUp">
+                            <div className="row">
+                                <div className="col-lg-12">
+
+                                    <div className="ibox">
+                                        <div className="ibox-title">
+                                            <h5>All projects assigned to this account</h5>
+                                            <div className="ibox-tools">
+                                                <a href="" className="btn btn-primary btn-xs">Create new project</a>
+                                            </div>
+                                        </div>
+                                        <div className="ibox-content">
+
+                                            <div className="project-list">
+
+                                                <table className="table table-hover">
+                                                    <tbody>
+                                                    <tr>
+                                                        <td className="project-status">
+                                                            <span className="label label-primary"/>
+                                                        </td>
+                                                        <td className="project-title">
+                                                            <a href="project_detail.html">Dr. ABC</a>
+                                                            <br/>
+                                                            <small>Phone: 123 123 123 | Emergency: 123 123</small>
+                                                        </td>
+                                                        <td className="project-actions">
+                                                            <a href="#" className="btn btn-white btn-sm">
+                                                                <i className="fa fa-pencil"/> Edit
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -130,17 +151,17 @@ export default function Home() {
             <footer className={styles.footer}>
                 {/* Main Scripts */}
 
-                <Script strategy={'beforeInteractive'} src="/js/jquery-3.1.1.min.js"/>
-                <Script strategy={'afterInteractive'} src="/js/popper.min.js"/>
-                <Script strategy={'afterInteractive'} src="/js/bootstrap.min.js"/>
-                <Script strategy={'afterInteractive'} src="/js/plugins/metisMenu/jquery.metisMenu.js"/>
-                <Script strategy={'afterInteractive'} src="/js/plugins/slimscroll/jquery.slimscroll.min.js"/>
+                <Script strategy={'beforeInteractive'} src="../public/js/jquery-3.1.1.min.js"/>
+                <Script strategy={'afterInteractive'} src="../public/js/popper.min.js"/>
+                <Script strategy={'afterInteractive'} src="../public/js/bootstrap.min.js"/>
+                <Script strategy={'afterInteractive'} src="../public/js/plugins/metisMenu/jquery.metisMenu.js"/>
+                <Script strategy={'afterInteractive'} src="../public/js/plugins/slimscroll/jquery.slimscroll.min.js"/>
 
                 {/* Plugins */}
-                <Script src="js/inspinia.js"></Script>
-                <Script src="js/plugins/pace/pace.min.js"></Script>
+                <Script src="../public/js/inspinia.js"></Script>
+                <Script src="../public/js/plugins/pace/pace.min.js"></Script>
 
             </footer>
         </div>
-    )
+)
 }
