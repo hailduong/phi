@@ -15,10 +15,10 @@ export default function PatientDetails() {
                 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
                 <span dangerouslySetInnerHTML={{
-                    __html: `<link href="css/bootstrap.min.css" rel="stylesheet"/>
-                <link href="font-awesome/css/font-awesome.css" rel="stylesheet"/>
-                <link href="css/animate.css" rel="stylesheet"/>
-                <link href="css/style.css" rel="stylesheet"/>`
+                    __html: `<link href="/css/bootstrap.min.css" rel="stylesheet"/>
+                <link href="/font-awesome/css/font-awesome.css" rel="stylesheet"/>
+                <link href="/css/animate.css" rel="stylesheet"/>
+                <link href="/css/style.css" rel="stylesheet"/>`
                 }}>
 
                 </span>
@@ -74,7 +74,7 @@ export default function PatientDetails() {
 
                     <div id="page-wrapper" className="gray-bg">
                         <div className="row border-bottom">
-                            <nav className="navbar navbar-static-top  mb-0" role="navigation">
+                            <nav className="navbar navbar-static-top mb-0" role="navigation">
                                 <div className="navbar-header">
                                     <a className="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#">
                                         <i className="fa fa-bars"/>
@@ -87,7 +87,6 @@ export default function PatientDetails() {
                                         </div>
                                     </form>
                                 </div>
-
                             </nav>
                         </div>
                         <div className="row wrapper border-bottom white-bg page-heading">
@@ -106,7 +105,130 @@ export default function PatientDetails() {
                         <div className="wrapper wrapper-content animated fadeInUp">
                             <div className="row">
                                 <div className="col-lg-12">
-                                    Content
+                                    <div className="ibox">
+                                        <div className="ibox-content">
+                                            <div className="row">
+                                                    <div className="col-lg-12">
+                                                        <div className="m-b-md">
+                                                            <h2 className="patient-name">Alex Smith</h2>
+                                                        </div>
+                                                        <div className="row m-t-sm">
+                                                            <div className="col-lg-12">
+                                                                <div className="panel blank-panel">
+                                                                    <div className="panel-heading">
+                                                                        <div className="panel-options">
+                                                                            <ul className="nav nav-tabs">
+                                                                                <li><a className="nav-link active show"
+                                                                                       href="#tab-1"
+                                                                                       data-toggle="tab">History</a>
+                                                                                </li>
+                                                                                <li><a className="nav-link"
+                                                                                       href="#tab-2"
+                                                                                       data-toggle="tab">Doctors</a>
+                                                                                </li>
+                                                                                <li><a className="nav-link"
+                                                                                       href="#tab-3"
+                                                                                       data-toggle="tab">Alergies</a>
+                                                                                </li>
+                                                                                <li><a className="nav-link"
+                                                                                       href="#tab-4"
+                                                                                       data-toggle="tab">Events</a></li>
+                                                                                <li><a className="nav-link"
+                                                                                       href="#tab-5"
+                                                                                       data-toggle="tab">Prescriptions</a>
+                                                                                </li>
+                                                                            </ul>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div className="panel-body">
+                                                                        <div className="tab-content">
+                                                                            <div className="tab-pane active show"
+                                                                                 id="tab-1">
+                                                                                <div className="feed-activity-list">
+                                                                                    <div className="feed-element">
+                                                                                        <a href="#"
+                                                                                           className="float-left">
+                                                                                            <img alt="image"
+                                                                                                 src="/img/icon-history.png"/>
+                                                                                        </a>
+                                                                                        <div className="media-body ">
+                                                                                            <div
+                                                                                                className="float-right from-toDate">12/2/2020
+                                                                                                - 13/2/2019</div>
+                                                                                            <h4> Lịch sử bệnh án 1</h4>
+                                                                                            <br/>
+                                                                                        </div>
+                                                                                        <div className="">
+                                                                                            Lorem Ipsum is simply dummy
+                                                                                            text
+                                                                                            of the printing and
+                                                                                            typesetting
+                                                                                            industry. Lorem Ipsum
+                                                                                            has been the industry's
+                                                                                            standard
+                                                                                            dummy text ever since the
+                                                                                            1500s.
+                                                                                            Over the years,
+                                                                                            sometimes by accident,
+                                                                                            sometimes
+                                                                                            on purpose (injected humour
+                                                                                            and
+                                                                                            the like).
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div className="panel-body">
+                                                                        <div className="tab-content">
+                                                                            <div className="tab-pane active show"
+                                                                                 id="tab-1">
+                                                                                <div className="feed-activity-list">
+                                                                                    <div className="feed-element">
+                                                                                        <a href="#"
+                                                                                           className="float-left">
+                                                                                            <img alt="image"
+                                                                                                 src="/img/icon-history.png"/>
+                                                                                        </a>
+                                                                                        <div className="media-body ">
+                                                                                            <div
+                                                                                                className="float-right from-toDate">12/2/2020
+                                                                                                - 13/2/2019</div>
+                                                                                            <h4> Lịch sử bệnh án 2</h4>
+                                                                                            <br/>
+                                                                                        </div>
+                                                                                        <div className="">
+                                                                                            Lorem Ipsum is simply dummy
+                                                                                            text
+                                                                                            of the printing and
+                                                                                            typesetting
+                                                                                            industry. Lorem Ipsum
+                                                                                            has been the industry's
+                                                                                            standard
+                                                                                            dummy text ever since the
+                                                                                            1500s.
+                                                                                            Over the years,
+                                                                                            sometimes by accident,
+                                                                                            sometimes
+                                                                                            on purpose (injected humour
+                                                                                            and
+                                                                                            the like).
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
