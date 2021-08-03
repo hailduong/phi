@@ -11727,3 +11727,30 @@ body.md-skin {
 .feed-element > a img {
     height: 29px;
 }
+
+.opacity-0 {
+    opacity: 0;
+}
+
+.top-0 {
+    top: 0%
+}
+
+.left-0 {
+    left: 0%
+}
+
+.add-button {
+    background: #1FB394;
+    color: white;
+    height: 40px;
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 300;
+}
+
+.add-img {
+    filter: grayscale(100%);
+}
