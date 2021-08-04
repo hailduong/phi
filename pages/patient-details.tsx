@@ -31,14 +31,12 @@ export default function PatientDetails() {
                             <ul className="nav metismenu" id="side-menu">
                                 <li className="nav-header">
                                     <div className="dropdown profile-element">
-
                                         <span data-toggle="dropdown" className="dropdown-toggle">
                                             <span className="block m-t-xs font-bold">Example user</span>
                                             <span className="text-muted text-xs block">menu
                                                     <b className="caret"/>
                                                 </span>
                                         </span>
-
                                         <ul className="dropdown-menu animated fadeInRight m-t-xs">
                                             <li>
                                                 <Link href={'/'}>
@@ -71,7 +69,6 @@ export default function PatientDetails() {
 
                         </div>
                     </nav>
-
                     <div id="page-wrapper" className="gray-bg">
                         <div className="row border-bottom">
                             <nav className="navbar navbar-static-top mb-0" role="navigation">
@@ -160,20 +157,14 @@ export default function PatientDetails() {
                                                                                         <br/>
                                                                                     </div>
                                                                                     <div className="">
-                                                                                        Lorem Ipsum is simply dummy
-                                                                                        text
-                                                                                        of the printing and
-                                                                                        typesetting
+                                                                                        Lorem Ipsum is simply dummy text
+                                                                                        of the printing and typesetting
                                                                                         industry. Lorem Ipsum
-                                                                                        has been the industry's
-                                                                                        standard
+                                                                                        has been the industry's standard
                                                                                         dummy text ever since the
-                                                                                        1500s.
-                                                                                        Over the years,
-                                                                                        sometimes by accident,
-                                                                                        sometimes
-                                                                                        on purpose (injected humour
-                                                                                        and
+                                                                                        1500s. Over the years, sometimes
+                                                                                        by accident, sometimes
+                                                                                        on purpose (injected humour and
                                                                                         the like).
                                                                                     </div>
                                                                                 </div>
@@ -215,8 +206,7 @@ export default function PatientDetails() {
                                                                              id="tab-2">
                                                                             <div className="feed-activity-list">
                                                                                 <div className="feed-element">
-                                                                                    <a href="#"
-                                                                                       className="float-left">
+                                                                                    <a href="#" className="float-left">
                                                                                         <img
                                                                                             src="https://img.icons8.com/ios/50/000000/doctor-male.png"/>
                                                                                     </a>
@@ -246,7 +236,8 @@ export default function PatientDetails() {
                                                                                         the like).
                                                                                     </div>
                                                                                     <div className="row pt-2">
-                                                                                        <div className="col-sm-6 b-r pt-2">
+                                                                                        <div
+                                                                                            className="col-sm-6 b-r pt-2">
                                                                                             <form role="form">
                                                                                                 <div
                                                                                                     className="form-group">
@@ -289,9 +280,11 @@ export default function PatientDetails() {
                                                                             <div className="feed-activity-list">
                                                                                 <div className="feed-element pt-3">
                                                                                     <a href="#" className="float-left">
-                                                                                        <img src="https://img.icons8.com/ios/50/000000/doctor-male.png"/>
+                                                                                        <img
+                                                                                            src="https://img.icons8.com/ios/50/000000/doctor-male.png"/>
                                                                                     </a>
-                                                                                    <button type="button" className="btn btn-outline-dark float-right">
+                                                                                    <button type="button"
+                                                                                            className="btn btn-outline-dark float-right">
                                                                                         Edit
                                                                                     </button>
                                                                                     <div className="media-body ">
