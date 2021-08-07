@@ -2,8 +2,10 @@ import Head from 'next/head'
 import Link from 'next/link'
 import Script from 'next/script'
 import styles from '../styles/Home.module.css'
+import LeftNavigation from "../components/common/LeftNavigation";
+import PageHeading from "../components/common/PageHeading";
 
-export default function PatientDetails() {
+export default function PatientDetailsPage() {
     return (
         <div className={styles.container}>
             <Head>
@@ -26,79 +28,9 @@ export default function PatientDetails() {
 
             <main className={styles.main}>
                 <div id="wrapper">
-                    <nav className="navbar-default navbar-static-side" role="navigation">
-                        <div className="sidebar-collapse">
-                            <ul className="nav metismenu" id="side-menu">
-                                <li className="nav-header">
-                                    <div className="dropdown profile-element">
-                                        <span data-toggle="dropdown" className="dropdown-toggle">
-                                            <span className="block m-t-xs font-bold">Example user</span>
-                                            <span className="text-muted text-xs block">menu
-                                                    <b className="caret"/>
-                                                </span>
-                                        </span>
-                                        <ul className="dropdown-menu animated fadeInRight m-t-xs">
-                                            <li>
-                                                <Link href={'/'}>
-                                                    <a className="dropdown-item">Logout</a>
-                                                </Link>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div className="logo-element">
-                                        IN+
-                                    </div>
-                                </li>
-                                <li className="active">
-                                    <Link href="/">
-                                        <a>
-                                            <i className="fa fa-th-large"/>
-                                            <span className="nav-label">Customers</span>
-                                        </a>
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link href="/">
-                                        <a>
-                                            <i className="fa fa-th-large"/>
-                                            <span className="nav-label">Notifications</span>
-                                        </a>
-                                    </Link>
-                                </li>
-                            </ul>
-
-                        </div>
-                    </nav>
+                    <LeftNavigation/>
                     <div id="page-wrapper" className="gray-bg">
-                        <div className="row border-bottom">
-                            <nav className="navbar navbar-static-top mb-0" role="navigation">
-                                <div className="navbar-header">
-                                    <a className="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#">
-                                        <i className="fa fa-bars"/>
-                                    </a>
-                                    <form role="search" className="navbar-form-custom" action="search_results.html">
-                                        <div className="form-group">
-                                            <input type="text" placeholder="Search for something..."
-                                                   className="form-control"
-                                                   name="top-search" id="top-search"/>
-                                        </div>
-                                    </form>
-                                </div>
-                            </nav>
-                        </div>
-                        <div className="row wrapper border-bottom white-bg page-heading">
-                            <div className="col-sm-4">
-                                <h2>Patient Details</h2>
-                                <ol className="breadcrumb">
-                                    <li className="breadcrumb-item">
-                                        <a href="index.html">Home</a>
-                                    </li>
-                                    <li className="breadcrumb-item active">
-                                        <strong>Patient Details</strong>
-                                    </li>
-                                </ol>
-                            </div>
-                        </div>
+                        <PageHeading pageName={"Patient Details"}/>
                         <div className="wrapper wrapper-content animated fadeInUp">
                             <div className="row">
                                 <div className="col-lg-12">
@@ -202,7 +134,7 @@ export default function PatientDetails() {
                                                                                 </div>
                                                                             </div>
                                                                         </div>
-                                                                        <div className="tab-pane active show"
+                                                                        <div className="tab-pane"
                                                                              id="tab-2">
                                                                             <div className="feed-activity-list">
                                                                                 <div className="feed-element">

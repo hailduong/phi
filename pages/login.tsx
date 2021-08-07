@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import Link from 'next/link'
 
-export default function Login() {
+export default function LoginPage() {
     return (
         <div className="gray-bg middle-box text-center loginscreen animated fadeInDown">
             <style dangerouslySetInnerHTML={{__html: `body{background: #f3f3f4}`}}/>

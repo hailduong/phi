@@ -2,8 +2,11 @@ import Head from 'next/head'
 import Link from 'next/link'
 import Script from 'next/script'
 import styles from '../styles/Home.module.css'
+import LeftNavigation from "../components/common/LeftNavigation";
+import PageHeading from "../components/common/PageHeading";
+import PatientPageContent from "../components/patients";
 
-export default function Home() {
+export default function PatientPage() {
     return (
         <div className={styles.container}>
             <Head>
@@ -26,124 +29,10 @@ export default function Home() {
 
             <main className={styles.main}>
                 <div id="wrapper">
-                    <nav className="navbar-default navbar-static-side" role="navigation">
-                        <div className="sidebar-collapse">
-                            <ul className="nav metismenu" id="side-menu">
-                                <li className="nav-header">
-                                    <div className="dropdown profile-element">
-
-                                        <span data-toggle="dropdown" className="dropdown-toggle">
-                                            <span className="block m-t-xs font-bold">Example user</span>
-                                            <span className="text-muted text-xs block">menu
-                                                    <b className="caret"/>
-                                                </span>
-                                        </span>
-
-                                        <ul className="dropdown-menu animated fadeInRight m-t-xs">
-                                            <li>
-                                                <Link href={'/'}>
-                                                    <a className="dropdown-item">Logout</a>
-                                                </Link>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div className="logo-element">
-                                        IN+
-                                    </div>
-                                </li>
-                                <li className="active">
-                                    <Link href="/">
-                                        <a>
-                                            <i className="fa fa-th-large"/>
-                                            <span className="nav-label">Customers</span>
-                                        </a>
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link href="/">
-                                        <a>
-                                            <i className="fa fa-th-large"/>
-                                            <span className="nav-label">Notifications</span>
-                                        </a>
-                                    </Link>
-                                </li>
-                            </ul>
-
-                        </div>
-                    </nav>
-
+                    <LeftNavigation/>
                     <div id="page-wrapper" className="gray-bg">
-                        <div className="row border-bottom">
-                            <nav className="navbar navbar-static-top  mb-0" role="navigation">
-                                <div className="navbar-header">
-                                    <a className="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#">
-                                        <i className="fa fa-bars"/>
-                                    </a>
-                                    <form role="search" className="navbar-form-custom" action="search_results.html">
-                                        <div className="form-group">
-                                            <input type="text" placeholder="Search for something..."
-                                                   className="form-control"
-                                                   name="top-search" id="top-search"/>
-                                        </div>
-                                    </form>
-                                </div>
-
-                            </nav>
-                        </div>
-                        <div className="row wrapper border-bottom white-bg page-heading">
-                            <div className="col-sm-4">
-                                <h2>Project list</h2>
-                                <ol className="breadcrumb">
-                                    <li className="breadcrumb-item">
-                                        <a href="index.html">Home</a>
-                                    </li>
-                                    <li className="breadcrumb-item active">
-                                        <strong>Project list</strong>
-                                    </li>
-                                </ol>
-                            </div>
-                        </div>
-                        <div className="wrapper wrapper-content animated fadeInUp">
-                            <div className="row">
-                                <div className="col-lg-12">
-
-                                    <div className="ibox">
-                                        <div className="ibox-title">
-                                            <h5>All projects assigned to this account</h5>
-                                            <div className="ibox-tools">
-                                                <a href="" className="btn btn-primary btn-xs">Create new project</a>
-                                            </div>
-                                        </div>
-                                        <div className="ibox-content">
-
-                                            <div className="project-list">
-
-                                                <table className="table table-hover">
-                                                    <tbody>
-                                                    <tr>
-                                                        <td className="project-status">
-                                                            <span className="label label-primary"/>
-                                                        </td>
-                                                        <td className="project-title">
-                                                            <a href="project_detail.html">Dr. ABC</a>
-                                                            <br/>
-                                                            <small>Phone: 123 123 123 | Emergency: 123 123</small>
-                                                        </td>
-                                                        <td className="project-actions">
-                                                            <a href="#" className="btn btn-white btn-sm">
-                                                                <i className="fa fa-pencil"/> Edit
-                                                            </a>
-                                                        </td>
-                                                    </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
+                        <PageHeading pageName={'Patients'}/>
+                        <PatientPageContent/>
                     </div>
                 </div>
             </main>
@@ -163,5 +52,5 @@ export default function Home() {
 
             </footer>
         </div>
-)
+    )
 }
