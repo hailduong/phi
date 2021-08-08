@@ -11724,10 +11724,6 @@ body.md-skin {
     padding: 6px 0;
 }
 
-.feed-element > a img {
-    height: 29px;
-}
-
 .opacity-0 {
     opacity: 0;
 }
@@ -11753,4 +11749,8 @@ body.md-skin {
 
 .add-img {
     filter: grayscale(100%);
+}
+
+.update {
+    margin-left: 15px;
 }
