@@ -33,7 +33,7 @@ const PatientPageContent = () => {
                 <div className="col-lg-12">
                     <div className="ibox">
                         <div className="ibox-title">
-                            <h5>All projects assigned to this account</h5>
+
                             <div className="ibox-tools">
                                 <a href="" className="btn btn-primary btn-xs">Create new project</a>
                             </div>

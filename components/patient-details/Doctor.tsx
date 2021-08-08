@@ -1,4 +1,4 @@
-import DoctorPatient from "./DoctorPatient";
+import DoctorPatient from "./DoctorPatient/DoctorPatient";
 
 const Doctor = () => {
     return (
