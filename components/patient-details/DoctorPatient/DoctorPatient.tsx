@@ -1,32 +1,32 @@
 import DoctorItem from "./DoctorItem";
+import {useEffect, useState} from "react";
 
 export type TDoctorData = {
-    scr: string
-    name: string
+    id: string
+    fullname: string
     phone: string
-    description: string
+    descriptions: string
 }
 
 type TDoctor = TDoctorData[]
 
-const data: TDoctor = [
-    {
-        scr: "https://img.icons8.com/ios/50/000000/doctor-male.png",
-        name: "Bs. Nguyen Van An",
-        phone: "0938 54 11 74",
-        description: "Over the years, sometimes by accident, sometimes on purpose (injected humour and the like)."
-    },
-    {
-        scr: "https://img.icons8.com/ios/50/000000/doctor-male.png",
-        name: "Bs. Tran Thi Bich Nga",
-        phone: "0938 54 11 74",
-        description: "Over the years, sometimes by accident, sometimes on purpose (injected humour and the like)."
-    }
-]
-
 const DoctorPatient = () => {
 
-    const doctorList = data.map(doctor => <DoctorItem key={doctor.name} doctorData={doctor}/>)
+    const [doctorData, setDoctorData] = useState<TDoctor>([])
+    useEffect(() => {
+        const getData = async () => {
+            const response = await fetch('http://localhost:3000/api/doctors')
+
+            const data = await response.json()
+            if (data.status === "200") {
+                setDoctorData(data.data)
+            }
+        }
+
+        getData()
+    }, [])
+
+    const doctorList = doctorData.map(doctor => <DoctorItem key={doctor.id} doctorData={doctor}/>)
     return <div>{doctorList}</div>
 }
 

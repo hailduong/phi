@@ -1,0 +1,34 @@
+import Image from "next/image";
+import * as url from "url";
+import {data} from "browserslist";
+import {useEffect, useState} from "react";
+import HistoryItem from "./HistoryItem";
+
+export type THistoryData = {
+    id: number
+    name: string
+    fromDate: number
+    toDate: number
+    descriptions: string
+}
+
+type THistory = THistoryData[]
+
+const HistoryPatient = () => {
+    const [historyData, setHistoryData] = useState<THistory>([])
+    useEffect(() => {
+        const getData = async () => {
+            const response = await fetch("http://localhost:3000/api/history")
+            const data = await response.json()
+            if (data.status === '200') {
+                setHistoryData(data.data)
+            }
+        }
+        getData()
+    }, [])
+
+    const historyList = historyData.map(history => <HistoryItem historyData={history} key={history.id}/>)
+    return <div>{historyList}</div>
+}
+
+export default HistoryPatient

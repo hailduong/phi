@@ -7,11 +7,14 @@ import PageHeading from "../components/common/PageHeading";
 import PatientHeading from "../components/patient-details/PatientHeading";
 import Image from "next/image";
 import PatientTabHeading from "../components/patient-details/PatientTabHeading";
-import HistoryPatient from "../components/patient-details/HistoryPatient";
-import Tab1 from "../components/patient-details/Tab1";
-import Doctor from "../components/patient-details/Doctor";
-import DoctorPatientEdit from "../components/patient-details/DoctorPatientEdit";
-import Tab2 from "../components/patient-details/Tab2";
+import HistoryPatient from "../components/patient-details/HistoryPatient/HistoryPatient";
+import Tab1 from "../components/patient-details/HistoryPatient/Tab1";
+import Doctor from "../components/patient-details/DoctorPatient/Doctor";
+import DoctorPatientEdit from "../components/patient-details/DoctorPatient/DoctorPatientEdit";
+import Tab2 from "../components/patient-details/DoctorPatient/Tab2";
+import Tab3 from "../components/patient-details/AllergyPatient/Tab3";
+import Tab4 from "../components/patient-details/Events/Tab4";
+import Tab5 from "../components/patient-details/Prescription/Tab5";
 
 export default function PatientDetailsPage() {
     return (
@@ -59,6 +62,9 @@ export default function PatientDetailsPage() {
                                                                     <div className="tab-content">
                                                                         <Tab1/>
                                                                         <Tab2/>
+                                                                        <Tab3/>
+                                                                        <Tab4/>
+                                                                        <Tab5/>
                                                                     </div>
                                                                 </div>
                                                             </div>
