@@ -1,4 +1,3 @@
-import HistoryPatient from "../HistoryPatient/HistoryPatient";
 import PrescriptionPatient from "./PrescriptionPatient";
 
 const Prescription = ( )=> {

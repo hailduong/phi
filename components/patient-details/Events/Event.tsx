@@ -1,4 +1,3 @@
-import HistoryPatient from "../HistoryPatient/HistoryPatient";
 import EventPatient from "./EventPatient";
 
 const Event = () => {
