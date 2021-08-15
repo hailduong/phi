@@ -1,0 +1,1 @@
+export const API_URL = 'https://private-15201e-phiwebapi.apiary-mock.com'

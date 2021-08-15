@@ -3,7 +3,7 @@ import Prescription from "./Prescription";
 
 const Tab5 = ()=> {
     return (
-        <div className="tab-pane active show" id="tab-5">
+        <div className="tab-pane" id="tab-5">
             <Prescription/>
         </div>
     )

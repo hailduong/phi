@@ -11,7 +11,7 @@ const EventItem = (props: TProps)=> {
     return (
         <div className="feed-element" key={eventData.id}>
             <a href="#" className="float-left">
-                <Image alt="image" height={"29px"} width={"29px"} src={"/img/event--v2.png"}/>
+                <Image alt="image" height={"29px"} width={"29px"} src={"/img/events--v2.png"}/>
             </a>
             <div className="media-body">
                 <div className="float-right from-toDate">

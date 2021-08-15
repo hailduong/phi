@@ -3,6 +3,7 @@ import * as url from "url";
 import {data} from "browserslist";
 import {useEffect, useState} from "react";
 import HistoryItem from "./HistoryItem";
+import {API_URL} from "../../../env";
 
 export type THistoryData = {
     id: number
@@ -18,7 +19,7 @@ const HistoryPatient = () => {
     const [historyData, setHistoryData] = useState<THistory>([])
     useEffect(() => {
         const getData = async () => {
-            const response = await fetch("http://localhost:3000/api/history")
+            const response = await fetch(`${API_URL}/auth/v1/user/history`)
             const data = await response.json()
             if (data.status === '200') {
                 setHistoryData(data.data)

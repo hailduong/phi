@@ -1,5 +1,6 @@
 import DoctorItem from "./DoctorItem";
 import {useEffect, useState} from "react";
+import {API_URL} from "../../../env";
 
 export type TDoctorData = {
     id: string
@@ -15,7 +16,7 @@ const DoctorPatient = () => {
     const [doctorData, setDoctorData] = useState<TDoctor>([])
     useEffect(() => {
         const getData = async () => {
-            const response = await fetch('http://localhost:3000/api/doctors')
+            const response = await fetch(`${API_URL}/auth/v1/docters/docters`)
 
             const data = await response.json()
             if (data.status === "200") {

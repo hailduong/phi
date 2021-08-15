@@ -1,5 +1,6 @@
 import {useEffect, useState} from "react";
 import PrescriptionItem from "./PrescriptionItem";
+import {API_URL} from "../../../env";
 
 export type TPresData = {
     id: number
@@ -14,7 +15,7 @@ const PrescriptionPatient = () => {
     const [presData, setPresData] = useState<TPres>([])
     useEffect(() => {
         const getData = async () => {
-            const response = await fetch('http://localhost:3000/api/prescription')
+            const response = await fetch(`${API_URL}/auth/v1/user/prescription`)
             const data = await response.json()
             if (data.status === '200') {
                 setPresData(data.data)

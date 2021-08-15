@@ -41,14 +41,14 @@ export default function PatientPage() {
                 {/* Main Scripts */}
 
                 <Script strategy={'beforeInteractive'} src="../public/js/jquery-3.1.1.min.js"/>
-                <Script strategy={'afterInteractive'} src="../public/js/popper.min.js"/>
-                <Script strategy={'afterInteractive'} src="../public/js/bootstrap.min.js"/>
-                <Script strategy={'afterInteractive'} src="../public/js/plugins/metisMenu/jquery.metisMenu.js"/>
-                <Script strategy={'afterInteractive'} src="../public/js/plugins/slimscroll/jquery.slimscroll.min.js"/>
+                <Script strategy={'beforeInteractive'} src="../public/js/popper.min.js"/>
+                <Script strategy={'beforeInteractive'} src="../public/js/bootstrap.min.js"/>
+                <Script strategy={'beforeInteractive'} src="../public/js/plugins/metisMenu/jquery.metisMenu.js"/>
+                <Script strategy={'beforeInteractive'} src="../public/js/plugins/slimscroll/jquery.slimscroll.min.js"/>
 
                 {/* Plugins */}
-                <Script src="../public/js/inspinia.js"></Script>
-                <Script src="../public/js/plugins/pace/pace.min.js"></Script>
+                <Script strategy={'beforeInteractive'} src="../public/js/inspinia.js"/>
+                <Script strategy={'beforeInteractive'} src="../public/js/plugins/pace/pace.min.js"/>
 
             </footer>
         </div>

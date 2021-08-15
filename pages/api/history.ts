@@ -33,28 +33,28 @@ export default function handler(
                 "descriptions": " + Mổ tim /n + bbbbbbbbb"
             },
             {
-                "id": 2,
+                "id": 3,
                 "name": "Lịch sử bệnh án 3",
                 "fromDate": 1592384762,
                 "toDate": 1623945962,
                 "descriptions": " + Mổ tim /n + bbbbbbbbb"
             },
             {
-                "id": 2,
+                "id": 4,
                 "name": "Lịch sử bệnh án 4",
                 "fromDate": 1592384762,
                 "toDate": 1623945962,
                 "descriptions": " + Mổ tim /n + bbbbbbbbb"
             },
             {
-                "id": 2,
+                "id": 5,
                 "name": "Lịch sử bệnh án 5",
                 "fromDate": 1592384762,
                 "toDate": 1623945962,
                 "descriptions": " + Mổ tim /n + bbbbbbbbb"
             },
             {
-                "id": 2,
+                "id": 6,
                 "name": "Lịch sử bệnh án 6",
                 "fromDate": 1592384762,
                 "toDate": 1623945962,

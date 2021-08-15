@@ -48,7 +48,7 @@ export default function PatientDetailsPage() {
                                     <div className="ibox">
                                         <div className="ibox-content">
                                             <div className="row">
-                                                <div className="col-lg-12">
+                                                <div className="col-lg-12 tab-seeContent">
                                                     <PatientHeading name={"Alex Smith"}/>
                                                     <div className="row m-t-sm">
                                                         <div className="col-lg-12">

@@ -5579,7 +5579,7 @@ video {
 }
 
 .wrapper-content {
-    padding: 20px 10px 40px;
+    padding: 20px 10px 0;
 }
 
 #page-wrapper {
@@ -5703,6 +5703,11 @@ body.body-small .footer.fixed {
     padding: 15px 15px 0 15px;
 }
 
+.tab-seeContent {
+    height: calc(100vh - 210px);
+    overflow: auto;
+}
+
 /* Bootstrap 3.3.x panels */
 .panel {
     margin-bottom: 20px;
@@ -5711,7 +5716,7 @@ body.body-small .footer.fixed {
     border-radius: 4px;
 }
 
-.panel-heading {
+.heading {
     color: white;
     padding: 10px 15px;
     border-bottom: 1px solid transparent;

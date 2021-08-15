@@ -1,7 +1,57 @@
 import Head from 'next/head'
 import Link from 'next/link'
+import {ChangeEvent, ChangeEventHandler, SyntheticEvent, useState} from "react";
+import LoginAlert from "../components/login/LoginAlert";
+import {use} from "ast-types";
 
 export default function LoginPage() {
+
+    /* Login logic */
+
+    // 1. Get value of username input
+    const [userName, setUserName] = useState<string>('')
+    const handleUserNameInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+        setUserName(event.target.value)
+    }
+
+    // 2. Get value of password
+    const [password, setPassword] = useState<string>('')
+    const handlePasswordInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+        setPassword(event.target.value)
+    }
+
+
+    // 3. Click sign in > send data
+    const handleClickSignIn = async () => {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/v1/doctor/login`, {
+            method: 'post',
+            body: JSON.stringify({
+                "email": userName,
+                "password": password
+            })
+        })
+        const data = await response.json()
+        if (data.status !== "200") {
+            navigateToThePatientPage()
+        } else {
+            showLoginAlert()// Show an error message
+        }
+    }
+    const [showLogin, setShowLogin] = useState(false)
+    const showLoginAlert = () => {
+        setShowLogin(true)
+
+        setTimeout(() => {
+            setShowLogin(false)
+        }, 5000)
+    }
+
+    // 4. If success, navigate to the `patient` page
+    const navigateToThePatientPage = () => {
+        location.assign('/')
+    }
+
+    /* Render */
     return (
         <div className="gray-bg middle-box text-center loginscreen animated fadeInDown">
             <style dangerouslySetInnerHTML={{__html: `body{background: #f3f3f4}`}}/>
@@ -28,17 +78,23 @@ export default function LoginPage() {
                 </div>
                 <h3>Welcome to PHI</h3>
                 <p>Login in. To see it in action.</p>
-                <form className="m-t" role="form" action="index.html">
+                <form className="m-t" role="form">
                     <div className="form-group">
-                        <input type="email" className="form-control" placeholder="Username" required/>
+                        <input type="email" onChange={handleUserNameInputChange} value={userName}
+                               className="form-control" placeholder="Username"
+                               required/>
                     </div>
                     <div className="form-group">
-                        <input type="password" className="form-control" placeholder="Password" required/>
+                        <input type="password" onChange={handlePasswordInputChange} value={password}
+                               className="form-control" placeholder="Password" required/>
                     </div>
-                    <button type="submit" className="btn btn-primary block full-width m-b">Login</button>
+                    {showLogin ? <LoginAlert/> : null}
+                    <button onClick={handleClickSignIn}
+                            className="btn btn-primary block full-width m-b">Login
+                    </button>
 
                     {/*<a href="#"><small>Forgot password?</small></a>*/}
-                    {/*<p className="text-muted text-center"><small>Do not have an account?</small></p>*/}
+                    <p className="text-muted text-center"><small>Do not have an account?</small></p>
                     <Link href=""><a className="btn btn-sm btn-white btn-block">Create an account</a></Link>
                 </form>
             </div>
