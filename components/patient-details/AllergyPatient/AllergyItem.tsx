@@ -1,5 +1,4 @@
 import {TAllergyData} from "./AllergyPatient";
-import DoctorPatientEdit from "../DoctorPatient/DoctorPatientEdit";
 
 type TProps = {
     allergyData: TAllergyData

@@ -1,26 +1,30 @@
+import Link from "next/link";
+import {TPatientData} from "../../services/types";
+
 type TProps = {
-  name: string
-  phoneNumber: string
-  emergencyNumber: string
+    patientData: TPatientData
 }
 
 const PatientItem = (props: TProps) => {
 
-    const {emergencyNumber, name, phoneNumber} = props
+    const {patientData} = props
 
     return <tr>
-        <td className="project-status">
-            <span className="label label-primary"/>
-        </td>
+        {/*<td className="project-status">*/}
+        {/*    <span className="label label-primary"/>*/}
+        {/*</td>*/}
         <td className="project-title">
-            <a href="project_detail.html">{name}</a>
+            <div>{patientData.id}</div>
+            <a href="project_detail.html">Title: {patientData.title} | {patientData.fisrtName} {patientData.lastName}</a>
             <br/>
-            <small>Phone: {phoneNumber} | Emergency: {emergencyNumber}</small>
+            <small>Phone: {patientData.phone} | Email: {patientData.email} </small>
         </td>
         <td className="project-actions">
-            <a href="#" className="btn btn-white btn-sm">
-                <i className="fa fa-pencil"/> Edit
-            </a>
+            <Link href={`/patient-details/${patientData.id}`}>
+                <a className="btn btn-white btn-sm">
+                    <i className="fa fa-pencil"/> Edit
+                </a>
+            </Link>
         </td>
     </tr>
 }

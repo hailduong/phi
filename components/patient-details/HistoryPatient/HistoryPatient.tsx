@@ -4,6 +4,7 @@ import {data} from "browserslist";
 import {useEffect, useState} from "react";
 import HistoryItem from "./HistoryItem";
 import {API_URL} from "../../../env";
+import {useRouter} from "next/router";
 
 export type THistoryData = {
     id: number
@@ -16,6 +17,9 @@ export type THistoryData = {
 type THistory = THistoryData[]
 
 const HistoryPatient = () => {
+    const router = useRouter()
+    const { pid } = router.query
+
     const [historyData, setHistoryData] = useState<THistory>([])
     useEffect(() => {
         const getData = async () => {

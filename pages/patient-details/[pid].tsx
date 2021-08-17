@@ -1,22 +1,36 @@
 import Head from 'next/head'
 import Link from 'next/link'
 import Script from 'next/script'
-import styles from '../styles/Home.module.css'
-import LeftNavigation from "../components/common/LeftNavigation";
-import PageHeading from "../components/common/PageHeading";
-import PatientHeading from "../components/patient-details/PatientHeading";
+import styles from '../../styles/Home.module.css'
+import LeftNavigation from "../../components/common/LeftNavigation";
+import PageHeading from "../../components/common/PageHeading";
+import PatientHeading from "../../components/patients/PatientHeading";
 import Image from "next/image";
-import PatientTabHeading from "../components/patient-details/PatientTabHeading";
-import HistoryPatient from "../components/patient-details/HistoryPatient/HistoryPatient";
-import Tab1 from "../components/patient-details/HistoryPatient/Tab1";
-import Doctor from "../components/patient-details/DoctorPatient/Doctor";
-import DoctorPatientEdit from "../components/patient-details/DoctorPatient/DoctorPatientEdit";
-import Tab2 from "../components/patient-details/DoctorPatient/Tab2";
-import Tab3 from "../components/patient-details/AllergyPatient/Tab3";
-import Tab4 from "../components/patient-details/Events/Tab4";
-import Tab5 from "../components/patient-details/Prescription/Tab5";
+import PatientTabHeading from "../../components/patient-details/PatientTabHeading";
+import HistoryPatient from "../../components/patient-details/HistoryPatient/HistoryPatient";
+import Tab1 from "../../components/patient-details/HistoryPatient/Tab1";
+import Doctor from "../../components/patient-details/DoctorPatient/Doctor";
+import DoctorPatientEdit from "../../components/patient-details/DoctorPatient/DoctorPatientEdit";
+import Tab2 from "../../components/patient-details/DoctorPatient/Tab2";
+import Tab3 from "../../components/patient-details/AllergyPatient/Tab3";
+import Tab4 from "../../components/patient-details/Events/Tab4";
+import Tab5 from "../../components/patient-details/Prescription/Tab5";
+import {useEffect, useState} from "react";
+import {TPatientDataList} from "../../services/types";
+import patientService from "../../services/patientService";
 
 export default function PatientDetailsPage() {
+
+    const [data, setData] = useState<TPatientDataList>([])
+    useEffect(() => {
+        // Get data
+        (async () => {
+            const data = await patientService.getPatientList()
+            if (data.status === '200') {
+                setData(data.data)
+            }
+        })()
+    }, [])
     return (
         <div className={styles.container}>
             <Head>
@@ -49,7 +63,7 @@ export default function PatientDetailsPage() {
                                         <div className="ibox-content">
                                             <div className="row">
                                                 <div className="col-lg-12 tab-seeContent">
-                                                    <PatientHeading name={"Alex Smith"}/>
+                                                    <PatientHeading patientData1={}/>
                                                     <div className="row m-t-sm">
                                                         <div className="col-lg-12">
                                                             <div className="panel blank-panel">

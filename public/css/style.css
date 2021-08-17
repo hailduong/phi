@@ -6020,6 +6020,10 @@ code {
     clear: both;
 }
 
+.addPatient {
+    padding: 15px 20px 20px 20px;
+}
+
 .ibox-content {
     background-color: #ffffff;
     color: inherit;

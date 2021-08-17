@@ -1,3 +1,5 @@
+import {useRouter} from "next/router";
+
 type TTab = {
     tabNumber: string
     tabName: string
@@ -28,6 +30,10 @@ const data: TTab = [
 
 
 const PatientTabHeading = () => {
+    const router = useRouter()
+    const { pid } = router.query
+
+    console.log('pid', pid)
 
     const liList = data.map(item => {
         return (
