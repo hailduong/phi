@@ -5,6 +5,7 @@ import styles from '../styles/Home.module.css'
 import LeftNavigation from "../components/common/LeftNavigation";
 import PageHeading from "../components/common/PageHeading";
 import PatientPageContent from "../components/patients";
+// import './externalScripts'
 
 export default function PatientPage() {
     return (
@@ -41,15 +42,14 @@ export default function PatientPage() {
                 {/* Main Scripts */}
 
                 <Script strategy={'beforeInteractive'} src="../public/js/jquery-3.1.1.min.js"/>
-                <Script strategy={'beforeInteractive'} src="../public/js/popper.min.js"/>
                 <Script strategy={'beforeInteractive'} src="../public/js/bootstrap.min.js"/>
+                <Script strategy={'beforeInteractive'} src="../public/js/popper.min.js"/>
                 <Script strategy={'beforeInteractive'} src="../public/js/plugins/metisMenu/jquery.metisMenu.js"/>
                 <Script strategy={'beforeInteractive'} src="../public/js/plugins/slimscroll/jquery.slimscroll.min.js"/>
 
                 {/* Plugins */}
                 <Script strategy={'beforeInteractive'} src="../public/js/inspinia.js"/>
                 <Script strategy={'beforeInteractive'} src="../public/js/plugins/pace/pace.min.js"/>
-
             </footer>
         </div>
     )

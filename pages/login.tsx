@@ -3,6 +3,7 @@ import Link from 'next/link'
 import {ChangeEvent, ChangeEventHandler, SyntheticEvent, useState} from "react";
 import LoginAlert from "../components/login/LoginAlert";
 import {use} from "ast-types";
+import authService from "../services/authService";
 
 export default function LoginPage() {
 
@@ -23,20 +24,19 @@ export default function LoginPage() {
 
     // 3. Click sign in > send data
     const handleClickSignIn = async () => {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/v1/doctor/login`, {
-            method: 'post',
-            body: JSON.stringify({
-                "email": userName,
-                "password": password
-            })
-        })
-        const data = await response.json()
-        if (data.status !== "200") {
+        // Send data to server
+        const data = await authService.login(userName, password)
+
+        if (data.status.code === 200) {
+            // Go to patient page if success
             navigateToThePatientPage()
         } else {
+            // Show error if fail
             showLoginAlert()// Show an error message
         }
     }
+
+
     const [showLogin, setShowLogin] = useState(false)
     const showLoginAlert = () => {
         setShowLogin(true)
@@ -78,7 +78,7 @@ export default function LoginPage() {
                 </div>
                 <h3>Welcome to PHI</h3>
                 <p>Login in. To see it in action.</p>
-                <form className="m-t" role="form">
+                <div className="m-t">
                     <div className="form-group">
                         <input type="email" onChange={handleUserNameInputChange} value={userName}
                                className="form-control" placeholder="Username"
@@ -95,8 +95,8 @@ export default function LoginPage() {
 
                     {/*<a href="#"><small>Forgot password?</small></a>*/}
                     <p className="text-muted text-center"><small>Do not have an account?</small></p>
-                    <Link href=""><a className="btn btn-sm btn-white btn-block">Create an account</a></Link>
-                </form>
+                    <a className="btn btn-sm btn-white btn-block">Create an account</a>
+                </div>
             </div>
         </div>
     )

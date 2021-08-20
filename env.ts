@@ -1,1 +1,1 @@
-export const API_URL = 'https://private-15201e-phiwebapi.apiary-mock.com'
+export const API_URL = 'http://api.physicianhealthintegration.com:3001/api/v1.0'

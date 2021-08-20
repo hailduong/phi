@@ -18,19 +18,26 @@ import Tab5 from "../../components/patient-details/Prescription/Tab5";
 import {useEffect, useState} from "react";
 import {TPatientDataList} from "../../services/types";
 import patientService from "../../services/patientService";
+import PatientItem from "../../components/patients/PatienItem";
+import {useRouter} from "next/router";
 
 export default function PatientDetailsPage() {
 
-    const [data, setData] = useState<TPatientDataList>([])
+    const [dataPatient, setDataPatient] = useState<TPatientDataList>([])
+    const router = useRouter()
+    const { pid } = router.query
+
     useEffect(() => {
-        // Get data
+        // Get dataPatient
         (async () => {
             const data = await patientService.getPatientList()
             if (data.status === '200') {
-                setData(data.data)
+                setDataPatient(data.data)
             }
         })()
     }, [])
+
+    // const patientList = dataPatient.map(patient => <PatientItem patientData={patient})
     return (
         <div className={styles.container}>
             <Head>
@@ -63,7 +70,7 @@ export default function PatientDetailsPage() {
                                         <div className="ibox-content">
                                             <div className="row">
                                                 <div className="col-lg-12 tab-seeContent">
-                                                    <PatientHeading patientData1={}/>
+                                                    {/*<PatientHeading patientData1={}/>*/}
                                                     <div className="row m-t-sm">
                                                         <div className="col-lg-12">
                                                             <div className="panel blank-panel">

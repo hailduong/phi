@@ -3,7 +3,7 @@ import {TPatientDataResponse} from "./types";
 
 const patientService = {
     getPatientList: async () => {
-        const response = await fetch(`${API_URL}/auth/v1/doctor/patients`)
+        const response = await fetch(`${API_URL}/doctor/info/patients`)
         return await response.json() as TPatientDataResponse
     },
     getPatientDetail: () => {

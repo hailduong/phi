@@ -33,11 +33,11 @@ const PatientPageContent = () => {
                     <div className="ibox">
                         <div className="ibox-title">
                             <div className="ibox-tools">
-                                <a onClick={handleAddPatient} className="btn btn-primary btn-xs">Add new patient</a>
+                                <a onClick={handleAddPatient} className="btn btn-primary">Add Patient</a>
                             </div>
-                        </div>
-                        <div className="addPatient">
-                            {addPatient ? <AddPatient/> : null}
+                            <div className="addPatient">
+                                {addPatient ? <AddPatient/> : null}
+                            </div>
                         </div>
                         <div className="ibox-content">
                             <div className="project-list">
