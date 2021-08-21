@@ -1,7 +1,9 @@
 import {API_URL} from '../../env'
-import {TAuthResponse} from './authType'
+import {TAuthResponse, TUserEntity} from './authType'
 
 class AuthService {
+
+    user: TUserEntity | null = null
 
     get key(): string | null {
         if (typeof window !== 'undefined') {
@@ -37,8 +39,12 @@ class AuthService {
         const jsonData: TAuthResponse = await response.json()
         // Save the access token
         if (jsonData.status.code === 200) {
+
             // Save to localStorage
             this.key = jsonData.data.accessToken
+
+            // Save user
+            this.user = jsonData.data
         }
 
         return jsonData

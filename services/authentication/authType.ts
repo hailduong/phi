@@ -1,6 +1,6 @@
 export type TAuthRequestBody = {
-    "password": string,
-    "email": string
+    'password': string,
+    'email': string
 }
 
 export type TAuthResponse = {
@@ -8,13 +8,15 @@ export type TAuthResponse = {
         code: number
         message: string
     }
-    data: {
-        userId: number
-        userEmail: string
-        firstName: string
-        lastName: string
-        role: string
-        accessToken: string
-        refreshToken: string
-    }
+    data: TUserEntity
+}
+
+export type TUserEntity = {
+    userId: number
+    userEmail: string
+    firstName: string
+    lastName: string
+    role: string
+    accessToken: string
+    refreshToken: string
 }
