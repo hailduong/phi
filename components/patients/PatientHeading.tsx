@@ -1,7 +1,7 @@
-import {TPatientData} from "../../services/types";
+import {TPatientEntity} from "../../services/patients/types";
 
 type TPatient = {
-    patientData1: TPatientData
+    patientData1: TPatientEntity
 }
 
 const PatientHeading = (props: TPatient) => {
@@ -9,7 +9,7 @@ const PatientHeading = (props: TPatient) => {
     const {patientData1} = props
 
     return <div className="m-b-md">
-        <h2 className="patient-name">{patientData1.fisrtName}</h2>
+        <h2 className="patient-name">{patientData1.firstName}</h2>
     </div>
 }
 

@@ -1,17 +1,17 @@
-import PatientItem from "./PatienItem";
-import {useEffect, useState} from "react";
-import AddPatient from "./AddPatient";
-import patientService from "../../services/patientService";
-import {TPatientDataList} from "../../services/types";
+import PatientItem from './PatienItem'
+import {useEffect, useState} from 'react'
+import AddPatient from './AddPatient'
+import patientService from '../../services/patients/patientService'
+import { TPatientDataResponse, TPatientEntity} from '../../services/patients/types'
 
 const PatientPageContent = () => {
 
-    const [data, setData] = useState<TPatientDataList>([])
+    const [data, setData] = useState<TPatientEntity[]>([])
     useEffect(() => {
         // Get data
         (async () => {
-            const data = await patientService.getPatientList()
-            if (data.status === '200') {
+            const data: TPatientDataResponse = await patientService.getPatientList()
+            if (data.status.code === 200) {
                 setData(data.data)
             }
         })()

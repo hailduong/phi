@@ -2,7 +2,7 @@ import Head from 'next/head'
 import styles from '../../styles/Home.module.css'
 import Script from 'next/script'
 import React from 'react'
-import authService from '../../services/authService'
+import authService from '../../services/authentication/authService'
 
 type TProps = {
     children: React.ReactNode

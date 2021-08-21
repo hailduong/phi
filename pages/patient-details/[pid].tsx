@@ -16,8 +16,8 @@ import Tab3 from "../../components/patient-details/AllergyPatient/Tab3";
 import Tab4 from "../../components/patient-details/Events/Tab4";
 import Tab5 from "../../components/patient-details/Prescription/Tab5";
 import {useEffect, useState} from "react";
-import {TPatientDataList} from "../../services/types";
-import patientService from "../../services/patientService";
+import {TPatientDataList} from "../../services/patients/types";
+import patientService from "../../services/patients/patientService";
 import PatientItem from "../../components/patients/PatienItem";
 import {useRouter} from "next/router";
 
