@@ -1,6 +1,5 @@
 import Link from 'next/link'
 import {TPatientEntity} from '../../services/patients/types'
-import patientService from "../../services/patients/patientService";
 
 type TProps = {
     patientData: TPatientEntity
@@ -18,7 +17,7 @@ const PatientItem = (props: TProps) => {
         {/*</td>*/}
         <td className="project-title">
             <Link href={`/patient-details/${patientData.id}`}>
-                <a>Title: {patientData.title} | {patientData.firstName} {patientData.lastName}
+                <a>{patientData.firstName} {patientData.lastName}
                     <br/>
                     <small>Phone: {patientData.phone} | Email: {patientData.email} </small>
                 </a>
@@ -26,7 +25,7 @@ const PatientItem = (props: TProps) => {
         </td>
         <td className="project-actions">
             <Link href={`/patient-details/${patientData.id}`}>
-                <a className="btn btn-white btn-sm">
+                <a className="btn btn-white btn-sm disabled">
                     <i className="fa fa-pencil"/> Edit
                 </a>
             </Link>
