@@ -10,10 +10,10 @@ const data: TTab = [
         tabName: 'History',
         tabHash: `#tab-1`
     },
-    {
-        tabName: 'Doctors',
-        tabHash: '#tab-2'
-    },
+    // {
+    //     tabName: 'Doctors',
+    //     tabHash: '#tab-2'
+    // },
     {
         tabName: 'Allergies',
         tabHash: '#tab-3'
