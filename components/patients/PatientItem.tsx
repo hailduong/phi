@@ -1,5 +1,5 @@
-import Link from "next/link";
-import {TPatientEntity} from "../../services/patients/types";
+import Link from 'next/link'
+import {TPatientEntity} from '../../services/patients/types'
 
 type TProps = {
     patientData: TPatientEntity
@@ -14,10 +14,12 @@ const PatientItem = (props: TProps) => {
         {/*    <span className="label label-primary"/>*/}
         {/*</td>*/}
         <td className="project-title">
-            <div>{patientData.id}</div>
-            <a href="project_detail.html">Title: {patientData.title} | {patientData.firstName} {patientData.lastName}</a>
-            <br/>
-            <small>Phone: {patientData.phone} | Email: {patientData.email} </small>
+            <Link href={`/patient-details/${patientData.id}`}>
+                <a>Title: {patientData.title} | {patientData.firstName} {patientData.lastName}
+                    <br/>
+                    <small>Phone: {patientData.phone} | Email: {patientData.email} </small>
+                </a>
+            </Link>
         </td>
         <td className="project-actions">
             <Link href={`/patient-details/${patientData.id}`}>
