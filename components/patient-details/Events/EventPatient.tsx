@@ -1,7 +1,7 @@
-import {use} from "ast-types";
-import {useEffect, useState} from "react";
-import EventItem from "./EventItem";
-import {API_URL} from "../../../env";
+import {useEffect, useState} from 'react'
+import EventItem from './EventItem'
+import {useRouter} from 'next/router'
+import eventService from '../../../services/eventService/eventService'
 
 export type TEventData = {
     id: number
@@ -13,17 +13,18 @@ export type TEventData = {
 type TEvent = TEventData[]
 
 const EventPatient = () => {
+    const router = useRouter()
+    const {patientId = ''} = router.query
     const [eventData, setEventData] = useState<TEvent>([])
     useEffect(() => {
         const getData = async () => {
-            const response = await fetch(`${API_URL}/auth/v1/user/event`)
-            const data = await response.json()
-            if (data.status === '200') {
+            const data = await eventService.getAllEvents(patientId as string)
+            if (data?.status.code === 200) {
                 setEventData(data.data)
             }
         }
         getData()
-    },[])
+    }, [patientId])
 
     const eventList = eventData.map(event => <EventItem eventData={event} key={event.id}/>)
     return <div>{eventList}</div>

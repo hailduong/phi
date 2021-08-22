@@ -2,6 +2,7 @@ import {useEffect, useState} from 'react'
 import AllergyItem from './AllergyItem'
 import allergyService from '../../../services/allergyService/allergyService'
 import {useRouter} from 'next/router'
+import eventService from '../../../services/eventService/eventService'
 
 export type TAllergyData = {
     id: number
