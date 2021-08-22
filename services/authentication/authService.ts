@@ -21,7 +21,7 @@ class AuthService {
     }
 
 
-    get key(): string | null {
+    getAccessToken(): string | null {
         if (typeof window !== 'undefined') {
             const value = localStorage.getItem('key')
             if (value) {
@@ -31,7 +31,7 @@ class AuthService {
         return null
     }
 
-    set key(value: string | null) {
+    setAccessToken(value: string | null) {
         if (typeof window !== 'undefined' && typeof value === 'string') {
             window.localStorage.setItem('key', window.btoa(window.btoa(value)))
         }
@@ -75,7 +75,7 @@ class AuthService {
         if (jsonData.status.code === 200) {
 
             // Save to localStorage
-            this.key = jsonData.data.accessToken
+            this.setAccessToken(jsonData.data.accessToken)
 
             // Save user
             this.setUser(jsonData.data)

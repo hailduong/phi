@@ -14,7 +14,7 @@ const apiClient = {
                 const response = await fetch(url, {
                     method,
                     headers: {
-                        'Authorization': `Bearer ${authService.key}`
+                        'Authorization': `Bearer ${authService.getAccessToken()}`
                     }
                 })
                 const data: ReturnedType = await response.json()
@@ -26,7 +26,7 @@ const apiClient = {
                     method,
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${authService.key}`
+                        'Authorization': `Bearer ${authService.getAccessToken()}`
                     },
                     body: JSON.stringify(body)
                 })
