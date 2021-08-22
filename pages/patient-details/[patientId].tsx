@@ -16,6 +16,7 @@ import PatientHeading from '../../components/patients/PatientHeading'
 
 export default function PatientDetailsPage() {
 
+    /* Get initial data */
     const [currentPatient, setCurrentPatient] = useState<TPatientEntity | null>(null)
     const router = useRouter()
     const {patientId} = router.query
@@ -29,7 +30,10 @@ export default function PatientDetailsPage() {
                 currentPatientData && setCurrentPatient(currentPatientData)
             }
         })()
-    }, [])
+    }, [patientId])
+
+    /* Tabbing */
+    const [activeTabIndex, setActiveTabIndex] = useState(0)
 
     /* Render */
     return (
@@ -47,22 +51,23 @@ export default function PatientDetailsPage() {
                                             <div className="row">
                                                 <div className="col-lg-12 tab-seeContent">
                                                     <PatientHeading
-                                                        patientName={`${currentPatient?.firstName} ${currentPatient?.lastName}`}/>
+                                                        patientName={`${currentPatient?.firstName || ''} ${currentPatient?.lastName || ''}`}/>
                                                     <div className="row m-t-sm">
                                                         <div className="col-lg-12">
                                                             <div className="panel blank-panel">
                                                                 <div className="panel-heading">
                                                                     <div className="panel-options">
-                                                                        <PatientTabHeading/>
+                                                                        <PatientTabHeading
+                                                                            onSelectTab={(tabIndex) => setActiveTabIndex(tabIndex)}/>
                                                                     </div>
                                                                 </div>
                                                                 <div className="panel-body">
                                                                     <div className="tab-content">
-                                                                        <Tab1/>
-                                                                        <Tab2/>
-                                                                        <Tab3/>
-                                                                        <Tab4/>
-                                                                        <Tab5/>
+                                                                        {activeTabIndex === 0 && <Tab1/>}
+                                                                        {activeTabIndex === 1 && <Tab2/>}
+                                                                        {activeTabIndex === 2 && <Tab3/>}
+                                                                        {activeTabIndex === 3 && <Tab4/>}
+                                                                        {activeTabIndex === 4 && <Tab5/>}
                                                                     </div>
                                                                 </div>
                                                             </div>

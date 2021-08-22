@@ -29,10 +29,10 @@ export default function HeaderFooter(props: TProps) {
                 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
                 <span dangerouslySetInnerHTML={{
-                    __html: `<link href="css/bootstrap.min.css" rel="stylesheet"/>
-                <link href="font-awesome/css/font-awesome.css" rel="stylesheet"/>
-                <link href="css/animate.css" rel="stylesheet"/>
-                <link href="css/style.css" rel="stylesheet"/>`
+                    __html: `<link href="/css/bootstrap.min.css" rel="stylesheet"/>
+                <link href="/font-awesome/css/font-awesome.css" rel="stylesheet"/>
+                <link href="/css/animate.css" rel="stylesheet"/>
+                <link href="/css/style.css" rel="stylesheet"/>`
                 }}>
 
                 </span>
@@ -41,15 +41,15 @@ export default function HeaderFooter(props: TProps) {
             <footer className={styles.footer}>
                 {/* Main Scripts */}
 
-                <Script strategy={'beforeInteractive'} src="../public/js/jquery-3.1.1.min.js"/>
-                <Script strategy={'beforeInteractive'} src="../public/js/bootstrap.min.js"/>
-                <Script strategy={'beforeInteractive'} src="../public/js/popper.min.js"/>
-                <Script strategy={'beforeInteractive'} src="../public/js/plugins/metisMenu/jquery.metisMenu.js"/>
-                <Script strategy={'beforeInteractive'} src="../public/js/plugins/slimscroll/jquery.slimscroll.min.js"/>
+                <Script strategy={'beforeInteractive'} src="/js/jquery-3.1.1.min.js"/>
+                <Script strategy={'beforeInteractive'} src="/js/popper.min.js"/>
+                <Script strategy={'beforeInteractive'} src="/js/bootstrap.min.js"/>
+                <Script strategy={'beforeInteractive'} src="/js/plugins/metisMenu/jquery.metisMenu.js"/>
+                <Script strategy={'beforeInteractive'} src="/js/plugins/slimscroll/jquery.slimscroll.min.js"/>
 
                 {/* Plugins */}
-                <Script strategy={'beforeInteractive'} src="../public/js/inspinia.js"/>
-                <Script strategy={'beforeInteractive'} src="../public/js/plugins/pace/pace.min.js"/>
+                <Script strategy={'beforeInteractive'} src="/js/inspinia.js"/>
+                <Script strategy={'beforeInteractive'} src="/js/plugins/pace/pace.min.js"/>
             </footer>
         </div>
     )

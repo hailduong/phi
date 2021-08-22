@@ -1,6 +1,7 @@
-import {useEffect, useState} from "react";
-import AllergyItem from "./AllergyItem";
-import {API_URL} from "../../../env";
+import {useEffect, useState} from 'react'
+import AllergyItem from './AllergyItem'
+import allergyService from '../../../services/allergyService/allergyService'
+import {useRouter} from 'next/router'
 
 export type TAllergyData = {
     id: number
@@ -11,17 +12,19 @@ export type TAllergyData = {
 type TAllergy = TAllergyData[]
 
 const AllergyPatient = () => {
+    const router = useRouter()
+    const {patientId = ''} = router.query
+
     const [allergyData, setAllergyData] = useState<TAllergy>([])
     useEffect(() => {
         const getData = async () => {
-            const response = await fetch(`${API_URL}/auth/v1/user/allergy`)
-            const data = await response.json()
-            if (data.status === "200") {
+            const data = await allergyService.getAllAllergies(patientId as string)
+            if (data?.status.code === 200) {
                 setAllergyData(data.data)
             }
         }
         getData()
-    }, [])
+    }, [patientId])
     const allergyList = allergyData.map(allergy => <AllergyItem key={allergy.id} allergyData={allergy}/>)
     return <div>{allergyList}</div>
 }

@@ -28,15 +28,24 @@ const data: TTab = [
     }
 ]
 
+type TProps = {
+    onSelectTab: (tabIndex: number) => void
+}
 
-const PatientTabHeading = () => {
+const PatientTabHeading = (props: TProps) => {
 
     const [activeTabHash, setActiveTabHash] = useState(`#tab-1`)
     const changeTabHash = (tabHash: string) => {
         setActiveTabHash(tabHash)
+
+        // Update location
         if (typeof window !== 'undefined') {
             location.assign(tabHash)
         }
+
+        // Output the index
+        const tabIndex = data.findIndex(item => item.tabHash === tabHash)
+        props.onSelectTab(tabIndex)
     }
     useEffect(() => {
         if (typeof window !== 'undefined') {
@@ -50,7 +59,7 @@ const PatientTabHeading = () => {
         return (
             <li className={activeClass} key={item.tabHash}>
                 <a className="nav-link"
-                   onClick={()=> changeTabHash(item.tabHash)}
+                   onClick={() => changeTabHash(item.tabHash)}
                    data-toggle="tab">{item.tabName}</a>
             </li>
         )
