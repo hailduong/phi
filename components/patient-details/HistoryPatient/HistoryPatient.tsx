@@ -1,10 +1,8 @@
-import Image from "next/image";
-import * as url from "url";
-import {data} from "browserslist";
-import {useEffect, useState} from "react";
-import HistoryItem from "./HistoryItem";
-import {API_URL} from "../../../env";
-import {useRouter} from "next/router";
+import {useEffect, useState} from 'react'
+import HistoryItem from './HistoryItem'
+import {useRouter} from 'next/router'
+import {THistoryEntity} from '../../../services/history/historyTypes'
+import historyService from '../../../services/history/historyService'
 
 export type THistoryData = {
     id: number
@@ -18,19 +16,16 @@ type THistory = THistoryData[]
 
 const HistoryPatient = () => {
     const router = useRouter()
-    const { pid } = router.query
-
-    const [historyData, setHistoryData] = useState<THistory>([])
+    const {patientId} = router.query
+    const [historyData, setHistoryData] = useState<THistoryEntity[]>([])
     useEffect(() => {
-        const getData = async () => {
-            const response = await fetch(`${API_URL}/auth/v1/user/history`)
-            const data = await response.json()
-            if (data.status === '200') {
+        (async () => {
+            const data = await historyService.getHistory(patientId as string)
+            if (data && data.status.code === 200){
                 setHistoryData(data.data)
             }
-        }
-        getData()
-    }, [])
+        })()
+    }, [patientId])
 
     const historyList = historyData.map(history => <HistoryItem historyData={history} key={history.id}/>)
     return <div>{historyList}</div>

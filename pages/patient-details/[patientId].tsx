@@ -17,16 +17,16 @@ export default function PatientDetailsPage() {
 
     const [dataPatient, setDataPatient] = useState<TPatientEntity[]>([])
     const router = useRouter()
-    const {pid} = router.query
+    const {patientId} = router.query
 
     useEffect(() => {
         // Get dataPatient
-        (async () => {
-            const data = await patientService.getPatientList()
-            if (data.status.code === 200) {
-                setDataPatient(data.data)
-            }
-        })()
+        // (async () => {
+        //     const data = await patientService.getPatientList()
+        //     if (data.status.code === 200) {
+        //         setDataPatient(data.data)
+        //     }
+        // })()
     }, [])
 
     return (
