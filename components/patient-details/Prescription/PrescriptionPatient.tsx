@@ -1,6 +1,10 @@
 import {useEffect, useState} from "react";
 import PrescriptionItem from "./PrescriptionItem";
 import {API_URL} from "../../../env";
+import {useRouter} from 'next/router'
+import eventService from '../../../services/eventService/eventService'
+import {TPrescriptionEntity} from '../../../services/prescriptionService/prescriptionTypes'
+import prescriptionService from '../../../services/prescriptionService/prescriptionService'
 
 export type TPresData = {
     id: number
@@ -12,17 +16,19 @@ export type TPresData = {
 type TPres = TPresData[]
 
 const PrescriptionPatient = () => {
-    const [presData, setPresData] = useState<TPres>([])
+
+    const router = useRouter()
+    const {patientId = ''} = router.query
+    const [presData, setPresData] = useState<TPrescriptionEntity[]>([])
     useEffect(() => {
         const getData = async () => {
-            const response = await fetch(`${API_URL}/auth/v1/user/prescription`)
-            const data = await response.json()
-            if (data.status === '200') {
+            const data = await prescriptionService.getAllPrescriptions(patientId as string)
+            if (data?.status.code === 200) {
                 setPresData(data.data)
             }
         }
         getData()
-    }, [])
+    }, [patientId])
 
     const presList = presData.map(pres => <PrescriptionItem presData={pres} key={pres.id}/>)
     return <div>{presList}</div>
