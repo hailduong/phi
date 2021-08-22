@@ -1,15 +1,15 @@
 import {TPatientEntity} from "../../services/patients/types";
 
 type TPatient = {
-    patientData1: TPatientEntity
+    patientName?: string
 }
 
 const PatientHeading = (props: TPatient) => {
 
-    const {patientData1} = props
+    const {patientName = ''} = props
 
     return <div className="m-b-md">
-        <h2 className="patient-name">{patientData1.firstName}</h2>
+        <h2 className="patient-name">{patientName}</h2>
     </div>
 }
 

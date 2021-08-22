@@ -1,45 +1,56 @@
-import {useRouter} from "next/router";
+import {useEffect, useState} from 'react'
 
 type TTab = {
-    tabNumber: string
+    tabHash: string
     tabName: string
 }[]
 
 const data: TTab = [
     {
-        tabName: "History",
-        tabNumber: "tab-1"
+        tabName: 'History',
+        tabHash: `#tab-1`
     },
     {
-        tabName: "Doctors",
-        tabNumber: "tab-2"
+        tabName: 'Doctors',
+        tabHash: '#tab-2'
     },
     {
-        tabName: "Allergies",
-        tabNumber: "tab-3"
+        tabName: 'Allergies',
+        tabHash: '#tab-3'
     },
     {
-        tabName: "Events",
-        tabNumber: "tab-4"
+        tabName: 'Events',
+        tabHash: '#tab-4'
     },
     {
-        tabName: "Prescription",
-        tabNumber: "tab-5"
+        tabName: 'Prescription',
+        tabHash: '#tab-5'
     }
 ]
 
 
 const PatientTabHeading = () => {
-    const router = useRouter()
-    const { pid } = router.query
 
-    console.log('pid', pid)
+    const [activeTabHash, setActiveTabHash] = useState(`#tab-1`)
+    const changeTabHash = (tabHash: string) => {
+        setActiveTabHash(tabHash)
+        if (typeof window !== 'undefined') {
+            location.assign(tabHash)
+        }
+    }
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            const currentTab = location.hash
+            setActiveTabHash(currentTab)
+        }
+    }, [])
 
     const liList = data.map(item => {
+        const activeClass = item.tabHash === activeTabHash ? 'active' : ''
         return (
-            <li key={item.tabNumber}>
+            <li className={activeClass} key={item.tabHash}>
                 <a className="nav-link"
-                   href={`#${item.tabNumber}`}
+                   onClick={()=> changeTabHash(item.tabHash)}
                    data-toggle="tab">{item.tabName}</a>
             </li>
         )

@@ -7,19 +7,22 @@ const hey = {
 
 
 const apiClient = {
-    async fetch(url: string, body?: { [prop: string]: string }, method: string = 'get') {
+    async fetch<ReturnedType>(url: string, body?: { [prop: string]: string }, method: string = 'get') {
 
         switch (method) {
             case 'get': {
-                return fetch(url, {
+                const response = await fetch(url, {
                     method,
                     headers: {
                         'Authorization': `Bearer ${authService.key}`
                     }
                 })
+                const data: ReturnedType = await response.json()
+                return data
+
             }
             case 'post': {
-                return fetch(url, {
+                const response = await fetch(url, {
                     method,
                     headers: {
                         'Content-Type': 'application/json',
@@ -27,6 +30,8 @@ const apiClient = {
                     },
                     body: JSON.stringify(body)
                 })
+                const data: ReturnedType = await response.json()
+                return data
             }
 
         }

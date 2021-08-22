@@ -4,8 +4,7 @@ import apiClient from '../apiClient'
 
 const patientService = {
     getPatientList: async () => {
-        const response = await apiClient.fetch(`${API_URL}/doctor/info/patients`)
-        return await response?.json() as TPatientDataResponse
+        return apiClient.fetch<TPatientDataResponse>(`${API_URL}/doctor/info/patients`)
     },
     getPatientDetail: () => {
     },
