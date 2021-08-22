@@ -1,10 +1,8 @@
 import Head from 'next/head'
 import Link from 'next/link'
-import {ChangeEvent, ChangeEventHandler, SyntheticEvent, useState} from "react";
-import LoginAlert from "../components/login/LoginAlert";
-import {use} from "ast-types";
-import authService from "../services/authentication/authService";
-import signUp from "./signup";
+import {ChangeEvent, useState} from 'react'
+import LoginAlert from '../components/login/LoginAlert'
+import authService from '../services/authentication/authService'
 
 export default function LoginPage() {
 

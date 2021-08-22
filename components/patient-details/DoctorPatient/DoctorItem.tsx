@@ -1,6 +1,6 @@
 import {useState} from 'react'
 import DoctorPatientEdit from './DoctorPatientEdit'
-
+import Image from 'next/image'
 import {TDoctorData} from './DoctorPatient'
 
 type TProps = {
@@ -17,8 +17,8 @@ const DoctorItem = (props: TProps) => {
 
     return <div className="feed-element" key={doctorData.id}>
         <a href="#" className="float-left">
-            <img width={'29px'} height={'29px'} src={'https://img.icons8.com/ios/50/000000/doctor-male.png'}
-                 alt={'Doctor icon'}/>
+            <Image width={'29px'} height={'29px'} src={'https://img.icons8.com/ios/50/000000/doctor-male.png'}
+                   alt={'Doctor icon'}/>
         </a>
         <button type="button" onClick={handleClick} className="btn btn-outline-dark float-right">
             Edit
