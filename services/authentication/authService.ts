@@ -1,6 +1,7 @@
 import {API_URL} from '../../env'
 import {TAuthResponse, TUserEntity} from './authType'
 
+
 class AuthService {
 
     user: TUserEntity | null = null
@@ -17,8 +18,23 @@ class AuthService {
 
     set key(value: string | null) {
         if (typeof window !== 'undefined' && typeof value === 'string') {
-            localStorage.setItem('key', window.btoa(window.btoa(value)))
+            window.localStorage.setItem('key', window.btoa(window.btoa(value)))
         }
+    }
+
+    async signup(email: string, password: string) {
+        const response = await fetch(`${API_URL}/doctor/auth/register`,{
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                email: email,
+                password: password
+            })
+        })
+        const respondedData: TAuthResponse = await response.json()
+        return respondedData
     }
 
     async login(email: string, password: string) {
@@ -37,6 +53,7 @@ class AuthService {
 
         // Get responded data
         const jsonData: TAuthResponse = await response.json()
+
         // Save the access token
         if (jsonData.status.code === 200) {
 
@@ -52,11 +69,13 @@ class AuthService {
     }
 
     checkIfUserHasLoggedIn() {
-        if (typeof window !== 'undefined') {
-            return !!localStorage.getItem('key')
+        if (typeof localStorage !== 'undefined') {
+            return localStorage.getItem('key') !== null
         }
         return false
     }
 }
 
-export default new AuthService
+export default new AuthService()
+
+

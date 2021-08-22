@@ -1,4 +1,4 @@
-import PatientItem from './PatienItem'
+import PatientItem from './PatientItem'
 import {useEffect, useState} from 'react'
 import AddPatient from './AddPatient'
 import patientService from '../../services/patients/patientService'

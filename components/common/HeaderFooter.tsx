@@ -10,7 +10,7 @@ type TProps = {
 
 export default function HeaderFooter(props: TProps) {
     /* Check if not login, return to the login page */
-    if (typeof window !== 'undefined') {
+    if (typeof location !== 'undefined') {
         const currentPageIsLoginPage = location.href.includes('/login')
         if (!authService.checkIfUserHasLoggedIn() && !currentPageIsLoginPage) {
             location.assign('/login')

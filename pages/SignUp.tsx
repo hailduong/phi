@@ -1,16 +1,10 @@
-import Head from 'next/head'
-import Link from 'next/link'
-import {ChangeEvent, ChangeEventHandler, SyntheticEvent, useState} from "react";
-import LoginAlert from "../components/login/LoginAlert";
-import {use} from "ast-types";
+import Head from "next/head";
+import {ChangeEvent, useState} from "react";
 import authService from "../services/authentication/authService";
-import signUp from "./SignUp";
+import SignUpSuccessAlert from "../components/login/SignUpSuccessAlert";
+import SignUpErrorAlert from "../components/login/SignUpErrorAlert";
 
-export default function LoginPage() {
-
-    /* Login logic */
-
-    // 1. Get value of username input
+const SignUp = () => {
     const [userName, setUserName] = useState<string>('')
     const handleUserNameInputChange = (event: ChangeEvent<HTMLInputElement>) => {
         setUserName(event.target.value)
@@ -21,39 +15,44 @@ export default function LoginPage() {
     const handlePasswordInputChange = (event: ChangeEvent<HTMLInputElement>) => {
         setPassword(event.target.value)
     }
-
-
     // 3. Click sign in > send data
-    const handleClickSignIn = async () => {
+    const handleClickSignUp = async () => {
         // Send data to server
-        const data = await authService.login(userName, password)
+        const data = await authService.signup(userName, password)
 
         if (data.status.code === 200) {
-            // Go to patient page if success
-            navigateToThePatientPage()
+            // 'Registered successfully! You will now be redirected to the login page.'
+            showSignUpSuccessAlert()
+            // Navigate to the login page after 5 seconds
+            setTimeout(()=> {
+                navigateToTheLoginPage()
+            },3000)
         } else {
-            // Show error if fail
-            showLoginAlert()// Show an error message
+            //Show alert if error
+            showSignUpErrorAlert()
         }
     }
 
-
-    const [showLogin, setShowLogin] = useState(false)
-    const showLoginAlert = () => {
-        setShowLogin(true)
-
+    const [showSignUpSuccess, setShowSignUpSuccess] = useState(false)
+    const showSignUpSuccessAlert = () => {
+        setShowSignUpSuccess(true)
         setTimeout(() => {
-            setShowLogin(false)
+            setShowSignUpSuccess(false)
+        }, 5000)
+    }
+
+    const [showSignUpError, setShowSignUpError] = useState(false)
+    const showSignUpErrorAlert = () => {
+        setShowSignUpError(true)
+        setTimeout(() => {
+            setShowSignUpError(false)
         }, 5000)
     }
 
     // 4. If success, navigate to the `patient` page
-    const navigateToThePatientPage = () => {
-        location.assign('/')
+    const navigateToTheLoginPage = () => {
+        location.assign('/login')
     }
-
-
-    /* Render */
     return (
         <div className="gray-bg middle-box text-center loginscreen animated fadeInDown">
             <style dangerouslySetInnerHTML={{__html: `body{background: #f3f3f4}`}}/>
@@ -74,34 +73,27 @@ export default function LoginPage() {
 
             <div>
                 <div>
-
                     <h1 className="logo-name">PHI</h1>
-
                 </div>
                 <h3>Welcome to PHI</h3>
-                <p>Login in. To see it in action.</p>
+                <p>Sign up. To see it in action.</p>
                 <div className="m-t">
                     <div className="form-group">
                         <input type="email" onChange={handleUserNameInputChange} value={userName}
-                               className="form-control" placeholder="Email"
-                               required/>
+                               className="form-control" placeholder="Email" required/>
                     </div>
                     <div className="form-group">
                         <input type="password" onChange={handlePasswordInputChange} value={password}
                                className="form-control" placeholder="Password" required/>
                     </div>
-                    {showLogin ? <LoginAlert/> : null}
-                    <button onClick={handleClickSignIn}
-                            className="btn btn-primary block full-width m-b">Login
+                    <button onClick={handleClickSignUp} className="btn btn-primary block full-width m-b">Sign Up
                     </button>
-
-                    <a href="#"><small>Forgot password?</small></a>
-                    <p className="text-muted text-center">Do not have an account?</p>
-                    <Link href={`/SignUp`}>
-                        <a className="btn btn-sm btn-white btn-block">Create an account</a>
-                    </Link>
+                    {showSignUpSuccess ? <SignUpSuccessAlert/> : null}
+                    {showSignUpError ? <SignUpErrorAlert/> : null}
                 </div>
             </div>
         </div>
     )
 }
+
+export default SignUp
