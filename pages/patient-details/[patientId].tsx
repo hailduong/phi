@@ -12,23 +12,26 @@ import Tab3 from '../../components/patient-details/AllergyPatient/Tab3'
 import Tab4 from '../../components/patient-details/Events/Tab4'
 import Tab5 from '../../components/patient-details/Prescription/Tab5'
 import {TPatientEntity} from '../../services/patients/types'
+import PatientHeading from '../../components/patients/PatientHeading'
 
 export default function PatientDetailsPage() {
 
-    const [dataPatient, setDataPatient] = useState<TPatientEntity[]>([])
+    const [currentPatient, setCurrentPatient] = useState<TPatientEntity | null>(null)
     const router = useRouter()
     const {patientId} = router.query
 
     useEffect(() => {
-        // Get dataPatient
-        // (async () => {
-        //     const data = await patientService.getPatientList()
-        //     if (data.status.code === 200) {
-        //         setDataPatient(data.data)
-        //     }
-        // })()
+        (async () => {
+            const data = await patientService.getPatientList()
+            if (data?.status.code === 200) {
+                const id = parseInt(patientId as string, 10)
+                const currentPatientData = data.data.find(item => item.id === id)
+                currentPatientData && setCurrentPatient(currentPatientData)
+            }
+        })()
     }, [])
 
+    /* Render */
     return (
         <HeaderFooter>
             <main className={styles.main}>
@@ -43,7 +46,8 @@ export default function PatientDetailsPage() {
                                         <div className="ibox-content">
                                             <div className="row">
                                                 <div className="col-lg-12 tab-seeContent">
-                                                    {/*<PatientHeading patientData1={}/>*/}
+                                                    <PatientHeading
+                                                        patientName={`${currentPatient?.firstName} ${currentPatient?.lastName}`}/>
                                                     <div className="row m-t-sm">
                                                         <div className="col-lg-12">
                                                             <div className="panel blank-panel">
