@@ -13,12 +13,14 @@ const AddPatient = (props: TProps) => {
     const [password, setPassword] = useState('')
     const [gender, setGender] = useState('')
 
-    function createPatient() {
-        patientService.createPatient({
+    async function createPatient() {
+        const res = await patientService.createPatient({
             firstName, lastName, phone, email, password, gender
         })
 
-        props.onPatientAdded()
+        if (res?.status.code === 200) {
+            props.onPatientAdded()
+        }
     }
 
     /* Render */
