@@ -13,13 +13,22 @@ const AddPatient = (props: TProps) => {
     const [password, setPassword] = useState('')
     const [gender, setGender] = useState('')
 
+    const [shouldShowError, setShouldShowError] = useState(false)
+
     async function createPatient() {
         const res = await patientService.createPatient({
             firstName, lastName, phone, email, password, gender
         })
 
-        if (res?.status.code === 200) {
+        // @ts-ignore
+        if (res && res?.status && res.status.code === 200) {
             props.onPatientAdded()
+            // @ts-ignore
+        } else if (res?.error === 400) {
+            setShouldShowError(true)
+            setTimeout(() => {
+                setShouldShowError(false)
+            }, 5000)
         }
     }
 
@@ -72,9 +81,16 @@ const AddPatient = (props: TProps) => {
                 </div>
             </form>
         </div>
+        {shouldShowError && <div className="col-sm-12">
+            <div className="alert alert-danger" role="alert">
+                Invalid input or email existed
+            </div>
+
+        </div>}
         <button className="btn btn-primary float-left update" onClick={createPatient}>
             <strong>Add Patient</strong>
         </button>
+
     </div>
 }
 

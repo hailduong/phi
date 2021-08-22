@@ -38,9 +38,9 @@ const PatientPageContent = () => {
         setShowAddPatientForm(!showAddPatientForm)
     }
 
-    const handlePatientAdded = () => {
-        getData()
+    const handlePatientAdded = async () => {
         setShowAddPatientForm(false)
+        await getData()
     }
 
     const patientList = data.map(dataItem => <PatientItem onDeletePatient={handleDeletePatient} patientData={dataItem}
@@ -55,7 +55,7 @@ const PatientPageContent = () => {
                                 <a onClick={handleAddPatient} className="btn btn-primary">Add Patient</a>
                             </div>
                             <div className="addPatient">
-                                {showAddPatientForm ? <AddPatient onPatientAdded={() => getData()}/> : null}
+                                {showAddPatientForm ? <AddPatient onPatientAdded={handlePatientAdded}/> : null}
                             </div>
                         </div>
                         <div className="ibox-content">
