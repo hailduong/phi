@@ -49,14 +49,6 @@ const LeftNavigation = () => {
                             </a>
                         </Link>
                     </li>
-                    <li>
-                        <Link href="/patient-details">
-                            <a>
-                                <i className="fa fa-th-large"/>
-                                <span className="nav-label">Patient Details</span>
-                            </a>
-                        </Link>
-                    </li>
                 </ul>
 
             </div>
