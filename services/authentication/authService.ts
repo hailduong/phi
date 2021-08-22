@@ -3,7 +3,22 @@ import {TAuthResponse, TUserEntity} from './authType'
 
 class AuthService {
 
-    user: TUserEntity | null = null
+    getUser(): TUserEntity | null {
+        if (typeof window !== 'undefined') {
+            const value = localStorage.getItem('user')
+            if (value) {
+                return JSON.parse(window.atob(window.atob(value)))
+            }
+        }
+        return null
+    }
+
+    setUser(user: TUserEntity | null) {
+        if (typeof window !== 'undefined' && user) {
+            localStorage.setItem('user', window.btoa(window.btoa(JSON.stringify(user))))
+        }
+    }
+
 
     get key(): string | null {
         if (typeof window !== 'undefined') {
@@ -44,7 +59,7 @@ class AuthService {
             this.key = jsonData.data.accessToken
 
             // Save user
-            this.user = jsonData.data
+            this.setUser(jsonData.data)
         }
 
         return jsonData

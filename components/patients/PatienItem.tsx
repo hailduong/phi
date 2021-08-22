@@ -25,6 +25,11 @@ const PatientItem = (props: TProps) => {
                     <i className="fa fa-pencil"/> Edit
                 </a>
             </Link>
+            <Link href={`/patient-details/${patientData.id}`}>
+                <a className="btn btn-white btn-sm ml-2">
+                    <i className="fa fa-trash"/>
+                </a>
+            </Link>
         </td>
     </tr>
 }
