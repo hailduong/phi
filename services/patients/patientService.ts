@@ -1,12 +1,13 @@
 import {API_URL} from '../../env'
-import {TDeletePatientResponse, TPatientDataResponse} from './types'
+import {TCreatePatientResponse, TDeletePatientResponse, TPatientDataResponse, TPatientEntity} from './types'
 import apiClient from '../apiClient'
 
 const patientService = {
     getPatientList: async () => {
         return apiClient.fetch<TPatientDataResponse>(`${API_URL}/doctor/info/patients`)
     },
-    getPatientDetail: () => {
+    createPatient: (patient: Partial<TPatientEntity & { password: string }>) => {
+        return apiClient.fetch<TCreatePatientResponse>(`${API_URL}/doctor/info/patient`, patient, 'post')
     },
     updatePatientDetail: () => {
 

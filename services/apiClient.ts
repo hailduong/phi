@@ -7,7 +7,7 @@ const hey = {
 
 
 const apiClient = {
-    async fetch<ReturnedType>(url: string, body?: { [prop: string]: string }, method: string = 'get') {
+    async fetch<ReturnedType>(url: string, body?: any, method: string = 'get') {
 
         switch (method) {
             case 'get': {

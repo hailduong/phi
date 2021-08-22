@@ -18,6 +18,14 @@ export type TPatientEntity = {
     gender: string;
 }
 
+export type TCreatePatientResponse = {
+    status: {
+        code: number;
+        message: string;
+    };
+    data: [];
+}
+
 export type TDeletePatientResponse = {
     status: {
         code: number;

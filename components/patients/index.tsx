@@ -2,7 +2,7 @@ import PatientItem from './PatientItem'
 import {useEffect, useState} from 'react'
 import AddPatient from './AddPatient'
 import patientService from '../../services/patients/patientService'
-import {TPatientDataResponse, TPatientEntity} from '../../services/patients/types'
+import {TPatientEntity} from '../../services/patients/types'
 
 const PatientPageContent = () => {
 
@@ -20,7 +20,7 @@ const PatientPageContent = () => {
         const response = await patientService.deletePatient(patientId)
 
         // Re-fetch data after successful deletion
-        if (response?.status.code === 200){
+        if (response?.status.code === 200) {
             getData()
         }
 
@@ -32,13 +32,19 @@ const PatientPageContent = () => {
 
     }, [])
 
-    const [addPatient, setAddPatient] = useState(false)
+    const [showAddPatientForm, setShowAddPatientForm] = useState(false)
 
     const handleAddPatient = () => {
-        setAddPatient(!addPatient)
+        setShowAddPatientForm(!showAddPatientForm)
     }
 
-    const patientList = data.map(dataItem => <PatientItem onDeletePatient={handleDeletePatient} patientData={dataItem} key={dataItem.id}/>)
+    const handlePatientAdded = () => {
+        getData()
+        setShowAddPatientForm(false)
+    }
+
+    const patientList = data.map(dataItem => <PatientItem onDeletePatient={handleDeletePatient} patientData={dataItem}
+                                                          key={dataItem.id}/>)
     return (
         <div className="wrapper wrapper-content animated fadeInUp">
             <div className="row">
@@ -49,7 +55,7 @@ const PatientPageContent = () => {
                                 <a onClick={handleAddPatient} className="btn btn-primary">Add Patient</a>
                             </div>
                             <div className="addPatient">
-                                {addPatient ? <AddPatient/> : null}
+                                {showAddPatientForm ? <AddPatient onPatientAdded={() => getData()}/> : null}
                             </div>
                         </div>
                         <div className="ibox-content">
