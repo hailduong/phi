@@ -37,6 +37,7 @@ class AuthService {
         }
     }
 
+    //1. Sign up
     async signup(email: string, password: string) {
         const response = await fetch(`${API_URL}/doctor/auth/register`,{
             method: 'post',
@@ -52,6 +53,7 @@ class AuthService {
         return respondedData
     }
 
+    //2. Login
     async login(email: string, password: string) {
 
         // Send request
@@ -78,11 +80,43 @@ class AuthService {
             // Save user
             this.setUser(jsonData.data)
         }
-
         return jsonData
-
     }
 
+    //3. Forgot password
+    async forgotPassword(email: string, password: string) {
+        const response = await fetch(`${API_URL}/doctor/auth/forgot-password`, {
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                email: email,
+                password: password
+            })
+        })
+        const emailData: TAuthResponse = await response.json()
+        return emailData
+    }
+
+    //4. Change password
+    async changePassword(code: string, password: string) {
+        const response = await fetch(`${API_URL}/doctor/auth/change-password`,{
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(({
+                password: password,
+                code: code
+            }))
+        })
+        const newPassword: TAuthResponse = await response.json()
+        return newPassword
+    }
+
+
+    //4. Check user has logged in?
     checkIfUserHasLoggedIn() {
         if (typeof localStorage !== 'undefined') {
             return localStorage.getItem('key') !== null

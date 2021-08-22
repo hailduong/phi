@@ -4,7 +4,7 @@ import {ChangeEvent, ChangeEventHandler, SyntheticEvent, useState} from "react";
 import LoginAlert from "../components/login/LoginAlert";
 import {use} from "ast-types";
 import authService from "../services/authentication/authService";
-import signUp from "./SignUp";
+import signUp from "./signup";
 
 export default function LoginPage() {
 
@@ -94,10 +94,11 @@ export default function LoginPage() {
                     <button onClick={handleClickSignIn}
                             className="btn btn-primary block full-width m-b">Login
                     </button>
-
-                    <a href="#"><small>Forgot password?</small></a>
+                    <Link href={`/forgot-password`}>
+                        <a><small>Forgot password?</small></a>
+                    </Link>
                     <p className="text-muted text-center">Do not have an account?</p>
-                    <Link href={`/SignUp`}>
+                    <Link href={`/signup`}>
                         <a className="btn btn-sm btn-white btn-block">Create an account</a>
                     </Link>
                 </div>
