@@ -88,8 +88,8 @@ const SignUp = () => {
                     </div>
                     <button onClick={handleClickSignUp} className="btn btn-primary block full-width m-b">Sign Up
                     </button>
-                    {showSignUpSuccess ? <SignUpSuccessAlert/> : null}
-                    {showSignUpError ? <SignUpErrorAlert/> : null}
+                    {showSignUpSuccess && <SignUpSuccessAlert/>}
+                    {showSignUpError && <SignUpErrorAlert/>}
                 </div>
             </div>
         </div>

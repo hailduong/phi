@@ -1,4 +1,3 @@
-import DoctorPatient from "../DoctorPatient/DoctorPatient";
 import AllergyPatient from "./AllergyPatient";
 
 const Allergy = () => {

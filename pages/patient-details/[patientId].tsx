@@ -58,7 +58,7 @@ export default function PatientDetailsPage() {
                                                                 <div className="panel-heading">
                                                                     <div className="panel-options">
                                                                         <PatientTabHeading
-                                                                            onSelectTab={(tabIndex) => setActiveTabIndex(tabIndex)}/>
+                                                                            onSelectTab={(tabIndex: number) => setActiveTabIndex(tabIndex)}/>
                                                                     </div>
                                                                 </div>
                                                                 <div className="panel-body">

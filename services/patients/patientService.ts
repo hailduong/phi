@@ -1,5 +1,5 @@
 import {API_URL} from '../../env'
-import {TPatientDataResponse} from './types'
+import {TDeletePatientResponse, TPatientDataResponse} from './types'
 import apiClient from '../apiClient'
 
 const patientService = {
@@ -11,8 +11,8 @@ const patientService = {
     updatePatientDetail: () => {
 
     },
-    deletePatient: () => {
-
+    deletePatient: (id: number) => {
+        return apiClient.fetch<TDeletePatientResponse>(`${API_URL}/doctor/info/patient/${id}`, undefined, 'delete')
     }
 }
 

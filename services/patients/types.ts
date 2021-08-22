@@ -17,3 +17,11 @@ export type TPatientEntity = {
     phone: string;
     gender: string;
 }
+
+export type TDeletePatientResponse = {
+    status: {
+        code: number;
+        message: string;
+    };
+    data: [];
+}

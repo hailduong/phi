@@ -21,6 +21,17 @@ const apiClient = {
                 return data
 
             }
+            case 'delete': {
+                const response = await fetch(url, {
+                    method,
+                    headers: {
+                        'Authorization': `Bearer ${authService.getAccessToken()}`
+                    }
+                })
+                const data: ReturnedType = await response.json()
+                return data
+
+            }
             case 'post': {
                 const response = await fetch(url, {
                     method,
@@ -33,6 +44,7 @@ const apiClient = {
                 const data: ReturnedType = await response.json()
                 return data
             }
+
 
         }
     }

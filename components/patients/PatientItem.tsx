@@ -1,13 +1,16 @@
 import Link from 'next/link'
 import {TPatientEntity} from '../../services/patients/types'
+import patientService from "../../services/patients/patientService";
 
 type TProps = {
     patientData: TPatientEntity
+    onDeletePatient: (id: number) => void
 }
 
 const PatientItem = (props: TProps) => {
 
-    const {patientData} = props
+    const {patientData, onDeletePatient} = props
+
 
     return <tr>
         {/*<td className="project-status">*/}
@@ -27,11 +30,12 @@ const PatientItem = (props: TProps) => {
                     <i className="fa fa-pencil"/> Edit
                 </a>
             </Link>
-            <Link href={`/patient-details/${patientData.id}`}>
-                <a className="btn btn-white btn-sm ml-2">
-                    <i className="fa fa-trash"/>
-                </a>
-            </Link>
+
+            <a className="btn btn-white btn-sm ml-2" onClick={() => {
+                onDeletePatient(patientData.id)
+            }}>
+                <i className="fa fa-trash"/>
+            </a>
         </td>
     </tr>
 }
