@@ -6,10 +6,16 @@ import {TUserEntity} from '../../services/authentication/authType'
 
 const LeftNavigation = () => {
 
+    /* Get user info */
     const [user, setUser] = useState<TUserEntity | null>(null)
     useEffect(() => {
         setUser(authService.getUser())
     }, [])
+
+    /* Logout */
+    function logout(){
+        authService.logout()
+    }
 
     return (
         <nav className="navbar-default navbar-static-side" role="navigation">
@@ -31,9 +37,7 @@ const LeftNavigation = () => {
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link href={'/logout'}>
-                                        <a className="dropdown-item">Logout</a>
-                                    </Link>
+                                    <a className="dropdown-item" onClick={logout}>Logout</a>
                                 </li>
                             </ul>
                         </div>

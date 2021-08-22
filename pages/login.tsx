@@ -28,7 +28,7 @@ export default function LoginPage() {
         // Send data to server
         const data = await authService.login(userName, password)
 
-        if (data.status.code === 200) {
+        if (data && data?.status?.code === 200) {
             // Go to patient page if success
             navigateToThePatientPage()
         } else {

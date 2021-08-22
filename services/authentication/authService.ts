@@ -14,6 +14,13 @@ class AuthService {
         return null
     }
 
+    logout() {
+        if (typeof window !== 'undefined') {
+            localStorage.removeItem('key')
+            location.assign('/login')
+        }
+    }
+
     setUser(user: TUserEntity | null) {
         if (typeof window !== 'undefined' && user) {
             localStorage.setItem('user', window.btoa(window.btoa(JSON.stringify(user))))
@@ -39,7 +46,7 @@ class AuthService {
 
     //1. Sign up
     async signup(email: string, password: string) {
-        const response = await fetch(`${API_URL}/doctor/auth/register`,{
+        const response = await fetch(`${API_URL}/doctor/auth/register`, {
             method: 'post',
             headers: {
                 'Content-Type': 'application/json'
@@ -72,7 +79,7 @@ class AuthService {
         const jsonData: TAuthResponse = await response.json()
 
         // Save the access token
-        if (jsonData.status.code === 200) {
+        if (jsonData.status?.code === 200) {
 
             // Save to localStorage
             this.setAccessToken(jsonData.data.accessToken)
@@ -101,7 +108,7 @@ class AuthService {
 
     //4. Change password
     async changePassword(code: string, password: string) {
-        const response = await fetch(`${API_URL}/doctor/auth/change-password`,{
+        const response = await fetch(`${API_URL}/doctor/auth/change-password`, {
             method: 'post',
             headers: {
                 'Content-Type': 'application/json'
