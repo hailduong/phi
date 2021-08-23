@@ -13,23 +13,25 @@ const AddPatient = (props: TProps) => {
     const [password, setPassword] = useState('')
     const [gender, setGender] = useState('')
 
+
+
     const [shouldShowError, setShouldShowError] = useState(false)
 
     async function createPatient() {
-        const res = await patientService.createPatient({
-            firstName, lastName, phone, email, password, gender
-        })
-
-        // @ts-ignore
-        if (res && res?.status && res.status.code === 200) {
-            props.onPatientAdded()
-            // @ts-ignore
-        } else if (res?.error === 400) {
-            setShouldShowError(true)
-            setTimeout(() => {
-                setShouldShowError(false)
-            }, 5000)
-        }
+        // const res = await patientService.createPatient({
+        //     firstName, lastName, phone, email, password, gender
+        // })
+        //
+        // // @ts-ignore
+        // if (res && res?.status && res.status.code === 200) {
+        //     props.onPatientAdded()
+        //     // @ts-ignore
+        // } else if (res?.error === 400) {
+        //     setShouldShowError(true)
+        //     setTimeout(() => {
+        //         setShouldShowError(false)
+        //     }, 5000)
+        // }
     }
 
     /* Render */

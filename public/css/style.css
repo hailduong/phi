@@ -11763,3 +11763,15 @@ body.md-skin {
 .update {
     margin-left: 15px;
 }
+
+.grid-container {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: auto auto;
+    /*margin-bottom: 1rem;*/
+    padding: 15px 20px 15px 20px;
+}
+
+.edit-patient {
+    grid-column: 1 / span 2;
+}
