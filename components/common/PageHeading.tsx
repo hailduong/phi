@@ -7,13 +7,13 @@ const PageHeading = (props: TProps) => {
     return (
         <div className="row wrapper border-bottom white-bg page-heading">
             <div className="col-sm-4">
-                <h2>{props.pageName}</h2>
+                <h2>{pageName}</h2>
                 <ol className="breadcrumb">
                     <li className="breadcrumb-item">
                         <a href="index.html">Home</a>
                     </li>
                     <li className="breadcrumb-item active">
-                        <strong>{props.pageName}</strong>
+                        <strong>{pageName}</strong>
                     </li>
                 </ol>
             </div>

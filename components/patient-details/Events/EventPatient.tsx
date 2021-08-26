@@ -27,7 +27,9 @@ const EventPatient = () => {
     }, [patientId])
 
     const eventList = eventData.map(event => <EventItem eventData={event} key={event.id}/>)
-    return <div>{eventList}</div>
+    return <div className="feed-activity-list">
+        <div>{eventList}</div>
+    </div>
 }
 
 export default EventPatient

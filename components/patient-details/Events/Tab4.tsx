@@ -1,9 +1,9 @@
-import Event from "./Event";
+import EventPatient from "./EventPatient";
 
 const Tab4 = () => {
     return (
         <div className="tab-pane active show" id="tab-4">
-            <Event/>
+            <EventPatient/>
         </div>
     )
 }

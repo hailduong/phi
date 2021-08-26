@@ -11775,3 +11775,8 @@ body.md-skin {
 .edit-patient {
     grid-column: 1 / span 2;
 }
+
+.addCustom {
+    position: absolute;
+    right: 15px;
+}

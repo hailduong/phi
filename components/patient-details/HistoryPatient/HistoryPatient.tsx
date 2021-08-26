@@ -21,14 +21,18 @@ const HistoryPatient = () => {
     useEffect(() => {
         (async () => {
             const data = await historyService.getHistory(patientId as string)
-            if (data && data.status.code === 200){
+            if (data && data.status.code === 200) {
                 setHistoryData(data.data)
             }
         })()
     }, [patientId])
 
     const historyList = historyData.map(history => <HistoryItem historyData={history} key={history.id}/>)
-    return <div>{historyList}</div>
+    return (
+        <div className="feed-activity-list">
+            <div>{historyList}</div>
+        </div>
+    )
 }
 
 export default HistoryPatient

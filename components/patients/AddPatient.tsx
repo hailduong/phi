@@ -14,7 +14,6 @@ const AddPatient = (props: TProps) => {
     const [gender, setGender] = useState('')
 
 
-
     const [shouldShowError, setShouldShowError] = useState(false)
 
     async function createPatient() {
@@ -48,7 +47,7 @@ const AddPatient = (props: TProps) => {
                     <label>Phone</label>
                     <input value={phone}
                            onChange={(e) => setPhone(e.target.value)}
-                           type="text" placeholder="Enter patient's contact number"
+                           type="number" placeholder="Enter patient's contact number"
                            className="form-control"/>
                 </div>
                 <div className="form-group">
@@ -74,12 +73,26 @@ const AddPatient = (props: TProps) => {
                            onChange={(e) => setEmail(e.target.value)}
                            type="email" placeholder="Enter patient's email address" className="form-control"/>
                 </div>
+
                 <div className="form-group">
                     <label>Gender</label>
-                    <input value={gender}
-                           onChange={(e) => setGender(e.target.value)}
-                           type="text" placeholder="Enter patient's gender"
-                           className="form-control"/>
+                    <div className="d-flex">
+                        <div className="form-check flex-grow-1">
+                            <input className="form-check-input" type="radio" name="gridRadios" id="gridRadios1"
+                                   value="option1" checked/>
+                            <label className="form-check-label" htmlFor="gridRadios1">
+                                Male
+                            </label>
+                        </div>
+                        <div className="form-check flex-grow-1">
+                            <input className="form-check-input" type="radio" name="gridRadios" id="gridRadios2"
+                                   value="option2"/>
+                            <label className="form-check-label" htmlFor="gridRadios2">
+                                Female
+                            </label>
+                        </div>
+                    </div>
+
                 </div>
             </form>
         </div>
