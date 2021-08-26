@@ -60,7 +60,7 @@ const PatientPageContent = () => {
         <div className="wrapper wrapper-content animated fadeInUp">
             <div className="row">
                 <div className="col-lg-12">
-                    <div className="ibox">
+                    <div className="ibox tab-seeContent">
                         <div className="ibox-title">
                             <div className="ibox-tools">
                                 <a onClick={handleAddPatient} className="btn btn-primary">Add Patient</a>

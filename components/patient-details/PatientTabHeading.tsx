@@ -104,11 +104,11 @@ const PatientTabHeading = (props: TProps) => {
                 <strong>{(showAddButton) ? 'Cancel' : `Add ${displayTabName?.tabName}`}</strong>
             </button>
         </ul>
-        {activeTabHash === '#tab-1' && <AddHistory/>}
-        {activeTabHash === '#tab-2' && <AddDoctor/>}
-        {activeTabHash === '#tab-3' && <AddAllergy/>}
-        {activeTabHash === '#tab-4' && <AddEvent/>}
-        {activeTabHash === '#tab-5' && <AddPrescription/>}
+        {(showAddButton) && activeTabHash === '#tab-1' && <AddHistory/>}
+        {(showAddButton) && activeTabHash === '#tab-2' && <AddDoctor/>}
+        {(showAddButton) && activeTabHash === '#tab-3' && <AddAllergy/>}
+        {(showAddButton) && activeTabHash === '#tab-4' && <AddEvent/>}
+        {(showAddButton) && activeTabHash === '#tab-5' && <AddPrescription/>}
     </div>
 }
 

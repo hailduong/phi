@@ -28,7 +28,11 @@ const DoctorPatient = () => {
     }, [])
 
     const doctorList = doctorData.map(doctor => <DoctorItem key={doctor.id} doctorData={doctor}/>)
-    return <div>{doctorList}</div>
+    return (
+        <div className="feed-activity-list">
+            <div>{doctorList}</div>
+        </div>
+    )
 }
 
 export default DoctorPatient

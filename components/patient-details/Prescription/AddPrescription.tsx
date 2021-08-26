@@ -9,14 +9,14 @@ const AddPrescription = () => {
                         type="text" placeholder="Enter patient's first name" className="form-control"/>
                 </div>
                 <div className="form-group">
-                    <label>From Date</label>
+                    <label>Date</label>
                     <input //value={phone}
                         //onChange={(e) => setPhone(e.target.value)}
                         type="date" placeholder="Enter starting date"
                         className="form-control"/>
                 </div>
                 <div className="form-group">
-                    <label>Description</label>
+                    <label>Descriptions</label>
                     <input //value={password}
                         //onChange={(e) => setPassword(e.target.value)}
                         type="text" placeholder="Enter description"
@@ -33,10 +33,10 @@ const AddPrescription = () => {
                         type="text" placeholder="Enter patient's last name" className="form-control"/>
                 </div>
                 <div className="form-group">
-                    <label>To Date</label>
+                    <label>Applicable Population</label>
                     <input //value={email}
                         //onChange={(e) => setEmail(e.target.value)}
-                        type="date" placeholder="Enter ending date" className="form-control"/>
+                        type="text" placeholder="Enter applicable population" className="form-control"/>
                 </div>
                 <div className="form-group">
                     <label>Frequency</label>

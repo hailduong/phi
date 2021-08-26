@@ -3,6 +3,7 @@ import AllergyItem from './AllergyItem'
 import allergyService from '../../../services/allergyService/allergyService'
 import {useRouter} from 'next/router'
 import eventService from '../../../services/eventService/eventService'
+import {list} from "postcss";
 
 export type TAllergyData = {
     id: number
@@ -27,7 +28,11 @@ const AllergyPatient = () => {
         getData()
     }, [patientId])
     const allergyList = allergyData.map(allergy => <AllergyItem key={allergy.id} allergyData={allergy}/>)
-    return <div>{allergyList}</div>
+    return (
+        <div className="feed-activity-list">
+            <div>{allergyList}</div>
+        </div>
+    )
 }
 
 export default AllergyPatient

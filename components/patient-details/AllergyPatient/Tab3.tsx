@@ -1,11 +1,9 @@
-import Doctor from "../DoctorPatient/Doctor";
-import Allergy from "./Allergy";
+import AllergyPatient from "./AllergyPatient";
 
 const Tab3 = () => {
     return (
-        <div className="tab-pane active show"
-             id="tab-3">
-            <Allergy/>
+        <div className="tab-pane active show" id="tab-3">
+            <AllergyPatient/>
         </div>
     )
 }

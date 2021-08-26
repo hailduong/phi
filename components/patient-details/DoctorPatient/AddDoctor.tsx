@@ -54,7 +54,7 @@ const AddDoctor = () => {
 
         {/*</div>}*/}
         <button className="btn btn-primary float-left update">
-            <strong>Add History</strong>
+            <strong>Add Doctor</strong>
         </button>
     </div>
 }

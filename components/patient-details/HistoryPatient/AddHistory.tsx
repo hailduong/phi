@@ -22,6 +22,13 @@ const AddHistory = () => {
                         type="text" placeholder="Enter description"
                         className="form-control"/>
                 </div>
+                <div className="form-group">
+                    <label>Applicable Population</label>
+                    <input //value={gender}
+                        //onChange={(e) => setGender(e.target.value)}
+                        type="text" placeholder="Enter applicable population"
+                        className="form-control"/>
+                </div>
             </form>
         </div>
         <div className="col-sm-6 pt-2">
@@ -45,8 +52,11 @@ const AddHistory = () => {
                         type="number" placeholder="Enter frequency"
                         className="form-control"/>
                 </div>
+
             </form>
         </div>
+
+
         {/*{shouldShowError && <div className="col-sm-12">*/}
         {/*    <div className="alert alert-danger" role="alert">*/}
         {/*        Invalid input or email existed*/}

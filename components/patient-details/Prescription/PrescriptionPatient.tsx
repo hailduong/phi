@@ -31,7 +31,11 @@ const PrescriptionPatient = () => {
     }, [patientId])
 
     const presList = presData.map(pres => <PrescriptionItem presData={pres} key={pres.id}/>)
-    return <div>{presList}</div>
+    return (
+        <div className="feed-activity-list">
+            {presList}
+        </div>
+    )
 }
 
 export default PrescriptionPatient

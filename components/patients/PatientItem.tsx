@@ -36,7 +36,7 @@ const PatientItem = (props: TProps) => {
             <div className="project-actions">
                 {/*<Link href={`/patient-details/${patientData.id}`}>*/}
                 <a onClick={handleEditPatient} className="btn btn-white btn-sm">
-                    <i className="fa fa-pencil"/> Edit
+                    <i className="fa fa-pencil"/> {showEditPatient ? 'Cancel' : 'Edit'}
                 </a>
                 {/*</Link>*/}
                 <a className="btn btn-white btn-sm ml-2" onClick={() => {
