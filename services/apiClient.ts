@@ -1,52 +1,44 @@
 import authService from './authentication/authService'
 
-const hey = {
-    'abc': 'ok',
-    'def': 'yes'
-}
-
-
 const apiClient = {
-    async fetch<ReturnedType>(url: string, body?: any, method: string = 'get') {
-
-        switch (method) {
-            case 'get': {
-                const response = await fetch(url, {
-                    method,
-                    headers: {
-                        'Authorization': `Bearer ${authService.getAccessToken()}`
-                    }
-                })
-                const data: ReturnedType = await response.json()
-                return data
-
+    async get<ReturnedType>(url: string) {
+        const response = await fetch(url, {
+            method: 'get',
+            headers: {
+                'Authorization': `Bearer ${authService.getAccessToken()}`
             }
-            case 'delete': {
-                const response = await fetch(url, {
-                    method,
-                    headers: {
-                        'Authorization': `Bearer ${authService.getAccessToken()}`
-                    }
-                })
-                const data: ReturnedType = await response.json()
-                return data
+        })
+        const data: ReturnedType = await response.json()
+        return data
+    },
 
+    async delete<ReturnedType>(url: string) {
+        const response = await fetch(url, {
+            method: 'delete',
+            headers: {
+                'Authorization': `Bearer ${authService.getAccessToken()}`
             }
-            case 'post': {
-                const response = await fetch(url, {
-                    method,
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${authService.getAccessToken()}`
-                    },
-                    body: JSON.stringify(body)
-                })
-                const data: ReturnedType = await response.json()
-                return data
-            }
+        })
+        const data: ReturnedType = await response.json()
+        return data
+    },
 
+    async post<ReturnedType>(url: string, body: any, authenticate = true) {
 
+        const header: HeadersInit = authenticate ? {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${authService.getAccessToken()}`
+        } : {
+            'Content-Type': 'application/json'
         }
+
+        const response = await fetch(url, {
+            method: 'post',
+            headers: header,
+            body: JSON.stringify(body)
+        })
+        const data: ReturnedType = await response.json()
+        return data
     }
 }
 

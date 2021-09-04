@@ -17,20 +17,20 @@ const AddPatient = (props: TProps) => {
     const [shouldShowError, setShouldShowError] = useState(false)
 
     async function createPatient() {
-        // const res = await patientService.createPatient({
-        //     firstName, lastName, phone, email, password, gender
-        // })
-        //
-        // // @ts-ignore
-        // if (res && res?.status && res.status.code === 200) {
-        //     props.onPatientAdded()
-        //     // @ts-ignore
-        // } else if (res?.error === 400) {
-        //     setShouldShowError(true)
-        //     setTimeout(() => {
-        //         setShouldShowError(false)
-        //     }, 5000)
-        // }
+        const res = await patientService.createPatient({
+            firstName, lastName, phone, email, password, gender
+        })
+
+        // @ts-ignore
+        if (res && res?.status && res.status.code === 200) {
+            props.onPatientAdded()
+            // @ts-ignore
+        } else if (res?.error === 400) {
+            setShouldShowError(true)
+            setTimeout(() => {
+                setShouldShowError(false)
+            }, 5000)
+        }
     }
 
     /* Render */
@@ -54,7 +54,7 @@ const AddPatient = (props: TProps) => {
                     <label>Password</label>
                     <input value={password}
                            onChange={(e) => setPassword(e.target.value)}
-                           type="text" placeholder="Enter patient's password"
+                           type="password" placeholder="Enter patient's password"
                            className="form-control"/>
                 </div>
             </form>
@@ -78,15 +78,15 @@ const AddPatient = (props: TProps) => {
                     <label>Gender</label>
                     <div className="d-flex">
                         <div className="form-check flex-grow-1">
-                            <input className="form-check-input" type="radio" name="gridRadios" id="gridRadios1"
-                                   value="option1" checked/>
+                            <input className="form-check-input" type="radio" name="gender" onChange={(e)=>setGender(e.target.value)}
+                                   value="male" checked={gender === 'male'}/>
                             <label className="form-check-label" htmlFor="gridRadios1">
                                 Male
                             </label>
                         </div>
                         <div className="form-check flex-grow-1">
-                            <input className="form-check-input" type="radio" name="gridRadios" id="gridRadios2"
-                                   value="option2"/>
+                            <input className="form-check-input" type="radio" name="gender" onChange={(e)=>setGender(e.target.value)}
+                                   value="female" checked={gender === 'female'}/>
                             <label className="form-check-label" htmlFor="gridRadios2">
                                 Female
                             </label>

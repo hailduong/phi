@@ -29,7 +29,7 @@ const PatientItem = (props: TProps) => {
                 <Link href={`/patient-details/${patientData.id}`}>
                     <a>{patientData.firstName} {patientData.lastName}
                         <br/>
-                        <small>Phone: {patientData.phone} | Email: {patientData.email} </small>
+                        <small>Gender: {patientData.gender} | Phone: {patientData.phone} | Email: {patientData.email} </small>
                     </a>
                 </Link>
             </div>

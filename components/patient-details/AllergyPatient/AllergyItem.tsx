@@ -3,21 +3,37 @@ import Image from 'next/image'
 
 type TProps = {
     allergyData: TAllergyData
+    onDeleteAllergy: (id: number) => void
 }
 
 const AllergyItem = (props: TProps) => {
-    const {allergyData} = props
-    return <div className="feed-element" key={allergyData.id}>
-        <a href="#" className="float-left">
-            <Image alt="icon" width={29} height={29} src="https://img.icons8.com/windows/32/000000/allergies.png"/>
-        </a>
-        {/*<button type="button" onClick={handleClick} className="btn btn-outline-dark float-right">*/}
-        {/*    Edit*/}
-        {/*</button>*/}
-        <div className="media-body"><h4> {allergyData.id}</h4><br/></div>
-        <div>Allergy: {allergyData.name} <br/>{allergyData.descriptions}</div>
-        {/*{isVisible ? <DoctorPatientEdit/> : null}*/}
-    </div>
+    const {allergyData, onDeleteAllergy} = props
+
+    const newDate = new Date(allergyData.date * 1000)
+    const dateForInput = newDate.toISOString().split('T')[0]
+
+    return (
+        <div className="feed-element grid-container" key={allergyData.id}>
+            <div>
+                <a href="#" className="float-left">
+                    <Image alt="icon" width={29} height={29} src="/img/icon-history.png"/>
+                </a>
+                <h4>{allergyData.id} {allergyData.name}</h4>
+                <div className='list-id'>{allergyData.descriptions}</div>
+            </div>
+            <div className="project-actions">
+                <a className="btn btn-white btn-sm">
+                    <i className="fa fa-pencil"/> Edit</a>
+                <a className="btn btn-white btn-sm ml-2" onClick={() => {
+                    onDeleteAllergy(allergyData.id)
+                }}>
+                    <i className="fa fa-trash"/>
+                </a>
+                <div>{dateForInput}</div>
+            </div>
+            {/*{isVisible ? <DoctorPatientEdit/> : null}*/}
+        </div>
+    )
 }
 
 export default AllergyItem

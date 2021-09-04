@@ -4,16 +4,16 @@ import apiClient from '../apiClient'
 
 const patientService = {
     getPatientList: async () => {
-        return apiClient.fetch<TPatientDataResponse>(`${API_URL}/doctor/info/patients`)
+        return apiClient.get<TPatientDataResponse>(`${API_URL}/doctor/info/patients`)
     },
     createPatient: (patient: Partial<TPatientEntity & { password: string }>) => {
-        return apiClient.fetch<TCreatePatientResponse>(`${API_URL}/doctor/info/patient`, patient, 'post')
+        return apiClient.post<TCreatePatientResponse>(`${API_URL}/doctor/info/patient`, patient)
     },
     updatePatientDetail: () => {
 
     },
     deletePatient: (id: number) => {
-        return apiClient.fetch<TDeletePatientResponse>(`${API_URL}/doctor/info/patient/${id}`, undefined, 'delete')
+        return apiClient.delete<TDeletePatientResponse>(`${API_URL}/doctor/info/patient/${id}`)
     }
 }
 

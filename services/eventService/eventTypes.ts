@@ -13,3 +13,5 @@ export type TEventEntity = {
     descriptions: string;
     date: number;
 }
+
+export type TEventCreateBody =Omit<TEventEntity, 'id'>

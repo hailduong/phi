@@ -1,6 +1,6 @@
 import apiClient from '../apiClient'
 import {API_URL} from '../../env'
-import {TPrescriptionResponse} from './prescriptionTypes'
+import {TPrescriptionCreateBody, TPrescriptionResponse} from './prescriptionTypes'
 
 
 const defaultData: TPrescriptionResponse = {
@@ -13,12 +13,21 @@ const defaultData: TPrescriptionResponse = {
 }
 
 class PrescriptionService {
-    getAllPrescriptions(patientId = '', pageNumber = 1, pageSize = 5) {
+    async getAllPrescriptions(patientId = '', pageNumber = 1, pageSize = 5) {
         if (patientId) {
-            const response = apiClient.fetch<TPrescriptionResponse>(`${API_URL}/doctor/prescription/patient/${patientId}?pagenum=${pageNumber}&pagesize=${pageSize}`)
+            const response = await apiClient.get<TPrescriptionResponse>(`${API_URL}/doctor/prescription/patient/${patientId}?pagenum=${pageNumber}&pagesize=${pageSize}`)
             return response
         }
         return defaultData
+    }
+
+    async createPrescription(patientId: string, dataPrescription: TPrescriptionCreateBody) {
+        const response = await apiClient.post<TPrescriptionResponse>(`${API_URL}/doctor/prescription/patient/${patientId}`,{dataPrescription})
+        return response
+    }
+
+    async deletePrescription(patientId: string, prescriptionId: number) {
+        return await apiClient.delete<TPrescriptionResponse>(`${API_URL}/doctor/prescription/${prescriptionId}/patient/${patientId}`)
     }
 }
 

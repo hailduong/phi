@@ -11,5 +11,7 @@ export type TAllergyEntity = {
     id: number;
     name: string;
     descriptions: string;
-    date: number;
+    date: number
 }
+
+export type TAllergyCreateBody = Omit<TAllergyEntity, 'id'>

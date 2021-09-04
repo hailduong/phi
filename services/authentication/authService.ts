@@ -1,5 +1,6 @@
 import {API_URL} from '../../env'
 import {TAuthResponse, TUserEntity} from './authType'
+import apiClient from "../apiClient";
 
 
 class AuthService {
@@ -46,48 +47,34 @@ class AuthService {
 
     //1. Sign up
     async signup(email: string, password: string) {
-        const response = await fetch(`${API_URL}/doctor/auth/register`, {
-            method: 'post',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                email: email,
-                password: password
-            })
-        })
-        const respondedData: TAuthResponse = await response.json()
-        return respondedData
+        const response = await apiClient.post<TAuthResponse>(`${API_URL}/doctor/auth/register`, {
+            email: email,
+            password: password
+        }, false )
+
+        return response
     }
 
     //2. Login
     async login(email: string, password: string) {
 
         // Send request
-        const response = await fetch(`${API_URL}/doctor/auth/login`, {
-            method: 'post',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                email: email,
-                password: password
-            })
-        })
 
-        // Get responded data
-        const jsonData: TAuthResponse = await response.json()
+        const response = await apiClient.post<TAuthResponse>(`${API_URL}/doctor/auth/login`,{
+            email: email,
+            password: password
+        },false)
 
         // Save the access token
-        if (jsonData.status?.code === 200) {
+        if (response.status?.code === 200) {
 
             // Save to localStorage
-            this.setAccessToken(jsonData.data.accessToken)
+            this.setAccessToken(response.data.accessToken)
 
             // Save user
-            this.setUser(jsonData.data)
+            this.setUser(response.data)
         }
-        return jsonData
+        return response
     }
 
     //3. Forgot password

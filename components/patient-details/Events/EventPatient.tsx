@@ -16,17 +16,36 @@ const EventPatient = () => {
     const router = useRouter()
     const {patientId = ''} = router.query
     const [eventData, setEventData] = useState<TEvent>([])
-    useEffect(() => {
-        const getData = async () => {
-            const data = await eventService.getAllEvents(patientId as string)
-            if (data?.status.code === 200) {
-                setEventData(data.data)
-            }
+    const getData = async () => {
+        const data = await eventService.getAllEvents(patientId as string)
+        if (data?.status.code === 200) {
+            const eventData = !!data.data ? data.data : []
+            setEventData(eventData)
         }
+    }
+    useEffect(() => {
         getData()
     }, [patientId])
 
-    const eventList = eventData.map(event => <EventItem eventData={event} key={event.id}/>)
+    const handleDeleteEvent = async (eventId: number) => {
+        return await eventService.deleteEvent(patientId as string, eventId)
+        getData()
+    }
+
+    useEffect(()=>{
+        getData()
+    },[patientId])
+
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            window.addEventListener('eventAdded', () => {
+                getData()
+            })
+        }
+    }, [])
+
+    const eventList = eventData.map(event => <EventItem onDeleteEvent={handleDeleteEvent} eventData={event}
+                                                        key={event.id}/>)
     return <div className="feed-activity-list">
         <div>{eventList}</div>
     </div>

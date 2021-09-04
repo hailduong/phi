@@ -3,7 +3,6 @@ import {useEffect, useState} from 'react'
 import AddPatient from './AddPatient'
 import patientService from '../../services/patients/patientService'
 import {TPatientEntity} from '../../services/patients/types'
-import {use} from "ast-types";
 
 const PatientPageContent = () => {
 
@@ -39,15 +38,15 @@ const PatientPageContent = () => {
         setShowAddPatientForm(!showAddPatientForm)
     }
 
-    const [showAddPatientButton, setShowAddPatientButton] = useState(true)
-
-    const handleShowAddPatientButton = () => {
-        if (showAddPatientButton) {
-            setTimeout(()=>{
-                setShowAddPatientButton(false)
-            }, 3000)
-        }
-    }
+    // const [showAddPatientButton, setShowAddPatientButton] = useState(true)
+    //
+    // const handleShowAddPatientButton = () => {
+    //     if (showAddPatientButton) {
+    //         setTimeout(()=>{
+    //             setShowAddPatientButton(false)
+    //         }, 3000)
+    //     }
+    // }
 
     const handlePatientAdded = async () => {
         setShowAddPatientForm(false)

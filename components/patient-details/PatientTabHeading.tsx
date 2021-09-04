@@ -4,7 +4,6 @@ import AddEvent from "./Events/AddEvent";
 import AddDoctor from "./DoctorPatient/AddDoctor";
 import AddAllergy from "./AllergyPatient/AddAllergy";
 import AddPrescription from "./Prescription/AddPrescription";
-// import {act} from "react-dom/test-utils";
 
 type TTab = {
     tabHash: string
@@ -74,7 +73,7 @@ const PatientTabHeading = (props: TProps) => {
     useEffect(() => {
         if (typeof window !== 'undefined') {
             const currentTab = location.hash
-            setActiveTabHash(currentTab)
+            currentTab && setActiveTabHash(currentTab)
         }
     }, [])
     // Create list of tabs
@@ -89,13 +88,16 @@ const PatientTabHeading = (props: TProps) => {
         )
     })
 
-
     const [showAddButton, setShowAddButton] = useState(false)
     const handleAddButton = () => {
         setShowAddButton(!showAddButton)
     }
 
     const buttonStyle = (showAddButton) ? 'btn-default' : 'btn-primary'
+
+    const handleAdded = async () => {
+        setShowAddButton(false)
+    }
 
     return <div>
         <ul className="nav nav-tabs">
@@ -106,8 +108,8 @@ const PatientTabHeading = (props: TProps) => {
         </ul>
         {(showAddButton) && activeTabHash === '#tab-1' && <AddHistory/>}
         {(showAddButton) && activeTabHash === '#tab-2' && <AddDoctor/>}
-        {(showAddButton) && activeTabHash === '#tab-3' && <AddAllergy/>}
-        {(showAddButton) && activeTabHash === '#tab-4' && <AddEvent/>}
+        {(showAddButton) && activeTabHash === '#tab-3' && <AddAllergy onAllergyAdded={handleAdded}/>}
+        {(showAddButton) && activeTabHash === '#tab-4' && <AddEvent onEventAdded={handleAdded}/>}
         {(showAddButton) && activeTabHash === '#tab-5' && <AddPrescription/>}
     </div>
 }

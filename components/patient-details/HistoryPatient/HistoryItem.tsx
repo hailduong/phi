@@ -16,10 +16,10 @@ const HistoryItem = (props: TProps) => {
                 <div className="float-right from-toDate">
                     {historyData.fromDate} - {historyData.toDate}
                 </div>
-                <h4> {historyData.name} </h4>
+                <h4>{historyData.name}</h4>
                 <br/>
             </div>
-            <div>{historyData.descriptions}</div>
+            <div>{historyData.descriptions} | {historyData.applicablePopulation}</div>
         </div>
     )
 }

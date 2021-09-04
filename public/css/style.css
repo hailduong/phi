@@ -11769,7 +11769,7 @@ body.md-skin {
     grid-template-columns: auto auto;
     grid-template-rows: auto auto;
     /*margin-bottom: 1rem;*/
-    padding: 15px 20px 15px 20px;
+    /*padding: 15px 20px 15px 20px;*/
 }
 
 .edit-patient {
@@ -11779,4 +11779,8 @@ body.md-skin {
 .addCustom {
     position: absolute;
     right: 15px;
+}
+
+.list-id {
+    margin-top: 1rem;
 }
