@@ -47,7 +47,7 @@ const AddEvent = (props: TProps) => {
                     <div className="form-group">
                         <label>Name</label>
                         <input value={name} onChange={(e) => setName(e.target.value)}
-                               type="text" placeholder="Enter allergy name" className="form-control"/>
+                               type="text" placeholder="Enter event name" className="form-control"/>
                     </div>
                     <div className="form-group">
                         <label>Descriptions</label>

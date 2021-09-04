@@ -22,7 +22,7 @@ class EventService {
     }
 
     async createEvent(patientId: string, eventData: TEventCreateBody) {
-        const response = await apiClient.post<TEventResponse>(`${API_URL}/doctor/event/patient/${patientId}`, {eventData})
+        const response = await apiClient.post<TEventResponse>(`${API_URL}/doctor/event/patient/${patientId}`, eventData)
         return response
     }
 

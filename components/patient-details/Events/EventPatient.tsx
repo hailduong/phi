@@ -28,7 +28,7 @@ const EventPatient = () => {
     }, [patientId])
 
     const handleDeleteEvent = async (eventId: number) => {
-        return await eventService.deleteEvent(patientId as string, eventId)
+        await eventService.deleteEvent(patientId as string, eventId)
         getData()
     }
 

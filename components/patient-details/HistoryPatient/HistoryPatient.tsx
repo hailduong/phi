@@ -18,16 +18,36 @@ const HistoryPatient = () => {
     const router = useRouter()
     const {patientId} = router.query
     const [historyData, setHistoryData] = useState<THistoryEntity[]>([])
+
+    const getData = async () => {
+        const data = await historyService.getHistory(patientId as string)
+        if (data && data.status.code === 200) {
+            setHistoryData(data.data)
+        }
+    }
+
     useEffect(() => {
-        (async () => {
-            const data = await historyService.getHistory(patientId as string)
-            if (data && data.status.code === 200) {
-                setHistoryData(data.data)
-            }
-        })()
+        getData()
     }, [patientId])
 
-    const historyList = historyData.map(history => <HistoryItem historyData={history} key={history.id}/>)
+    const handleDeleteHistory = async (historyId: number) => {
+        const response = await historyService.deleteHistory(patientId as string, historyId)
+
+        if (response.status.code = 200) {
+            getData()
+        }
+    }
+
+    useEffect(() => {
+        if (window !== 'undefined') {
+            window.addEventListener('historyAdded', () => {
+                getData()
+            })
+        }
+    })
+
+    const historyList = historyData.map(history => <HistoryItem onDeleteHistory={handleDeleteHistory}
+                                                                historyData={history} key={history.id}/>)
     return (
         <div className="feed-activity-list">
             <div>{historyList}</div>

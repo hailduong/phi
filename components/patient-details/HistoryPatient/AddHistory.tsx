@@ -1,58 +1,80 @@
-const AddHistory = () => {
+import {useState} from "react";
+import historyService from "../../../services/history/historyService";
+import {useRouter} from "next/router";
+
+type TProps = {
+    onHistoryAdded: () => void
+}
+
+const AddHistory = (props: TProps) => {
+
+    const router = useRouter()
+    const {patientId} = router.query
+
+    const [name, setName] = useState('')
+    const [fromDate, setFromDate] = useState(new Date().toISOString())
+    const [toDate, setToDate] = useState(new Date().toISOString())
+    const [descriptions, setDescriptions] = useState('')
+
+    const newFromDate = new Date(fromDate)
+    const fromDateForInput = newFromDate.toISOString().split('T')[0]
+    const fromDateForServer = newFromDate.getTime() / 1000
+
+
+    const newToDate = new Date(toDate)
+    const toDateForInput = newToDate.toISOString().split('T')[0]
+    const toDateForServer = newToDate.getTime() / 1000
+
+    async function createHistory() {
+
+        const myPatientId = typeof patientId === 'string' ? patientId : ''
+        const response = await historyService.createHistory(myPatientId, {
+            name,
+            descriptions,
+            fromDate: fromDateForServer,
+            toDate: toDateForServer
+        })
+
+        if (response && response?.status && response?.status.code === 200) {
+            props.onHistoryAdded()
+            if (window !== 'undefined') {
+                const event = new Event('historyAdded')
+                window.dispatchEvent(event)
+            }
+        }
+    }
+
     return <div className="row pt-2">
         <div className="col-sm-6 pt-2">
             <form role="form">
                 <div className="form-group">
-                    <label>First Name</label>
-                    <input //value={firstName}
-                        //onChange={(e) => setFirstName(e.target.value)}
-                        type="text" placeholder="Enter patient's first name" className="form-control"/>
+                    <label>Name</label>
+                    <input value={name} onChange={(e) => setName(e.target.value)}
+                           type="text" placeholder="Enter history name"
+                           className="form-control"/>
                 </div>
                 <div className="form-group">
                     <label>From Date</label>
-                    <input //value={phone}
-                        //onChange={(e) => setPhone(e.target.value)}
-                        type="date" placeholder="Enter starting date"
-                        className="form-control"/>
-                </div>
-                <div className="form-group">
-                    <label>Description</label>
-                    <input //value={password}
-                        //onChange={(e) => setPassword(e.target.value)}
-                        type="text" placeholder="Enter description"
-                        className="form-control"/>
-                </div>
-                <div className="form-group">
-                    <label>Applicable Population</label>
-                    <input //value={gender}
-                        //onChange={(e) => setGender(e.target.value)}
-                        type="text" placeholder="Enter applicable population"
-                        className="form-control"/>
+                    <input value={fromDateForInput}
+                           onChange={(e) => setFromDate(new Date(e.target.value).toISOString())}
+                           type="date" placeholder="Enter starting date" className="form-control"/>
                 </div>
             </form>
         </div>
         <div className="col-sm-6 pt-2">
             <form role="form">
                 <div className="form-group">
-                    <label>Last Name</label>
-                    <input //value={lastName}
-                        //onChange={(e) => setLastName(e.target.value)}
-                        type="text" placeholder="Enter patient's last name" className="form-control"/>
+                    <label>Description</label>
+                    <input value={descriptions} onChange={(e) => setDescriptions(e.target.value)}
+                           type="text" placeholder="Enter description"
+                           className="form-control"/>
                 </div>
                 <div className="form-group">
                     <label>To Date</label>
-                    <input //value={email}
-                        //onChange={(e) => setEmail(e.target.value)}
-                        type="date" placeholder="Enter ending date" className="form-control"/>
+                    <input value={toDateForInput}
+                           onChange={(e) => setToDate(new Date(e.target.value).toISOString())}
+                           type="date" placeholder="Enter ending date" className="form-control"/>
                 </div>
-                <div className="form-group">
-                    <label>Frequency</label>
-                    <input //value={gender}
-                        //onChange={(e) => setGender(e.target.value)}
-                        type="number" placeholder="Enter frequency"
-                        className="form-control"/>
-                </div>
-
             </form>
         </div>
 
@@ -63,7 +85,7 @@ const AddHistory = () => {
         {/*    </div>*/}
 
         {/*</div>}*/}
-        <button className="btn btn-primary float-left update">
+        <button className="btn btn-primary float-left update" onClick={createHistory}>
             <strong>Add History</strong>
         </button>
     </div>

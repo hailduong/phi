@@ -16,12 +16,17 @@ const AllergyItem = (props: TProps) => {
         <div className="feed-element grid-container" key={allergyData.id}>
             <div>
                 <a href="#" className="float-left">
-                    <Image alt="icon" width={29} height={29} src="/img/icon-history.png"/>
+                    <Image alt="icon" width={29} height={29} src="/img/icons8-allergies-32.png"/>
                 </a>
-                <h4>{allergyData.id} {allergyData.name}</h4>
-                <div className='list-id'>{allergyData.descriptions}</div>
+                <div className="media-body">
+                    <h4>{allergyData.name}</h4>
+                </div>
+                <div>Description: {allergyData.descriptions}</div>
             </div>
             <div className="project-actions">
+                <div className="media-body from-toDate">
+                    <div>{dateForInput}</div>
+                </div>
                 <a className="btn btn-white btn-sm">
                     <i className="fa fa-pencil"/> Edit</a>
                 <a className="btn btn-white btn-sm ml-2" onClick={() => {
@@ -29,7 +34,7 @@ const AllergyItem = (props: TProps) => {
                 }}>
                     <i className="fa fa-trash"/>
                 </a>
-                <div>{dateForInput}</div>
+
             </div>
             {/*{isVisible ? <DoctorPatientEdit/> : null}*/}
         </div>

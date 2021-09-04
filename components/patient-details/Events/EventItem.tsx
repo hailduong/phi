@@ -18,10 +18,12 @@ const EventItem = (props: TProps) => {
                 <a href="#" className="float-left">
                     <Image alt="image" height={"29px"} width={"29px"} src={"/img/events--v2.png"}/>
                 </a>
-                <h4> {eventData.name} </h4>
-                <div>{eventData.descriptions}</div>
+                <div className="media-body">
+                    <h4>{eventData.name}</h4></div>
+                <div>Description: {eventData.descriptions}</div>
             </div>
             <div className="project-actions">
+                <div className="media-body from-toDate">{dateForInput}</div>
                 <a className="btn btn-white btn-sm">
                     <i className="fa fa-pencil"/> Edit</a>
                 <a className="btn btn-white btn-sm ml-2" onClick={() => {
@@ -29,7 +31,6 @@ const EventItem = (props: TProps) => {
                 }}>
                     <i className="fa fa-trash"/>
                 </a>
-                <div>{dateForInput}</div>
             </div>
         </div>
     )

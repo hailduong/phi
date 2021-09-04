@@ -1,8 +1,6 @@
 import {useEffect, useState} from "react";
 import PrescriptionItem from "./PrescriptionItem";
-import {API_URL} from "../../../env";
 import {useRouter} from 'next/router'
-import eventService from '../../../services/eventService/eventService'
 import {TPrescriptionEntity} from '../../../services/prescriptionService/prescriptionTypes'
 import prescriptionService from '../../../services/prescriptionService/prescriptionService'
 
@@ -13,24 +11,38 @@ export type TPresData = {
     descriptions: string
 }
 
-type TPres = TPresData[]
-
 const PrescriptionPatient = () => {
 
     const router = useRouter()
     const {patientId = ''} = router.query
     const [presData, setPresData] = useState<TPrescriptionEntity[]>([])
-    useEffect(() => {
-        const getData = async () => {
-            const data = await prescriptionService.getAllPrescriptions(patientId as string)
-            if (data?.status.code === 200) {
-                setPresData(data.data)
-            }
+
+    const getData = async () => {
+        const data = await prescriptionService.getAllPrescriptions(patientId as string)
+        if (data?.status.code === 200) {
+            setPresData(data.data)
         }
+    }
+
+    useEffect(() => {
         getData()
     }, [patientId])
 
-    const presList = presData.map(pres => <PrescriptionItem presData={pres} key={pres.id}/>)
+    const handleDeletePrescription = async (prescriptionId: number) => {
+        await prescriptionService.deletePrescription(patientId as string, prescriptionId)
+        getData()
+    }
+
+    useEffect(() => {
+        if (window !== 'undefined') {
+            window.addEventListener('prescriptionAdded', () => {
+                getData()
+            })
+        }
+    })
+
+    const presList = presData.map(pres => <PrescriptionItem onDeletePrescription={handleDeletePrescription}
+                                                            presData={pres} key={pres.id}/>)
     return (
         <div className="feed-activity-list">
             {presList}

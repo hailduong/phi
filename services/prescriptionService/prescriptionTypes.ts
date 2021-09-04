@@ -10,10 +10,8 @@ export type TPrescriptionResponse = {
 export type TPrescriptionEntity = {
     id: number;
     name: string;
-    descriptions: string;
     date: number;
-    applicablePopulation: string;
-    frequency: number
+    descriptions: string;
 }
 
-export type TPrescriptionCreateBody = Omit<TPrescriptionResponse, 'id'>
+export type TPrescriptionCreateBody = Omit<TPrescriptionEntity, 'id'>

@@ -13,8 +13,6 @@ export type THistoryEntity = {
     descriptions: string;
     fromDate: number;
     toDate: number;
-    applicablePopulation: string;
-    frequency: number
 }
 
 export type THistoryCreateBody = Omit<THistoryEntity, 'id'>

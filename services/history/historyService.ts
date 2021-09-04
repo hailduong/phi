@@ -20,12 +20,12 @@ class HistoryService {
         return defaultData
     }
 
-    async createHistory(patientId: number, historyData: THistoryCreateBody) {
+    async createHistory(patientId: string, historyData: THistoryCreateBody) {
         const response = await apiClient.post<THistoryResponse>(`${API_URL}/doctor/history/patient/${patientId}`, historyData)
         return response
     }
 
-    async deleteHistory(patientId: number, historyId: number, pageNumber = 1, pageSize = 5) {
+    async deleteHistory(patientId: string, historyId: number, pageNumber = 1, pageSize = 5) {
         return await apiClient.delete<THistoryResponse>(`${API_URL}/doctor/history/${historyId}/patient/${patientId}?pageNum=${pageNumber}&pageSize=${pageSize}`)
     }
 }

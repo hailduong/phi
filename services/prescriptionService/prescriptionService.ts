@@ -22,7 +22,7 @@ class PrescriptionService {
     }
 
     async createPrescription(patientId: string, dataPrescription: TPrescriptionCreateBody) {
-        const response = await apiClient.post<TPrescriptionResponse>(`${API_URL}/doctor/prescription/patient/${patientId}`,{dataPrescription})
+        const response = await apiClient.post<TPrescriptionResponse>(`${API_URL}/doctor/prescription/patient/${patientId}`,dataPrescription)
         return response
     }
 

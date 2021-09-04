@@ -4,6 +4,7 @@ import AddEvent from "./Events/AddEvent";
 import AddDoctor from "./DoctorPatient/AddDoctor";
 import AddAllergy from "./AllergyPatient/AddAllergy";
 import AddPrescription from "./Prescription/AddPrescription";
+import {use} from "ast-types";
 
 type TTab = {
     tabHash: string
@@ -95,7 +96,7 @@ const PatientTabHeading = (props: TProps) => {
 
     const buttonStyle = (showAddButton) ? 'btn-default' : 'btn-primary'
 
-    const handleAdded = async () => {
+    const handleAdded = () => {
         setShowAddButton(false)
     }
 
@@ -106,11 +107,11 @@ const PatientTabHeading = (props: TProps) => {
                 <strong>{(showAddButton) ? 'Cancel' : `Add ${displayTabName?.tabName}`}</strong>
             </button>
         </ul>
-        {(showAddButton) && activeTabHash === '#tab-1' && <AddHistory/>}
+        {(showAddButton) && activeTabHash === '#tab-1' && <AddHistory onHistoryAdded={handleAdded}/>}
         {(showAddButton) && activeTabHash === '#tab-2' && <AddDoctor/>}
         {(showAddButton) && activeTabHash === '#tab-3' && <AddAllergy onAllergyAdded={handleAdded}/>}
         {(showAddButton) && activeTabHash === '#tab-4' && <AddEvent onEventAdded={handleAdded}/>}
-        {(showAddButton) && activeTabHash === '#tab-5' && <AddPrescription/>}
+        {(showAddButton) && activeTabHash === '#tab-5' && <AddPrescription onPrescriptionAdded={handleAdded}/>}
     </div>
 }
 
