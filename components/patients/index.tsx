@@ -54,6 +54,8 @@ const PatientPageContent = () => {
         await getData()
     }
 
+    const buttonAdd = showAddPatientForm ? 'btn-default' : 'btn-primary'
+
     const patientList = data.map(dataItem => <PatientItem onDeletePatient={handleDeletePatient} patientData={dataItem}
                                                           key={dataItem.id}/>)
     return (
@@ -64,7 +66,7 @@ const PatientPageContent = () => {
                         <div className={`${s.boxTitle} ibox-title`}>
                             <h5>Patient List</h5>
                             <div className={`${s.addButton} ibox-tools`}>
-                                <a onClick={handleAddPatient} className="btn btn-primary">Add Patient</a>
+                                <a onClick={handleAddPatient} className={`btn ${buttonAdd}`}>{showAddPatientForm ? 'Cancel' : 'Add Patient'}</a>
                             </div>
                             {showAddPatientForm ? <AddPatient onPatientAdded={handlePatientAdded}/> : null}
                         </div>
