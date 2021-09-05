@@ -1,5 +1,7 @@
 import Image from 'next/image'
 import {THistoryEntity} from '../../../services/history/historyTypes'
+import {useState} from "react";
+import EditHistory from "./EditHistory";
 
 type TProps = {
     historyData: THistoryEntity
@@ -9,11 +11,19 @@ type TProps = {
 const HistoryItem = (props: TProps) => {
 
     const {historyData, onDeleteHistory} = props
-    debugger
     const newFromDate = new Date(historyData.fromDate * 1000)
     const newToDate = new Date(historyData.toDate * 1000)
     const fromDateForInput = newFromDate.toISOString().split('T')[0]
     const toDateForInput = newToDate.toISOString().split('T')[0]
+
+    const [showEdit, setShowEdit] = useState(false)
+    const handleEdit = () => {
+        setShowEdit(!showEdit)
+    }
+
+    const handleEdited = () => {
+        setShowEdit(false)
+    }
 
     return (
         <div className="grid-container feed-element" key={historyData.id}>
@@ -32,14 +42,16 @@ const HistoryItem = (props: TProps) => {
                         {fromDateForInput} to {toDateForInput}
                     </div>
                 </div>
-                <a className="btn btn-white btn-sm">
-                    <i className="fa fa-pencil"/> Edit</a>
+                <a className="btn btn-white btn-sm" onClick={handleEdit}>
+                    <i className="fa fa-pencil"/>{showEdit ? ' Cancel' : ' Edit'}</a>
                 <a className="btn btn-white btn-sm ml-2" onClick={() => {
                     onDeleteHistory(historyData.id)
                 }}>
                     <i className="fa fa-trash"/>
                 </a>
-
+            </div>
+            <div className="update-patient">
+                {showEdit ? <EditHistory historyId={historyData.id} onHistoryEdited={handleEdited}/> : null}
             </div>
         </div>
     )
