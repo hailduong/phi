@@ -17,10 +17,6 @@ const data: TTab = [
         tabHash: `#tab-1`
     },
     {
-        tabName: 'Doctors',
-        tabHash: '#tab-2'
-    },
-    {
         tabName: 'Allergies',
         tabHash: '#tab-3'
     },
@@ -53,20 +49,9 @@ const PatientTabHeading = (props: TProps) => {
         // Output the index
         const tabIndex = data.findIndex(item => item.tabHash === tabHash)
 
+        // TODO: output the tab name instead
         props.onSelectTab(tabIndex)
     }
-
-    // if (activeTabHash === '#tab-1') {
-    //     displayTabName = 'History'
-    // } else if (activeTabHash === '#tab-2') {
-    //     displayTabName = 'Doctors'
-    // } else if (activeTabHash === '#tab-3') {
-    //     displayTabName = 'Allergies'
-    // } else if (activeTabHash === '#tab-4') {
-    //     displayTabName = 'Event'
-    // } else if (activeTabHash === '#tab-5') {
-    //     displayTabName = 'Prescription'
-    // }
 
     const displayTabName = data.find(item => item.tabHash === activeTabHash)
 
@@ -108,7 +93,7 @@ const PatientTabHeading = (props: TProps) => {
             </button>
         </ul>
         {(showAddButton) && activeTabHash === '#tab-1' && <AddHistory onHistoryAdded={handleAdded}/>}
-        {(showAddButton) && activeTabHash === '#tab-2' && <AddDoctor/>}
+        {/*{(showAddButton) && activeTabHash === '#tab-2' && <AddDoctor/>}*/}
         {(showAddButton) && activeTabHash === '#tab-3' && <AddAllergy onAllergyAdded={handleAdded}/>}
         {(showAddButton) && activeTabHash === '#tab-4' && <AddEvent onEventAdded={handleAdded}/>}
         {(showAddButton) && activeTabHash === '#tab-5' && <AddPrescription onPrescriptionAdded={handleAdded}/>}

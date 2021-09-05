@@ -9,7 +9,6 @@ import PatientTabHeading from '../../components/patient-details/PatientTabHeadin
 import {TPatientEntity} from '../../services/patients/types'
 import PatientHeading from '../../components/patients/PatientHeading'
 import HistoryPatient from '../../components/patient-details/History'
-import DoctorPatient from '../../components/patient-details/Doctor'
 import Allergy from '../../components/patient-details/Allergy'
 import EventPatient from '../../components/patient-details/Events'
 import PrescriptionPatient from '../../components/patient-details/Prescription'
@@ -64,10 +63,10 @@ export default function PatientDetailsPage() {
                                                                 <div className="panel-body">
                                                                     <div className="tab-content">
                                                                         {activeTabIndex === 0 && <HistoryPatient/>}
-                                                                        {activeTabIndex === 1 && <DoctorPatient/>}
-                                                                        {activeTabIndex === 2 && <Allergy/>}
-                                                                        {activeTabIndex === 3 && <EventPatient/>}
-                                                                        {activeTabIndex === 4 && <PrescriptionPatient/>}
+                                                                        {/*{activeTabIndex === 1 && <DoctorPatient/>}*/}
+                                                                        {activeTabIndex === 1 && <Allergy/>}
+                                                                        {activeTabIndex === 2 && <EventPatient/>}
+                                                                        {activeTabIndex === 3 && <PrescriptionPatient/>}
                                                                     </div>
                                                                 </div>
                                                             </div>
