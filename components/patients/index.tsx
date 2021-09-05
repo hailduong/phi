@@ -53,6 +53,8 @@ const PatientPageContent = () => {
         await getData()
     }
 
+    const buttonAdd = showAddPatientForm ? 'btn-default' : 'btn-primary'
+
     const patientList = data.map(dataItem => <PatientItem onDeletePatient={handleDeletePatient} patientData={dataItem}
                                                           key={dataItem.id}/>)
     return (
@@ -62,7 +64,7 @@ const PatientPageContent = () => {
                     <div className="ibox tab-seeContent">
                         <div className="ibox-title">
                             <div className="ibox-tools">
-                                <a onClick={handleAddPatient} className="btn btn-primary">Add Patient</a>
+                                <a onClick={handleAddPatient} className={`btn ${buttonAdd}`}>{showAddPatientForm ? 'Cancel' : 'Add Patient'}</a>
                             </div>
                             <div className="addPatient">
                                 {showAddPatientForm ? <AddPatient onPatientAdded={handlePatientAdded}/> : null}
