@@ -17,7 +17,7 @@ class AuthService {
 
     setUser(user: TUserEntity | null) {
         if (typeof window !== 'undefined' && user) {
-            localStorage.setItem('user', window.btoa(window.btoa(JSON.stringify(user))))
+            localStorage.setItem('user', window.btoa(window.btoa(encodeURIComponent(JSON.stringify(user)))))
         }
     }
 
