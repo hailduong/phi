@@ -1,6 +1,6 @@
-import {useState} from "react";
-import {useRouter} from "next/router";
-import prescriptionService from "../../../services/prescriptionService/prescriptionService";
+import {useState} from 'react'
+import {useRouter} from 'next/router'
+import prescriptionService from '../../../services/prescriptionService/prescriptionService'
 
 type TProps = {
     prescriptionId: number
@@ -39,41 +39,43 @@ const EditPrescription = (props: TProps) => {
         }
     }
 
-    return <div className="row pt-2">
-        <div className="col-sm-6 pt-2">
-            <form role="form">
-                <div className="form-group">
-                    <label>Name</label>
-                    <input value={name} onChange={(e) => setName(e.target.value)}
-                           type="text" placeholder="Enter prescription name" className="form-control"/>
-                </div>
+    return <div className="updateBox animated fadeIn">
+        <div className="row pt-2">
+            <div className="col-sm-6 pt-2">
+                <form role="form">
+                    <div className="form-group">
+                        <label>Name</label>
+                        <input value={name} onChange={(e) => setName(e.target.value)}
+                               type="text" placeholder="Enter prescription name" className="form-control"/>
+                    </div>
 
-                <div className="form-group">
-                    <label>Descriptions</label>
-                    <input value={descriptions} onChange={(e) => setDescriptions(e.target.value)}
-                           type="text" placeholder="Enter description"
-                           className="form-control"/>
-                </div>
-            </form>
-        </div>
-        <div className="col-sm-6 pt-2">
-            <form role="form">
-                <div className="form-group">
-                    <label>Date</label>
-                    <input value={dateForInput} onChange={(e) => setDate(new Date(e.target.value).toISOString())}
-                           type="date" placeholder="Enter patient's last name" className="form-control"/>
-                </div>
-            </form>
-        </div>
-        {shouldShowError && <div className="col-sm-12">
-            <div className="alert alert-danger" role="alert">
-                Invalid input or email existed
+                    <div className="form-group">
+                        <label>Descriptions</label>
+                        <input value={descriptions} onChange={(e) => setDescriptions(e.target.value)}
+                               type="text" placeholder="Enter description"
+                               className="form-control"/>
+                    </div>
+                </form>
             </div>
+            <div className="col-sm-6 pt-2">
+                <form role="form">
+                    <div className="form-group">
+                        <label>Date</label>
+                        <input value={dateForInput} onChange={(e) => setDate(new Date(e.target.value).toISOString())}
+                               type="date" placeholder="Enter patient's last name" className="form-control"/>
+                    </div>
+                </form>
+            </div>
+            {shouldShowError && <div className="col-sm-12">
+                <div className="alert alert-danger" role="alert">
+                    Invalid input or email existed
+                </div>
 
-        </div>}
-        <button className="btn btn-primary float-left update" onClick={updatePrescription}>
-            <strong>Update Prescription</strong>
-        </button>
+            </div>}
+            <button className="btn btn-primary float-left update" onClick={updatePrescription}>
+                <strong>Update Prescription</strong>
+            </button>
+        </div>
     </div>
 }
 

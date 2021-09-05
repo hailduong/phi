@@ -47,13 +47,15 @@ const HistoryPatient = () => {
                 getData()
             })
         }
-    },[])
+    }, [])
 
     const historyList = historyData.map(history => <HistoryItem onDeleteHistory={handleDeleteHistory}
                                                                 historyData={history} key={history.id}/>)
     return (
-        <div className="feed-activity-list">
-            <div>{historyList}</div>
+        <div className="tab-pane active show" id="tab-1">
+            <div className="feed-activity-list">
+                <div>{historyList}</div>
+            </div>
         </div>
     )
 }

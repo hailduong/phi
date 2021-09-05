@@ -1,6 +1,6 @@
-import DoctorItem from "./DoctorItem";
-import {useEffect, useState} from "react";
-import {API_URL} from "../../../env";
+import DoctorItem from './DoctorItem'
+import {useEffect, useState} from 'react'
+import {API_URL} from '../../../env'
 
 export type TDoctorData = {
     id: string
@@ -19,7 +19,7 @@ const DoctorPatient = () => {
             const response = await fetch(`${API_URL}/auth/v1/docters/docters`)
 
             const data = await response.json()
-            if (data.status === "200") {
+            if (data.status === '200') {
                 setDoctorData(data.data)
             }
         }
@@ -29,8 +29,11 @@ const DoctorPatient = () => {
 
     const doctorList = doctorData.map(doctor => <DoctorItem key={doctor.id} doctorData={doctor}/>)
     return (
-        <div className="feed-activity-list">
-            <div>{doctorList}</div>
+        <div className="tab-pane active show"
+             id="tab-2">
+            <div className="feed-activity-list">
+                <div>{doctorList}</div>
+            </div>
         </div>
     )
 }

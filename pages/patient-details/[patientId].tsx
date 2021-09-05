@@ -6,13 +6,13 @@ import styles from '../../styles/Home.module.scss'
 import LeftNavigation from '../../components/common/LeftNavigation'
 import PageHeading from '../../components/common/PageHeading'
 import PatientTabHeading from '../../components/patient-details/PatientTabHeading'
-import Tab1 from '../../components/patient-details/HistoryPatient/Tab1'
-import Tab2 from '../../components/patient-details/DoctorPatient/Tab2'
-import Tab3 from '../../components/patient-details/AllergyPatient/Tab3'
-import Tab4 from '../../components/patient-details/Events/Tab4'
-import Tab5 from '../../components/patient-details/Prescription/Tab5'
 import {TPatientEntity} from '../../services/patients/types'
 import PatientHeading from '../../components/patients/PatientHeading'
+import HistoryPatient from '../../components/patient-details/History'
+import DoctorPatient from '../../components/patient-details/Doctor'
+import Allergy from '../../components/patient-details/Allergy'
+import EventPatient from '../../components/patient-details/Events'
+import PrescriptionPatient from '../../components/patient-details/Prescription'
 
 export default function PatientDetailsPage() {
 
@@ -63,11 +63,11 @@ export default function PatientDetailsPage() {
                                                                 </div>
                                                                 <div className="panel-body">
                                                                     <div className="tab-content">
-                                                                        {activeTabIndex === 0 && <Tab1/>}
-                                                                        {activeTabIndex === 1 && <Tab2/>}
-                                                                        {activeTabIndex === 2 && <Tab3/>}
-                                                                        {activeTabIndex === 3 && <Tab4/>}
-                                                                        {activeTabIndex === 4 && <Tab5/>}
+                                                                        {activeTabIndex === 0 && <HistoryPatient/>}
+                                                                        {activeTabIndex === 1 && <DoctorPatient/>}
+                                                                        {activeTabIndex === 2 && <Allergy/>}
+                                                                        {activeTabIndex === 3 && <EventPatient/>}
+                                                                        {activeTabIndex === 4 && <PrescriptionPatient/>}
                                                                     </div>
                                                                 </div>
                                                             </div>

@@ -1,7 +1,8 @@
 import Image from 'next/image'
 import {THistoryEntity} from '../../../services/history/historyTypes'
-import {useState} from "react";
-import EditHistory from "./EditHistory";
+import {useState} from 'react'
+import EditHistory from './EditHistory'
+import s from './index.module.scss'
 
 type TProps = {
     historyData: THistoryEntity
@@ -28,8 +29,8 @@ const HistoryItem = (props: TProps) => {
     return (
         <div className="grid-container feed-element" key={historyData.id}>
             <div>
-                <a href="#" className="float-left">
-                    <Image alt="image" height={'29px'} width={'29px'} src={'/img/icons8-history-64.png'}/>
+                <a href="#" className={`float-left mr-1 ${s.icon}`}>
+                    <Image alt="image" height={'20px'} width={'20px'} src={'/img/icons8-history-64.png'}/>
                 </a>
                 <div className="media-body">
                     <h4>{historyData.name}</h4>
@@ -50,9 +51,8 @@ const HistoryItem = (props: TProps) => {
                     <i className="fa fa-trash"/>
                 </a>
             </div>
-            <div className="update-patient">
-                {showEdit ? <EditHistory historyId={historyData.id} onHistoryEdited={handleEdited}/> : null}
-            </div>
+
+            {showEdit ? <EditHistory historyId={historyData.id} onHistoryEdited={handleEdited}/> : null}
         </div>
     )
 }

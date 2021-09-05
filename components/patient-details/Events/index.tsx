@@ -50,8 +50,10 @@ const EventPatient = () => {
     const eventList = eventData.map(event => <EventItem onDeleteEvent={handleDeleteEvent}
                                                         eventData={event}
                                                         key={event.id}/>)
-    return <div className="feed-activity-list">
-        <div>{eventList}</div>
+    return <div className="tab-pane active show" id="tab-4">
+        <div className="feed-activity-list">
+            <div>{eventList}</div>
+        </div>
     </div>
 }
 

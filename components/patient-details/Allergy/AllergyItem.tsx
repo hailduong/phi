@@ -1,7 +1,8 @@
-import {TAllergyData} from './AllergyPatient'
+import {TAllergyData} from './index'
 import Image from 'next/image'
-import {useState} from "react";
-import EditAllergy from "./EditAllergy";
+import {useState} from 'react'
+import EditAllergy from './EditAllergy'
+import s from './index.module.scss'
 
 type TProps = {
     allergyData: TAllergyData
@@ -26,8 +27,8 @@ const AllergyItem = (props: TProps) => {
     return (
         <div className="feed-element grid-container" key={allergyData.id}>
             <div>
-                <a href="#" className="float-left">
-                    <Image alt="icon" width={29} height={29} src="/img/icons8-allergies-32.png"/>
+                <a href="#" className={`${s.icon} mr-1 float-left`}>
+                    <Image alt="icon" width={20} height={20} src="/img/icons8-allergies-32.png"/>
                 </a>
                 <div className="media-body">
                     <h4>{allergyData.name}</h4>
@@ -47,9 +48,9 @@ const AllergyItem = (props: TProps) => {
                 </a>
 
             </div>
-            <div className='edit-patient'>
-                {showEdit ? <EditAllergy allergyId={allergyData.id} onAllergyEdited={handleEdited}/> : null}
-            </div>
+
+            {showEdit ? <EditAllergy allergyId={allergyData.id} onAllergyEdited={handleEdited}/> : null}
+
         </div>
     )
 }

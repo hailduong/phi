@@ -1,7 +1,8 @@
-import {TPresData} from "./PrescriptionPatient";
-import Image from "next/image";
-import {useState} from "react";
-import EditPrescription from "./EditPrescription";
+import {TPresData} from './index'
+import Image from 'next/image'
+import {useState} from 'react'
+import EditPrescription from './EditPrescription'
+import s from './index.module.scss'
 
 type TProps = {
     presData: TPresData
@@ -26,8 +27,8 @@ const PrescriptionItem = (props: TProps) => {
     return (
         <div className="grid-container feed-element" key={presData.id}>
             <div>
-                <a href="#" className="float-left">
-                    <Image alt="image" height={"29px"} width={"29px"} src={"/img/treatment-plan.png"}/>
+                <a href="#" className={`float-left mr-1 ${s.icon}`}>
+                    <Image alt="image" height={20} width={20} src={'/img/treatment-plan.png'}/>
                 </a>
                 <div className="media-body">
                     <h4> {presData.name} </h4>
@@ -44,9 +45,9 @@ const PrescriptionItem = (props: TProps) => {
                     <i className="fa fa-trash"/>
                 </a>
             </div>
-            <div className="update-patient">
-                {showEdit ? <EditPrescription prescriptionId={presData.id} onPrescriptionEdited={handleEdited}/> : null}
-            </div>
+
+            {showEdit ? <EditPrescription prescriptionId={presData.id} onPrescriptionEdited={handleEdited}/> : null}
+
         </div>
     )
 }

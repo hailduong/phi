@@ -12,7 +12,7 @@ export type TAllergyData = {
 
 type TAllergy = TAllergyData[]
 
-const AllergyPatient = () => {
+const Allergy = () => {
     const router = useRouter()
     const {patientId = ''} = router.query
 
@@ -51,10 +51,12 @@ const AllergyPatient = () => {
     const allergyList = allergyData.map(allergy => <AllergyItem onDeleteAllergy={handleDeleteAllergy}
                                                                 key={allergy.id} allergyData={allergy}/>)
     return (
-        <div className="feed-activity-list">
-            <div>{allergyList}</div>
+        <div className="tab-pane active show" id="tab-3">
+            <div className="feed-activity-list">
+                <div>{allergyList}</div>
+            </div>
         </div>
     )
 }
 
-export default AllergyPatient
+export default Allergy

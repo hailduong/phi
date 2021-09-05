@@ -1,7 +1,7 @@
 import {useState} from 'react'
 import DoctorPatientEdit from './DoctorPatientEdit'
 import Image from 'next/image'
-import {TDoctorData} from './DoctorPatient'
+import {TDoctorData} from './index'
 
 type TProps = {
     doctorData: TDoctorData

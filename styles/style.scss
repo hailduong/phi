@@ -11723,10 +11723,6 @@ body.md-skin {
   }
 }
 
-.patient-name {
-  padding: 10px 15px 0 15px;
-}
-
 .from-toDate {
   color: #a7b1c2;
   padding: 6px 0;
@@ -11778,4 +11774,10 @@ body.md-skin {
 
 .list-id {
   margin-top: 1rem;
+}
+
+.updateBox{
+  background: rgb(0 0 0 / 5%);
+  padding: 0 20px 20px;
+  border-radius: 7px;
 }

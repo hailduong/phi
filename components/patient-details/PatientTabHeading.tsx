@@ -1,8 +1,8 @@
 import {useEffect, useState} from 'react'
-import AddHistory from "./HistoryPatient/AddHistory";
+import AddHistory from "./History/AddHistory";
 import AddEvent from "./Events/AddEvent";
-import AddDoctor from "./DoctorPatient/AddDoctor";
-import AddAllergy from "./AllergyPatient/AddAllergy";
+import AddDoctor from "./Doctor/AddDoctor";
+import AddAllergy from "./Allergy/AddAllergy";
 import AddPrescription from "./Prescription/AddPrescription";
 import {use} from "ast-types";
 

@@ -1,8 +1,8 @@
-import {TEventData} from "./EventPatient";
-import Image from "next/image";
-import {useState} from "react";
-import EditPatient from "../../patients/EditPatient";
-import EditEvent from "./EditEvent";
+import {TEventData} from './index'
+import Image from 'next/image'
+import {useState} from 'react'
+import EditEvent from './EditEvent'
+import s from './index.module.scss'
 
 type TProps = {
     eventData: TEventData
@@ -28,8 +28,8 @@ const EventItem = (props: TProps) => {
     return (
         <div className="grid-container feed-element" key={eventData.id}>
             <div>
-                <a href="#" className="float-left">
-                    <Image alt="image" height={"29px"} width={"29px"} src={"/img/events--v2.png"}/>
+                <a href="#" className={`${s.icon} mr-1 float-left`}>
+                    <Image alt="image" height={20} width={20} src={'/img/events--v2.png'}/>
                 </a>
                 <div className="media-body">
                     <h4>{eventData.name}</h4></div>
@@ -45,9 +45,9 @@ const EventItem = (props: TProps) => {
                     <i className="fa fa-trash"/>
                 </a>
             </div>
-            <div className="edit-patient">
-                {showEdit ? <EditEvent onEventEdited={handleEdited} eventId={eventData.id}/> : null}
-            </div>
+
+            {showEdit ? <EditEvent onEventEdited={handleEdited} eventId={eventData.id}/> : null}
+
         </div>
     )
 }

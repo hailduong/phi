@@ -1,5 +1,5 @@
-import {useEffect, useState} from "react";
-import PrescriptionItem from "./PrescriptionItem";
+import {useEffect, useState} from 'react'
+import PrescriptionItem from './PrescriptionItem'
 import {useRouter} from 'next/router'
 import {TPrescriptionEntity} from '../../../services/prescriptionService/prescriptionTypes'
 import prescriptionService from '../../../services/prescriptionService/prescriptionService'
@@ -47,8 +47,10 @@ const PrescriptionPatient = () => {
     const presList = presData.map(pres => <PrescriptionItem onDeletePrescription={handleDeletePrescription}
                                                             presData={pres} key={pres.id}/>)
     return (
-        <div className="feed-activity-list">
-            {presList}
+        <div className="tab-pane active show" id="tab-5">
+            <div className="feed-activity-list">
+                {presList}
+            </div>
         </div>
     )
 }
