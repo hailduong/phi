@@ -1,6 +1,6 @@
 import {API_URL} from '../../env'
-import {TAuthResponse, TUserEntity} from './authType'
-import apiClient from "../apiClient";
+import {TAuthResponse, TDoctorInfoEntity, TDoctorInfoResponse, TUserEntity} from './authType'
+import apiClient from '../apiClient'
 
 
 class AuthService {
@@ -50,7 +50,7 @@ class AuthService {
         const response = await apiClient.post<TAuthResponse>(`${API_URL}/doctor/auth/register`, {
             email: email,
             password: password
-        }, false )
+        }, false)
 
         return response
     }
@@ -60,10 +60,10 @@ class AuthService {
 
         // Send request
 
-        const response = await apiClient.post<TAuthResponse>(`${API_URL}/doctor/auth/login`,{
+        const response = await apiClient.post<TAuthResponse>(`${API_URL}/doctor/auth/login`, {
             email: email,
             password: password
-        },false)
+        }, false)
 
         // Save the access token
         if (response.status?.code === 200) {
@@ -116,6 +116,14 @@ class AuthService {
             return localStorage.getItem('key') !== null
         }
         return false
+    }
+
+    async getMyProfile() {
+        return await apiClient.get<TDoctorInfoResponse>(`${API_URL}/doctor/info`)
+    }
+
+    async updateMyProfile(data: TDoctorInfoEntity){
+        return await apiClient.put<TDoctorInfoResponse>(`${API_URL}/doctor/info`, data)
     }
 }
 

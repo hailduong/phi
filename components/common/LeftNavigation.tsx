@@ -32,11 +32,6 @@ const LeftNavigation = () => {
                                         </span>
                             <ul className="dropdown-menu animated fadeInRight m-t-xs">
                                 <li>
-                                    <Link href={'/'}>
-                                        <a className="dropdown-item">My Profile</a>
-                                    </Link>
-                                </li>
-                                <li>
                                     <a className="dropdown-item" onClick={logout}>Logout</a>
                                 </li>
                             </ul>
@@ -50,6 +45,12 @@ const LeftNavigation = () => {
                             <a>
                                 <i className="fa fa-th-large"/>
                                 <span className="nav-label">Patients</span>
+                            </a>
+                        </Link>
+                        <Link href="/my-profile">
+                            <a>
+                                <i className="fa fa-user-circle"/>
+                                <span className="nav-label">My Profile</span>
                             </a>
                         </Link>
                     </li>

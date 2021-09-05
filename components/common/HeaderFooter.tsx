@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import styles from '../../styles/Home.module.css'
+import styles from '../../styles/Home.module.scss'
 import Script from 'next/script'
 import React from 'react'
 import authService from '../../services/authentication/authService'
@@ -30,9 +30,7 @@ export default function HeaderFooter(props: TProps) {
 
                 <span dangerouslySetInnerHTML={{
                     __html: `<link href="/css/bootstrap.min.css" rel="stylesheet"/>
-                <link href="/font-awesome/css/font-awesome.css" rel="stylesheet"/>
-                <link href="/css/animate.css" rel="stylesheet"/>
-                <link href="/css/style.css" rel="stylesheet"/>`
+                <link href="/font-awesome/css/font-awesome.css" rel="stylesheet"/>`
                 }}>
 
                 </span>

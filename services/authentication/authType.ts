@@ -20,3 +20,23 @@ export type TUserEntity = {
     accessToken: string
     refreshToken: string
 }
+
+export type TDoctorInfoResponse = {
+    status: {
+        code: number;
+        message: string;
+    }
+    data: TDoctorInfoEntity;
+}
+
+export type TDoctorInfoEntity = {
+    id: number;
+    firstName: string;
+    lastName: string;
+    email: string;
+    role: string;
+    address: string;
+    title: string;
+    phone: string;
+    gender: string;
+}

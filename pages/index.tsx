@@ -1,4 +1,4 @@
-import styles from '../styles/Home.module.css'
+import styles from '../styles/Home.module.scss'
 import LeftNavigation from '../components/common/LeftNavigation'
 import PageHeading from '../components/common/PageHeading'
 import PatientPageContent from '../components/patients'
