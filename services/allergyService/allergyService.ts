@@ -29,6 +29,11 @@ class AllergyService {
         const response = await apiClient.delete<TEventResponse>(`${API_URL}/doctor/allergy/${allergyId}/patient/${patientId}`)
         return response
     }
+
+    async updateEvent(patientId: string, allergyId: number, allergyData: TAllergyCreateBody){
+        const response = await apiClient.put(`${API_URL}/doctor/allergy/${allergyId}/patient/${patientId}`, allergyData)
+        return response
+    }
 }
 
 export default new AllergyService()

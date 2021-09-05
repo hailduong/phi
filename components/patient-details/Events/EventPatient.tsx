@@ -32,19 +32,23 @@ const EventPatient = () => {
         getData()
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         getData()
-    },[patientId])
+    }, [patientId])
 
     useEffect(() => {
         if (typeof window !== 'undefined') {
             window.addEventListener('eventAdded', () => {
                 getData()
             })
+            window.addEventListener('eventUpdated', () => {
+                getData()
+            })
         }
     }, [])
 
-    const eventList = eventData.map(event => <EventItem onDeleteEvent={handleDeleteEvent} eventData={event}
+    const eventList = eventData.map(event => <EventItem onDeleteEvent={handleDeleteEvent}
+                                                        eventData={event}
                                                         key={event.id}/>)
     return <div className="feed-activity-list">
         <div>{eventList}</div>

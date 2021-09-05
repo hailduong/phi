@@ -39,7 +39,25 @@ const apiClient = {
         })
         const data: ReturnedType = await response.json()
         return data
+    },
+    async put<ReturnedType>(url: string, body: any, authenticate = true) {
+
+        const header: HeadersInit = authenticate ? {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${authService.getAccessToken()}`
+        } : {
+            'Content-Type': 'application/json'
+        }
+
+        const response = await fetch(url, {
+            method: 'put',
+            headers: header,
+            body: JSON.stringify(body)
+        })
+        const data: ReturnedType = await response.json()
+        return data
     }
+
 }
 
 export default apiClient

@@ -1,6 +1,5 @@
 import {useState} from "react";
 
-
 const EditPatient = () => {
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
@@ -8,20 +7,6 @@ const EditPatient = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [gender, setGender] = useState('')
-
-    console.log('firstName', firstName)
-    console.log('lastName', lastName)
-    console.log('phone', phone)
-    console.log('email', email)
-    console.log('password', password)
-    console.log('gender', gender)
-
-    async function updatePatient() {
-        console.log('========')
-        console.log('firstName', firstName)
-        console.log('========')
-    }
-
 
     return <div className="row pt-2">
         <div className="col-sm-6 pt-2">
@@ -66,7 +51,7 @@ const EditPatient = () => {
             </form>
         </div>
 
-        <button onClick={updatePatient} className="btn btn-primary float-left update">
+        <button className="btn btn-primary float-left update">
             <strong>Update Patient</strong>
         </button>
 

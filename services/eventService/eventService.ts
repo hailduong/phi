@@ -29,6 +29,10 @@ class EventService {
     async deleteEvent(patientId: string, eventId: number) {
         return await apiClient.delete<TEventResponse>(`${API_URL}/doctor/event/${eventId}/patient/${patientId}`)
     }
+
+    async updateEvent(patientId: string, eventId: number, eventData: TEventCreateBody) {
+        return await apiClient.put<TEventResponse>(`${API_URL}/doctor/event/${eventId}/patient/${patientId}`,eventData)
+    }
 }
 
 
