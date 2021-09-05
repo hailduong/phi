@@ -38,7 +38,7 @@ const EventItem = (props: TProps) => {
             <div className="project-actions">
                 <div className="media-body from-toDate">{dateForInput}</div>
                 <a className="btn btn-white btn-sm" onClick={handleEdit}>
-                    <i className="fa fa-pencil"/> Edit</a>
+                    <i className="fa fa-pencil"/>{showEdit ? ' Cancel' : ' Edit'}</a>
                 <a className="btn btn-white btn-sm ml-2" onClick={() => {
                     onDeleteEvent(eventData.id)
                 }}>

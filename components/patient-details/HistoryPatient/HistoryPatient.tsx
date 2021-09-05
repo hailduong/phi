@@ -33,7 +33,7 @@ const HistoryPatient = () => {
     const handleDeleteHistory = async (historyId: number) => {
         const response = await historyService.deleteHistory(patientId as string, historyId)
 
-        if (response.status.code = 200) {
+        if (response && response.status && response.status.code === 200) {
             getData()
         }
     }
@@ -43,8 +43,11 @@ const HistoryPatient = () => {
             window.addEventListener('historyAdded', () => {
                 getData()
             })
+            window.addEventListener('historyEdited', () => {
+                getData()
+            })
         }
-    })
+    },[])
 
     const historyList = historyData.map(history => <HistoryItem onDeleteHistory={handleDeleteHistory}
                                                                 historyData={history} key={history.id}/>)

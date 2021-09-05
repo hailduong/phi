@@ -1,5 +1,7 @@
 import {TAllergyData} from './AllergyPatient'
 import Image from 'next/image'
+import {useState} from "react";
+import EditAllergy from "./EditAllergy";
 
 type TProps = {
     allergyData: TAllergyData
@@ -11,6 +13,15 @@ const AllergyItem = (props: TProps) => {
 
     const newDate = new Date(allergyData.date * 1000)
     const dateForInput = newDate.toISOString().split('T')[0]
+
+    const [showEdit, setShowEdit] = useState(false)
+    const handleEdit = () => {
+        setShowEdit(!showEdit)
+    }
+
+    const handleEdited = () => {
+        setShowEdit(false)
+    }
 
     return (
         <div className="feed-element grid-container" key={allergyData.id}>
@@ -27,8 +38,8 @@ const AllergyItem = (props: TProps) => {
                 <div className="media-body from-toDate">
                     <div>{dateForInput}</div>
                 </div>
-                <a className="btn btn-white btn-sm">
-                    <i className="fa fa-pencil"/> Edit</a>
+                <a className="btn btn-white btn-sm" onClick={handleEdit}>
+                    <i className="fa fa-pencil"/>{showEdit ? ' Cancel' : ' Edit'}</a>
                 <a className="btn btn-white btn-sm ml-2" onClick={() => {
                     onDeleteAllergy(allergyData.id)
                 }}>
@@ -36,7 +47,9 @@ const AllergyItem = (props: TProps) => {
                 </a>
 
             </div>
-            {/*{isVisible ? <DoctorPatientEdit/> : null}*/}
+            <div className='edit-patient'>
+                {showEdit ? <EditAllergy allergyId={allergyData.id} onAllergyEdited={handleEdited}/> : null}
+            </div>
         </div>
     )
 }

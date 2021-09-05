@@ -25,9 +25,9 @@ const AllergyPatient = () => {
     }
 
     const handleDeleteAllergy = async (allergyId: number) => {
-        const response = await allergyService.deleteEvent(patientId as string, allergyId)
+        const response = await allergyService.deleteAllergy(patientId as string, allergyId)
 
-        if (response.status.code === 200){
+        if (response.status.code === 200) {
             getData()
         }
     }
@@ -41,11 +41,15 @@ const AllergyPatient = () => {
             window.addEventListener('allergyAdded', () => {
                 getData()
             })
+            window.addEventListener('allergyEdited', () => {
+                getData()
+            })
         }
     }, [])
 
 
-    const allergyList = allergyData.map(allergy => <AllergyItem onDeleteAllergy={handleDeleteAllergy} key={allergy.id} allergyData={allergy}/>)
+    const allergyList = allergyData.map(allergy => <AllergyItem onDeleteAllergy={handleDeleteAllergy}
+                                                                key={allergy.id} allergyData={allergy}/>)
     return (
         <div className="feed-activity-list">
             <div>{allergyList}</div>

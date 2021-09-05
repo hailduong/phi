@@ -22,12 +22,16 @@ class PrescriptionService {
     }
 
     async createPrescription(patientId: string, dataPrescription: TPrescriptionCreateBody) {
-        const response = await apiClient.post<TPrescriptionResponse>(`${API_URL}/doctor/prescription/patient/${patientId}`,dataPrescription)
+        const response = await apiClient.post<TPrescriptionResponse>(`${API_URL}/doctor/prescription/patient/${patientId}`, dataPrescription)
         return response
     }
 
     async deletePrescription(patientId: string, prescriptionId: number) {
         return await apiClient.delete<TPrescriptionResponse>(`${API_URL}/doctor/prescription/${prescriptionId}/patient/${patientId}`)
+    }
+
+    async updatePrescription(patientId: string, prescriptionId: number, dataPrescription: TPrescriptionCreateBody) {
+        return await apiClient.put<TPrescriptionResponse>(`${API_URL}/doctor/prescription/${prescriptionId}/patient/${patientId}`, dataPrescription)
     }
 }
 

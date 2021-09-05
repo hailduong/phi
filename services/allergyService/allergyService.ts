@@ -25,13 +25,13 @@ class AllergyService {
         return response
     }
 
-    async deleteEvent(patientId: string, allergyId: number) {
-        const response = await apiClient.delete<TEventResponse>(`${API_URL}/doctor/allergy/${allergyId}/patient/${patientId}`)
+    async deleteAllergy(patientId: string, allergyId: number) {
+        const response = await apiClient.delete<TAllergyResponse>(`${API_URL}/doctor/allergy/${allergyId}/patient/${patientId}`)
         return response
     }
 
-    async updateEvent(patientId: string, allergyId: number, allergyData: TAllergyCreateBody){
-        const response = await apiClient.put(`${API_URL}/doctor/allergy/${allergyId}/patient/${patientId}`, allergyData)
+    async updateAllergy(patientId: string, allergyId: number, allergyData: TAllergyCreateBody){
+        const response = await apiClient.put<TEventResponse>(`${API_URL}/doctor/allergy/${allergyId}/patient/${patientId}`, allergyData)
         return response
     }
 }

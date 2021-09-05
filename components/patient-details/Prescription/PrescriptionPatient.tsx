@@ -38,6 +38,9 @@ const PrescriptionPatient = () => {
             window.addEventListener('prescriptionAdded', () => {
                 getData()
             })
+            window.addEventListener('prescriptionEdited', () => {
+                getData()
+            })
         }
     })
 
