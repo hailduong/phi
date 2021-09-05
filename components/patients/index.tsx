@@ -3,6 +3,7 @@ import {useEffect, useState} from 'react'
 import AddPatient from './AddPatient'
 import patientService from '../../services/patients/patientService'
 import {TPatientEntity} from '../../services/patients/types'
+import s from './index.module.scss'
 
 const PatientPageContent = () => {
 
@@ -59,17 +60,16 @@ const PatientPageContent = () => {
         <div className="wrapper wrapper-content animated fadeInUp">
             <div className="row">
                 <div className="col-lg-12">
-                    <div className="ibox tab-seeContent">
-                        <div className="ibox-title">
-                            <div className="ibox-tools">
+                    <div className="ibox">
+                        <div className={`${s.boxTitle} ibox-title`}>
+                            <h5>Patient List</h5>
+                            <div className={`${s.addButton} ibox-tools`}>
                                 <a onClick={handleAddPatient} className="btn btn-primary">Add Patient</a>
                             </div>
-                            <div className="addPatient">
-                                {showAddPatientForm ? <AddPatient onPatientAdded={handlePatientAdded}/> : null}
-                            </div>
+                            {showAddPatientForm ? <AddPatient onPatientAdded={handlePatientAdded}/> : null}
                         </div>
                         <div className="ibox-content">
-                            <div className="project-list">
+                            <div className="patient-list">
                                 <table className="table table-hover">
                                     <tbody>
                                     {patientList}

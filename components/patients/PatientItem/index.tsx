@@ -1,7 +1,8 @@
 import Link from 'next/link'
-import {TPatientEntity} from '../../services/patients/types'
-import {useState} from "react";
-import EditPatient from "./EditPatient";
+import {TPatientEntity} from '../../../services/patients/types'
+import {useState} from 'react'
+import EditPatient from '../EditPatient'
+import s from './index.module.scss'
 
 type TProps = {
     patientData: TPatientEntity
@@ -17,24 +18,18 @@ const PatientItem = (props: TProps) => {
         setShowEditPatient(!showEditPatient)
     }
 
-    // const handleEditedPatient = () => {
-    //     getData()
-    //     setShowEditPatient(false)
-    // }
-
-
     return (
-        <div className="grid-container ibox-content">
+        <div className={`grid-container ibox-content ${s.patientItem}`}>
             <div className="project-title">
                 <Link href={`/patient-details/${patientData.id}`}>
                     <a>{patientData.firstName} {patientData.lastName}
                         <br/>
-                        <small>Gender: {patientData.gender} | Phone: {patientData.phone} | Email: {patientData.email} </small>
+                        <small>Gender: {patientData.gender} | Phone: {patientData.phone} |
+                            Email: {patientData.email} </small>
                     </a>
                 </Link>
             </div>
             <div className="project-actions">
-                {/*<Link href={`/patient-details/${patientData.id}`}>*/}
                 <a onClick={handleEditPatient} className="btn btn-white btn-sm">
                     <i className="fa fa-pencil"/> {showEditPatient ? 'Cancel' : 'Edit'}
                 </a>
@@ -45,9 +40,7 @@ const PatientItem = (props: TProps) => {
                     <i className="fa fa-trash"/>
                 </a>
             </div>
-            <div className="edit-patient">
-                {showEditPatient ? <EditPatient/> : null}
-            </div>
+            {showEditPatient ? <EditPatient/> : null}
         </div>
 
     )
