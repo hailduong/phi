@@ -15,19 +15,38 @@ class AuthService {
         return null
     }
 
-    logout() {
-        if (typeof window !== 'undefined') {
-            localStorage.removeItem('key')
-            location.assign('/login')
-        }
-    }
-
     setUser(user: TUserEntity | null) {
         if (typeof window !== 'undefined' && user) {
             localStorage.setItem('user', window.btoa(window.btoa(JSON.stringify(user))))
         }
     }
 
+    async getDoctorBasicInfo(): Promise<null | TDoctorInfoEntity> {
+        if (typeof window !== 'undefined') {
+            const value = sessionStorage.getItem('doctorBasicInfo')
+            if (value) {
+                return JSON.parse(value) as TDoctorInfoEntity
+            }
+
+            const data = await this.getMyProfile()
+            if (data.status.code === 200) {
+                sessionStorage.setItem('doctorBasicInfo', JSON.stringify(data.data))
+                return data.data
+            }
+
+        }
+
+        return null
+    }
+
+    logout() {
+        if (typeof window !== 'undefined') {
+            localStorage.removeItem('key')
+            localStorage.removeItem('user')
+            sessionStorage.removeItem('doctorBasicInfo')
+            location.assign('/login')
+        }
+    }
 
     getAccessToken(): string | null {
         if (typeof window !== 'undefined') {
@@ -122,8 +141,13 @@ class AuthService {
         return await apiClient.get<TDoctorInfoResponse>(`${API_URL}/doctor/info`)
     }
 
-    async updateMyProfile(data: TDoctorInfoEntity){
-        return await apiClient.put<TDoctorInfoResponse>(`${API_URL}/doctor/info`, data)
+    async updateMyProfile(data: TDoctorInfoEntity) {
+        const response = await apiClient.put<TDoctorInfoResponse>(`${API_URL}/doctor/info`, data)
+        if (response.status.code === 200 && typeof window !== 'undefined') {
+            sessionStorage.setItem('doctorBasicInfo', JSON.stringify(data))
+        }
+
+        return response
     }
 }
 

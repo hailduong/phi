@@ -1,19 +1,23 @@
 import Link from 'next/link'
 import authService from '../../services/authentication/authService'
 import {useEffect, useState} from 'react'
-import {TUserEntity} from '../../services/authentication/authType'
+import {TDoctorInfoEntity} from '../../services/authentication/authType'
 
 
 const LeftNavigation = () => {
 
     /* Get user info */
-    const [user, setUser] = useState<TUserEntity | null>(null)
+    const [doctorInfo, setDoctorInfo] = useState<TDoctorInfoEntity | null>(null)
     useEffect(() => {
-        setUser(authService.getUser())
+        const getUserInfo = async () => {
+            const data = await authService.getDoctorBasicInfo()
+            !!data && setDoctorInfo(data)
+        }
+        getUserInfo()
     }, [])
 
     /* Logout */
-    function logout(){
+    function logout() {
         authService.logout()
     }
 
@@ -25,8 +29,8 @@ const LeftNavigation = () => {
                         <div className="dropdown profile-element">
                                         <span data-toggle="dropdown" className="dropdown-toggle">
                                             <span
-                                                className="block m-t-xs font-bold">{user?.firstName} {user?.lastName}</span>
-                                            <span className="text-muted text-xs block">{user?.role}
+                                                className="block m-t-xs font-bold">{doctorInfo?.firstName} {doctorInfo?.lastName}</span>
+                                            <span className="text-muted text-xs block">{doctorInfo?.role}
                                                 <b className="caret"/>
                                                 </span>
                                         </span>

@@ -58,6 +58,9 @@ export default function PatientDetailsPage() {
                             <div className="row">
                                 <div className="col-lg-12">
                                     <div className="ibox">
+                                        <div className="ibox-title">
+                                            <h5>My Profile</h5>
+                                        </div>
                                         <div className="ibox-content">
                                             <div className="form">
                                                 <div className="form-group row">
@@ -75,22 +78,10 @@ export default function PatientDetailsPage() {
                                                                id="lastName" value={lastName}/>
                                                     </div>
                                                     <div className="form-group col-6">
-                                                        <label htmlFor="email">Email</label>
-                                                        <input type="email" className="form-control"
-                                                               onChange={(event) => handleSetData('email', event.target.value)}
-                                                               id="email" value={email}/>
-                                                    </div>
-                                                    <div className="form-group col-6">
                                                         <label htmlFor="address">Address</label>
                                                         <input type="text" className="form-control"
                                                                onChange={(event) => handleSetData('address', event.target.value)}
                                                                id="address" value={address}/>
-                                                    </div>
-                                                    <div className="form-group col-6">
-                                                        <label htmlFor="role">Role</label>
-                                                        <input type="text" className="form-control"
-                                                               onChange={(event) => handleSetData('role', event.target.value)}
-                                                               id="role" value={role}/>
                                                     </div>
                                                     <div className="form-group col-6">
                                                         <label htmlFor="title">Title</label>
@@ -124,6 +115,20 @@ export default function PatientDetailsPage() {
                                                                        htmlFor="female">Female</label>
                                                             </div>
                                                         </div>
+                                                    </div>
+                                                    <div className="form-group col-6">
+                                                        <label htmlFor="email">Email</label>
+                                                        <input type="email" className="form-control"
+                                                               readOnly
+                                                               onChange={(event) => handleSetData('email', event.target.value)}
+                                                               id="email" value={email}/>
+                                                    </div>
+                                                    <div className="form-group col-6">
+                                                        <label htmlFor="role">Role</label>
+                                                        <input type="text" className="form-control"
+                                                               readOnly
+                                                               onChange={(event) => handleSetData('role', event.target.value)}
+                                                               id="role" value={role}/>
                                                     </div>
                                                 </div>
                                                 <button type="submit" onClick={handleSubmitProfileData}
