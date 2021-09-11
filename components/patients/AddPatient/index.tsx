@@ -4,6 +4,7 @@ import s from './index.module.scss'
 
 type TProps = {
     onPatientAdded: () => void
+    onCancelAdding: () => void
 }
 
 const AddPatient = (props: TProps) => {
@@ -32,6 +33,10 @@ const AddPatient = (props: TProps) => {
                 setShouldShowError(false)
             }, 5000)
         }
+    }
+
+    const cancelAdded = () => {
+        props.onCancelAdding()
     }
 
     /* Render */
@@ -109,7 +114,9 @@ const AddPatient = (props: TProps) => {
             <button className="btn btn-primary float-left update" onClick={createPatient}>
                 <strong>Add Patient</strong>
             </button>
-
+            <button className="btn btn-default float-left update" onClick={cancelAdded}>
+                <strong>Cancel</strong>
+            </button>
         </div>
     </div>
 }
