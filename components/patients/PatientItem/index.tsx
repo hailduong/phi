@@ -24,6 +24,9 @@ const PatientItem = (props: TProps) => {
 
     const togglePopover = () => setPopoverOpen(!popoverOpen)
 
+    const cancelEdit = () => {
+        setShowEditPatient(false)
+    }
     return (
         <div className={`grid-container ibox-content ${s.patientItem}`}>
             <div className="project-title">
@@ -35,13 +38,14 @@ const PatientItem = (props: TProps) => {
                     </a>
                 </Link>
             </div>
-            <div key={patientData.id} className="project-actions">
-                <a onClick={handleEditPatient} className="btn btn-white btn-sm">
-                    <i className="fa fa-pencil"/> {showEditPatient ? 'Cancel' : 'Edit'}
-                </a>
+            <div className="project-actions">
+                {showEditPatient ? null : <a onClick={handleEditPatient} className="btn btn-white btn-sm">
+                    <i className="fa fa-pencil"/> Edit
+                </a>}
                 {/*</Link>*/}
-                <a id={'confirmDelete' + patientData.id.toString()} onClick={togglePopover} className="btn btn-white btn-sm ml-2">
-                    <i className="fa fa-trash"/>
+                <a id={'confirmDelete' + patientData.id.toString()} onClick={togglePopover}
+                   className="btn btn-white btn-sm ml-2">
+                    <i className="fa fa-trash"/> Delete
                 </a>
                 <Popover target={'confirmDelete' + patientData.id.toString()} isOpen={popoverOpen} placement={"auto"}>
                     <PopoverBody>
@@ -55,7 +59,7 @@ const PatientItem = (props: TProps) => {
                     </PopoverBody>
                 </Popover>
             </div>
-            {showEditPatient ? <EditPatient/> : null}
+            {showEditPatient ? <EditPatient onCancelEditing={cancelEdit}/> : null}
         </div>
 
     )

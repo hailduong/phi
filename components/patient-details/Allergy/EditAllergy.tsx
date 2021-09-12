@@ -5,6 +5,7 @@ import allergyService from '../../../services/allergyService/allergyService'
 type TProps = {
     allergyId: number
     onAllergyEdited: () => void
+    onCancelEditing: () => void
 }
 
 const EditAllergy = (props: TProps) => {
@@ -49,6 +50,8 @@ const EditAllergy = (props: TProps) => {
         }
     }
 
+    const cancelUpdate = () => props.onCancelEditing()
+
     return (
         <div className="updateBox animated fadeIn">
             <div className="row pt-2">
@@ -83,8 +86,11 @@ const EditAllergy = (props: TProps) => {
                         Invalid input
                     </div>
                 </div>}
-                <button className="btn btn-primary float-left update" onClick={updateAllergy}>
-                    <strong>Update Allergy</strong>
+                <button className="btn btn-primary btn-sm float-left update" onClick={updateAllergy}>
+                    <>Update Allergy</>
+                </button>
+                <button className="btn btn-default float-left update" onClick={cancelUpdate}>
+                    <>Cancel</>
                 </button>
             </div>
         </div>

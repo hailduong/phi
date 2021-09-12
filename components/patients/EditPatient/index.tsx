@@ -1,13 +1,19 @@
 import {useState} from 'react'
 import s from './index.module.scss'
 
-const EditPatient = () => {
+type TProps = {
+    onCancelEditing: () => void
+}
+
+const EditPatient = (props: TProps) => {
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
     const [phone, setPhone] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [gender, setGender] = useState('')
+
+    const cancelEdit = () => props.onCancelEditing()
 
     return <div className={`${s.editPatient} animated fadeIn`}>
         <div className="row pt-2">
@@ -46,17 +52,34 @@ const EditPatient = () => {
                     </div>
                     <div className="form-group">
                         <label>Gender</label>
-                        <input value={gender} onChange={(event) => setGender(event.target.value)}
-                               type="text" placeholder="Enter patient's gender"
-                               className="form-control"/>
+                        <div className="d-flex">
+                            <div className="form-check flex-grow-1">
+                                <input className="form-check-input" type="radio" name="gender"
+                                       onChange={(e) => setGender(e.target.value)}
+                                       value="male" checked={gender === 'male'}/>
+                                <label className="form-check-label" htmlFor="gridRadios1">
+                                    Male
+                                </label>
+                            </div>
+                            <div className="form-check flex-grow-1">
+                                <input className="form-check-input" type="radio" name="gender"
+                                       onChange={(e) => setGender(e.target.value)}
+                                       value="female" checked={gender === 'female'}/>
+                                <label className="form-check-label" htmlFor="gridRadios2">
+                                    Female
+                                </label>
+                            </div>
+                        </div>
                     </div>
                 </form>
             </div>
 
-            <button className="btn btn-primary float-left update">
-                <strong>Update Patient</strong>
+            <button className="btn btn-primary btn-sm float-left update">
+                Update Patient
             </button>
-
+            <button className="btn btn-default float-left update" onClick={cancelEdit}>
+                Cancel
+            </button>
         </div>
     </div>
 }

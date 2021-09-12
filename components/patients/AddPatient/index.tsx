@@ -111,11 +111,11 @@ const AddPatient = (props: TProps) => {
                 </div>
 
             </div>}
-            <button className="btn btn-primary float-left update" onClick={createPatient}>
-                <strong>Add Patient</strong>
+            <button className="btn btn-primary btn-sm float-left update" onClick={createPatient}>
+                Add Patient
             </button>
-            <button className="btn btn-default float-left update" onClick={cancelAdded}>
-                <strong>Cancel</strong>
+            <button className="btn btn-sm btn-default float-left update" onClick={cancelAdded}>
+                Cancel
             </button>
         </div>
     </div>

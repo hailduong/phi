@@ -3,6 +3,7 @@ import Image from 'next/image'
 import {useState} from 'react'
 import EditPrescription from './EditPrescription'
 import s from './index.module.scss'
+import {Button, Popover, PopoverBody} from "reactstrap";
 
 type TProps = {
     presData: TPresData
@@ -24,6 +25,10 @@ const PrescriptionItem = (props: TProps) => {
         setShowEdit(false)
     }
 
+    const [popoverOpen, setPopoverOpen] = useState(false)
+
+    const togglePopover = () => setPopoverOpen(!popoverOpen)
+
     return (
         <div className="grid-container feed-element" key={presData.id}>
             <div>
@@ -37,17 +42,26 @@ const PrescriptionItem = (props: TProps) => {
             </div>
             <div className="project-actions">
                 <div className="media-body from-toDate">{dateForInput}</div>
-                <a className="btn btn-white btn-sm" onClick={handleEdit}>
-                    <i className="fa fa-pencil"/> {showEdit ? ' Cancel' : ' Edit'}</a>
-                <a className="btn btn-white btn-sm ml-2" onClick={() => {
-                    onDeletePrescription(presData.id)
-                }}>
-                    <i className="fa fa-trash"/>
+                {showEdit ? null : <a className="btn btn-white btn-sm" onClick={handleEdit}>
+                    <i className="fa fa-pencil"/> Edit</a>}
+                <a id={"Delete" + presData.id.toString()} className="btn btn-white btn-sm ml-2" onClick={togglePopover}>
+                    <i className="fa fa-trash"/> Delete
                 </a>
+                <Popover target={"Delete" + presData.id.toString()} isOpen={popoverOpen} placement={"auto"}>
+                    <PopoverBody>
+                        Are you sure you want to delete?
+                        <div className="grid-container justify-content-center mt-2">
+                            <Button className='btn btn-danger btn-sm'
+                                    onClick={() => onDeletePrescription(presData.id)}>Delete</Button>
+                            <Button className='btn btn-default btn-sm ml-2' onClick={togglePopover}>Cancel</Button>
+                        </div>
+                    </PopoverBody>
+                </Popover>
             </div>
-
-            {showEdit ? <EditPrescription prescriptionId={presData.id} onPrescriptionEdited={handleEdited}/> : null}
-
+            <div className="grid-item mt-2">
+                {showEdit ? <EditPrescription onCancelEditing={handleEdit} prescriptionId={presData.id}
+                                              onPrescriptionEdited={handleEdited}/> : null}
+            </div>
         </div>
     )
 }

@@ -5,6 +5,7 @@ import eventService from '../../../services/eventService/eventService'
 type TProps = {
     eventId: number
     onEventEdited: () => void
+    onCancelEditing: () => void
 }
 
 const EditEvent = (props: TProps) => {
@@ -41,6 +42,8 @@ const EditEvent = (props: TProps) => {
         }
     }
 
+    const cancelEdit = () => props.onCancelEditing()
+
     return <div className="updateBox animated fadeIn">
         <div className="row pt-2">
             <div className="col-sm-6 pt-2">
@@ -73,8 +76,11 @@ const EditEvent = (props: TProps) => {
                     Invalid input
                 </div>
             </div>}
-            <button className="btn btn-primary float-left update" onClick={updateEvent}>
-                <strong>Update Event</strong>
+            <button className="btn btn-primary btn-sm float-left update" onClick={updateEvent}>
+                <>Update Event</>
+            </button>
+            <button className="btn btn-default btn-sm float-left update" onClick={cancelEdit}>
+                <>Cancel</>
             </button>
         </div>
     </div>

@@ -3,6 +3,7 @@ import Image from 'next/image'
 import {useState} from 'react'
 import EditEvent from './EditEvent'
 import s from './index.module.scss'
+import {Button, Popover, PopoverBody} from "reactstrap";
 
 type TProps = {
     eventData: TEventData
@@ -25,6 +26,9 @@ const EventItem = (props: TProps) => {
         setShowEdit(false)
     }
 
+    const [popoverOpen, setPopoverOpen] = useState(false)
+    const togglePopover = () => setPopoverOpen(!popoverOpen)
+
     return (
         <div className="grid-container feed-element" key={eventData.id}>
             <div>
@@ -37,17 +41,29 @@ const EventItem = (props: TProps) => {
             </div>
             <div className="project-actions">
                 <div className="media-body from-toDate">{dateForInput}</div>
-                <a className="btn btn-white btn-sm" onClick={handleEdit}>
-                    <i className="fa fa-pencil"/>{showEdit ? ' Cancel' : ' Edit'}</a>
-                <a className="btn btn-white btn-sm ml-2" onClick={() => {
-                    onDeleteEvent(eventData.id)
-                }}>
-                    <i className="fa fa-trash"/>
+                {showEdit ? null : <a className="btn btn-white btn-sm" onClick={handleEdit}>
+                    <i className="fa fa-pencil"/> Edit</a>}
+
+                <a id={"Delete" + eventData.id.toString()} onClick={togglePopover}
+                   className="btn btn-white btn-sm ml-2">
+                    <i className="fa fa-trash"/> Delete
                 </a>
+                <Popover target={"Delete" + eventData.id.toString()} isOpen={popoverOpen} placement={"auto"}>
+                    <PopoverBody>
+                        Are you sure you want to delete?
+                        <div className="grid-container justify-content-center mt-1">
+                            <Button className="btn btn-sm btn-danger" onClick={() => {
+                                onDeleteEvent(eventData.id)
+                            }}>Delete</Button>
+                            <Button className="btn btn-sm btn-default ml-2" onClick={togglePopover}>Cancel</Button>
+                        </div>
+                    </PopoverBody>
+                </Popover>
             </div>
-
-            {showEdit ? <EditEvent onEventEdited={handleEdited} eventId={eventData.id}/> : null}
-
+            <div className="grid-item mt-2">
+                {showEdit ? <EditEvent onEventEdited={handleEdited} onCancelEditing={handleEdit}
+                                       eventId={eventData.id}/> : null}
+            </div>
         </div>
     )
 }

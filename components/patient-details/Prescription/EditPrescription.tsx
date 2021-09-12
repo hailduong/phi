@@ -5,6 +5,7 @@ import prescriptionService from '../../../services/prescriptionService/prescript
 type TProps = {
     prescriptionId: number
     onPrescriptionEdited: () => void
+    onCancelEditing: () => void
 }
 
 const EditPrescription = (props: TProps) => {
@@ -39,6 +40,8 @@ const EditPrescription = (props: TProps) => {
         }
     }
 
+    const cancelEdit = () => props.onCancelEditing()
+
     return <div className="updateBox animated fadeIn">
         <div className="row pt-2">
             <div className="col-sm-6 pt-2">
@@ -72,8 +75,11 @@ const EditPrescription = (props: TProps) => {
                 </div>
 
             </div>}
-            <button className="btn btn-primary float-left update" onClick={updatePrescription}>
-                <strong>Update Prescription</strong>
+            <button className="btn btn-primary btn-sm float-left update" onClick={updatePrescription}>
+                <>Update Prescription</>
+            </button>
+            <button className="btn btn-default btn-sm float-left update" onClick={cancelEdit}>
+                <>Cancel</>
             </button>
         </div>
     </div>

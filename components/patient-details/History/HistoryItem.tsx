@@ -3,6 +3,7 @@ import {THistoryEntity} from '../../../services/history/historyTypes'
 import {useState} from 'react'
 import EditHistory from './EditHistory'
 import s from './index.module.scss'
+import {Button, Popover, PopoverBody} from "reactstrap";
 
 type TProps = {
     historyData: THistoryEntity
@@ -26,6 +27,10 @@ const HistoryItem = (props: TProps) => {
         setShowEdit(false)
     }
 
+    const [popoverOpen, setPopoverOpen] = useState(false)
+
+    const togglePopover = () => setPopoverOpen(!popoverOpen)
+
     return (
         <div className="grid-container feed-element" key={historyData.id}>
             <div>
@@ -43,16 +48,28 @@ const HistoryItem = (props: TProps) => {
                         {fromDateForInput} to {toDateForInput}
                     </div>
                 </div>
-                <a className="btn btn-white btn-sm" onClick={handleEdit}>
-                    <i className="fa fa-pencil"/>{showEdit ? ' Cancel' : ' Edit'}</a>
-                <a className="btn btn-white btn-sm ml-2" onClick={() => {
-                    onDeleteHistory(historyData.id)
-                }}>
-                    <i className="fa fa-trash"/>
+                {showEdit ? null : <a className="btn btn-white btn-sm" onClick={handleEdit}>
+                    <i className="fa fa-pencil"/> Edit</a>}
+                <a id={"Delete" + historyData.id.toString()} onClick={togglePopover}
+                   className="btn btn-white btn-sm ml-2">
+                    <i className="fa fa-trash"/> Delete
                 </a>
+                <Popover target={"Delete" + historyData.id.toString()} isOpen={popoverOpen} placement={"auto"}>
+                    <PopoverBody>
+                        Are you sure you want to delete?
+                        <div className="grid-container justify-content-center mt-2">
+                            <Button className="btn btn-danger btn-sm" onClick={() => {
+                                onDeleteHistory(historyData.id)
+                            }}>Delete</Button>
+                            <Button className="btn btn-sm btn-default ml-2" onClick={togglePopover}>Cancel</Button>
+                        </div>
+                    </PopoverBody>
+                </Popover>
             </div>
-
-            {showEdit ? <EditHistory historyId={historyData.id} onHistoryEdited={handleEdited}/> : null}
+            <div className="grid-item mt-2">
+                {showEdit ? <EditHistory onCancelEditing={handleEdit} historyId={historyData.id}
+                                         onHistoryEdited={handleEdited}/> : null}
+            </div>
         </div>
     )
 }

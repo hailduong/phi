@@ -11781,3 +11781,7 @@ body.md-skin {
   padding: 0 20px 20px;
   border-radius: 7px;
 }
+
+.grid-item {
+  grid-column: 1/ span 2;
+}

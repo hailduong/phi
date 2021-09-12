@@ -88,15 +88,17 @@ const PatientTabHeading = (props: TProps) => {
     return <div>
         <ul className="nav nav-tabs">
             {liList}
-            <button className={`${buttonStyle} btn float-right addCustom`} onClick={handleAddButton}>
-                <strong>{(showAddButton) ? 'Cancel' : `Add ${displayTabName?.tabName}`}</strong>
-            </button>
+            {showAddButton ? null :
+                <button className={`${buttonStyle} btn-sm btn float-right addCustom`} onClick={handleAddButton}>
+                    Add {displayTabName?.tabName}
+                </button>}
         </ul>
-        {(showAddButton) && activeTabHash === '#tab-1' && <AddHistory onHistoryAdded={handleAdded}/>}
+        {(showAddButton) && activeTabHash === '#tab-1' && <AddHistory onCancelAdding={handleAddButton} onHistoryAdded={handleAdded}/>}
         {/*{(showAddButton) && activeTabHash === '#tab-2' && <AddDoctor/>}*/}
-        {(showAddButton) && activeTabHash === '#tab-3' && <AddAllergy onAllergyAdded={handleAdded}/>}
-        {(showAddButton) && activeTabHash === '#tab-4' && <AddEvent onEventAdded={handleAdded}/>}
-        {(showAddButton) && activeTabHash === '#tab-5' && <AddPrescription onPrescriptionAdded={handleAdded}/>}
+        {(showAddButton) && activeTabHash === '#tab-3' && <AddAllergy onCancelAdding={handleAddButton} onAllergyAdded={handleAdded}/>}
+        {(showAddButton) && activeTabHash === '#tab-4' &&
+        <AddEvent onCancelAdding={handleAddButton} onEventAdded={handleAdded}/>}
+        {(showAddButton) && activeTabHash === '#tab-5' && <AddPrescription onCancelAdding={handleAddButton} onPrescriptionAdded={handleAdded}/>}
     </div>
 }
 

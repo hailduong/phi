@@ -1,9 +1,11 @@
 import {useState} from "react";
 import {useRouter} from "next/router";
 import prescriptionService from "../../../services/prescriptionService/prescriptionService";
+import s from "../../patients/AddPatient/index.module.scss";
 
 type TProps = {
     onPrescriptionAdded: () => void
+    onCancelAdding: () => void
 }
 
 const AddPrescription = (props: TProps) => {
@@ -38,41 +40,48 @@ const AddPrescription = (props: TProps) => {
         }
     }
 
-    return <div className="row pt-2">
-        <div className="col-sm-6 pt-2">
-            <form role="form">
-                <div className="form-group">
-                    <label>Name</label>
-                    <input value={name} onChange={(e) => setName(e.target.value)}
-                           type="text" placeholder="Enter prescription name" className="form-control"/>
-                </div>
+    const cancelAdd = () => props.onCancelAdding()
 
-                <div className="form-group">
-                    <label>Descriptions</label>
-                    <input value={descriptions} onChange={(e) => setDescriptions(e.target.value)}
-                           type="text" placeholder="Enter description"
-                           className="form-control"/>
-                </div>
-            </form>
-        </div>
-        <div className="col-sm-6 pt-2">
-            <form role="form">
-                <div className="form-group">
-                    <label>Date</label>
-                    <input value={dateForInput} onChange={(e) => setDate(new Date(e.target.value).toISOString)}
-                           type="date" placeholder="Enter patient's last name" className="form-control"/>
-                </div>
-            </form>
-        </div>
-        {shouldShowError && <div className="col-sm-12">
-            <div className="alert alert-danger" role="alert">
-                Invalid input or email existed
+    return <div className={`${s.addPatient} animated fadeIn`}>
+        <div className="row pt-2">
+            <div className="col-sm-6 pt-2">
+                <form role="form">
+                    <div className="form-group">
+                        <label>Name</label>
+                        <input value={name} onChange={(e) => setName(e.target.value)}
+                               type="text" placeholder="Enter prescription name" className="form-control"/>
+                    </div>
+
+                    <div className="form-group">
+                        <label>Descriptions</label>
+                        <input value={descriptions} onChange={(e) => setDescriptions(e.target.value)}
+                               type="text" placeholder="Enter description"
+                               className="form-control"/>
+                    </div>
+                </form>
             </div>
+            <div className="col-sm-6 pt-2">
+                <form role="form">
+                    <div className="form-group">
+                        <label>Date</label>
+                        <input value={dateForInput} onChange={(e) => setDate(new Date(e.target.value).toISOString)}
+                               type="date" placeholder="Enter patient's last name" className="form-control"/>
+                    </div>
+                </form>
+            </div>
+            {shouldShowError && <div className="col-sm-12">
+                <div className="alert alert-danger" role="alert">
+                    Invalid input or email existed
+                </div>
 
-        </div>}
-        <button className="btn btn-primary float-left update" onClick={createPrescription}>
-            <strong>Add Prescription</strong>
-        </button>
+            </div>}
+            <button className="btn btn-primary btn-sm float-left update" onClick={createPrescription}>
+                Add Prescription
+            </button>
+            <button className="btn btn-default btn-sm float-left update" onClick={cancelAdd}>
+                Cancel
+            </button>
+        </div>
     </div>
 }
 

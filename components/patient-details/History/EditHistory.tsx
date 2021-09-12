@@ -5,6 +5,7 @@ import {useRouter} from 'next/router'
 type TProps = {
     historyId: number
     onHistoryEdited: () => void
+    onCancelEditing: () => void
 }
 
 const EditHistory = (props: TProps) => {
@@ -20,7 +21,7 @@ const EditHistory = (props: TProps) => {
     const newFromDate = new Date(fromDate)
     const fromDateForInput = newFromDate.toISOString().split('T')[0]
     const fromDateForServer = newFromDate.getTime() / 1000
-
+    const [shouldShowError, setShouldShowError] = useState(false)
 
     const newToDate = new Date(toDate)
     const toDateForInput = newToDate.toISOString().split('T')[0]
@@ -44,6 +45,8 @@ const EditHistory = (props: TProps) => {
             }
         }
     }
+
+    const cancelEdit = () => props.onCancelEditing()
 
     return <div className="updateBox animated fadeIn">
         <div className="row pt-2">
@@ -81,14 +84,17 @@ const EditHistory = (props: TProps) => {
             </div>
 
 
-            {/*{shouldShowError && <div className="col-sm-12">*/}
-            {/*    <div className="alert alert-danger" role="alert">*/}
-            {/*        Invalid input or email existed*/}
-            {/*    </div>*/}
+            {shouldShowError && <div className="col-sm-12">
+                <div className="alert alert-danger" role="alert">
+                    Invalid input or email existed
+                </div>
 
-            {/*</div>}*/}
-            <button className="btn btn-primary float-left update" onClick={updateHistory}>
-                <strong>Update History</strong>
+            </div>}
+            <button className="btn btn-primary btn-sm float-left update" onClick={updateHistory}>
+                <>Update History</>
+            </button>
+            <button className="btn btn-default btn-sm float-left update" onClick={cancelEdit}>
+                <>Cancel</>
             </button>
         </div>
     </div>

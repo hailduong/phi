@@ -3,6 +3,7 @@ import Image from 'next/image'
 import {useState} from 'react'
 import EditAllergy from './EditAllergy'
 import s from './index.module.scss'
+import {Button, Popover, PopoverBody} from "reactstrap";
 
 type TProps = {
     allergyData: TAllergyData
@@ -24,6 +25,9 @@ const AllergyItem = (props: TProps) => {
         setShowEdit(false)
     }
 
+    const [popoverOpen, setPopoverOpen] = useState(false)
+    const togglePopover = () => setPopoverOpen(!popoverOpen)
+
     return (
         <div className="feed-element grid-container" key={allergyData.id}>
             <div>
@@ -39,18 +43,29 @@ const AllergyItem = (props: TProps) => {
                 <div className="media-body from-toDate">
                     <div>{dateForInput}</div>
                 </div>
-                <a className="btn btn-white btn-sm" onClick={handleEdit}>
-                    <i className="fa fa-pencil"/>{showEdit ? ' Cancel' : ' Edit'}</a>
-                <a className="btn btn-white btn-sm ml-2" onClick={() => {
-                    onDeleteAllergy(allergyData.id)
-                }}>
-                    <i className="fa fa-trash"/>
+                {showEdit ? null :
+                    <a className="btn btn-white btn-sm" onClick={handleEdit}>
+                        <i className="fa fa-pencil"/> Edit</a>}
+                <a className="btn btn-white btn-sm ml-2" id={"Delete" + allergyData.id.toString()}
+                   onClick={togglePopover}>
+                    <i className="fa fa-trash"/> Delete
                 </a>
+                <Popover target={"Delete" + allergyData.id.toString()} isOpen={popoverOpen} placement={"auto"}>
+                    <PopoverBody>
+                        Are you sure you want to delete?
+                        <div className="grid-container justify-content-center mt-2">
+                            <Button className='btn btn-sm btn-danger'
+                                    onClick={() => onDeleteAllergy(allergyData.id)}>Delete</Button>
+                            <Button className='btn btn-sm btn-default ml-2' onClick={togglePopover}>Cancel</Button>
+                        </div>
+                    </PopoverBody>
+                </Popover>
 
             </div>
-
-            {showEdit ? <EditAllergy allergyId={allergyData.id} onAllergyEdited={handleEdited}/> : null}
-
+            <div className="grid-item mt-2">
+                {showEdit ? <EditAllergy allergyId={allergyData.id} onCancelEditing={handleEdit}
+                                         onAllergyEdited={handleEdited}/> : null}
+            </div>
         </div>
     )
 }

@@ -1,9 +1,11 @@
 import {useRouter} from "next/router";
 import {useState} from "react";
 import allergyService from "../../../services/allergyService/allergyService";
+import s from "../../patients/AddPatient/index.module.scss";
 
 type TProps = {
     onAllergyAdded: () => void
+    onCancelAdding: () => void
 }
 
 const AddAllergy = (props: TProps) => {
@@ -33,7 +35,7 @@ const AddAllergy = (props: TProps) => {
             props.onAllergyAdded()
 
             // Fire event
-            if (typeof window !== 'undefined'){
+            if (typeof window !== 'undefined') {
                 const event = new Event("allergyAdded")
                 window.dispatchEvent(event)
             }
@@ -47,41 +49,49 @@ const AddAllergy = (props: TProps) => {
         }
     }
 
+    const cancelAdd = () => props.onCancelAdding()
+
     return (
-        <div className="row pt-2">
-            <div className="col-sm-6 pt-2">
-                <form role="form">
-                    <div className="form-group">
-                        <label>Name</label>
-                        <input value={name} onChange={(e) => setName(e.target.value)}
-                               type="text" placeholder="Enter allergy name" className="form-control"/>
-                    </div>
-                    <div className="form-group">
-                        <label>Descriptions</label>
-                        <input value={descriptions} onChange={(e) => setDescriptions(e.target.value)}
-                               type="text" placeholder="Enter description"
-                               className="form-control"/>
-                    </div>
-                </form>
-            </div>
-            <div className="col-sm-6 pt-2">
-                <form role="form">
-                    <div className="form-group">
-                        <label>Date</label>
-                        <input value={dateForInput} onChange={(e) => setDate(new Date(e.target.value).toISOString())}
-                               type="date" placeholder="Enter starting date"
-                               className="form-control"/>
-                    </div>
-                </form>
-            </div>
-            {shouldShowError && <div className="col-sm-12">
-                <div className="alert alert-danger" role="alert">
-                    Invalid input
+        <div className={`${s.addPatient} animated fadeIn`}>
+            <div className="row pt-2">
+                <div className="col-sm-6 pt-2">
+                    <form role="form">
+                        <div className="form-group">
+                            <label>Name</label>
+                            <input value={name} onChange={(e) => setName(e.target.value)}
+                                   type="text" placeholder="Enter allergy name" className="form-control"/>
+                        </div>
+                        <div className="form-group">
+                            <label>Descriptions</label>
+                            <input value={descriptions} onChange={(e) => setDescriptions(e.target.value)}
+                                   type="text" placeholder="Enter description"
+                                   className="form-control"/>
+                        </div>
+                    </form>
                 </div>
-            </div>}
-            <button className="btn btn-primary float-left update" onClick={createAllergy}>
-                <strong>Add Allergy</strong>
-            </button>
+                <div className="col-sm-6 pt-2">
+                    <form role="form">
+                        <div className="form-group">
+                            <label>Date</label>
+                            <input value={dateForInput}
+                                   onChange={(e) => setDate(new Date(e.target.value).toISOString())}
+                                   type="date" placeholder="Enter starting date"
+                                   className="form-control"/>
+                        </div>
+                    </form>
+                </div>
+                {shouldShowError && <div className="col-sm-12">
+                    <div className="alert alert-danger" role="alert">
+                        Invalid input
+                    </div>
+                </div>}
+                <button className="btn btn-primary btn-sm float-left update" onClick={createAllergy}>
+                    Add Allergy
+                </button>
+                <button className="btn btn-default btn-sm float-left update" onClick={cancelAdd}>
+                    Cancel
+                </button>
+            </div>
         </div>
     )
 }
