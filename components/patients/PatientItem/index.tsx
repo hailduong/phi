@@ -3,6 +3,7 @@ import {TPatientEntity} from '../../../services/patients/types'
 import {useState} from 'react'
 import EditPatient from '../EditPatient'
 import s from './index.module.scss'
+import {Button, Popover, PopoverBody} from "reactstrap";
 
 type TProps = {
     patientData: TPatientEntity
@@ -18,6 +19,11 @@ const PatientItem = (props: TProps) => {
         setShowEditPatient(!showEditPatient)
     }
 
+    const [popoverOpen, setPopoverOpen] = useState(false)
+    console.log('popoverOpen', popoverOpen)
+
+    const togglePopover = () => setPopoverOpen(!popoverOpen)
+
     return (
         <div className={`grid-container ibox-content ${s.patientItem}`}>
             <div className="project-title">
@@ -29,16 +35,25 @@ const PatientItem = (props: TProps) => {
                     </a>
                 </Link>
             </div>
-            <div className="project-actions">
+            <div key={patientData.id} className="project-actions">
                 <a onClick={handleEditPatient} className="btn btn-white btn-sm">
                     <i className="fa fa-pencil"/> {showEditPatient ? 'Cancel' : 'Edit'}
                 </a>
                 {/*</Link>*/}
-                <a className="btn btn-white btn-sm ml-2" onClick={() => {
-                    onDeletePatient(patientData.id)
-                }}>
+                <a id={'confirmDelete' + patientData.id.toString()} onClick={togglePopover} className="btn btn-white btn-sm ml-2">
                     <i className="fa fa-trash"/>
                 </a>
+                <Popover target={'confirmDelete' + patientData.id.toString()} isOpen={popoverOpen} placement={"auto"}>
+                    <PopoverBody>
+                        <div>Are you sure you want to delete?</div>
+                        <div className='grid-container justify-content-center mt-1'>
+                            <Button className='btn btn-sm btn-danger' onClick={() => {
+                                onDeletePatient(patientData.id)
+                            }}>Delete</Button>
+                            <Button className='btn btn-white btn-sm ml-2' onClick={togglePopover}>Cancel</Button>
+                        </div>
+                    </PopoverBody>
+                </Popover>
             </div>
             {showEditPatient ? <EditPatient/> : null}
         </div>
