@@ -40,9 +40,9 @@ const AllergyItem = (props: TProps) => {
                 <div>Description: {allergyData.descriptions}</div>
             </div>
             <div className="project-actions">
-                <div className="media-body from-toDate">
-                    <div>{dateForInput}</div>
-                </div>
+                {/*<div className="media-body from-toDate">*/}
+                {/*    <div>{dateForInput}</div>*/}
+                {/*</div>*/}
                 {showEdit ? null :
                     <a className="btn btn-white btn-sm" onClick={handleEdit}>
                         <i className="fa fa-pencil"/> Edit</a>}

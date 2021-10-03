@@ -55,24 +55,24 @@ const EditHistory = (props: TProps) => {
                     <div className="form-group">
                         <label>Name</label>
                         <input value={name} onChange={(e) => setName(e.target.value)}
-                               type="text" placeholder="Enter history name"
+                               type="text" placeholder="Input history name"
                                className="form-control"/>
                     </div>
                     <div className="form-group">
-                        <label>From Date</label>
-                        <input value={fromDateForInput}
-                               onChange={(e) => setFromDate(new Date(e.target.value).toISOString())}
-                               type="date" placeholder="Enter starting date" className="form-control"/>
+                        <label>Description</label>
+                        <textarea value={descriptions} onChange={(e) => setDescriptions(e.target.value)}
+                                  placeholder="Input description"
+                                  className="form-control"/>
                     </div>
                 </form>
             </div>
             <div className="col-sm-6 pt-2">
                 <form role="form">
                     <div className="form-group">
-                        <label>Description</label>
-                        <input value={descriptions} onChange={(e) => setDescriptions(e.target.value)}
-                               type="text" placeholder="Enter description"
-                               className="form-control"/>
+                        <label>From Date</label>
+                        <input value={fromDateForInput}
+                               onChange={(e) => setFromDate(new Date(e.target.value).toISOString())}
+                               type="date" placeholder="Enter starting date" className="form-control"/>
                     </div>
                     <div className="form-group">
                         <label>To Date</label>

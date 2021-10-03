@@ -16,6 +16,13 @@ export type TPatientEntity = {
     title: string;
     phone: string;
     gender: string;
+    dateOfBirth: number;
+    emergencyContactName: string;
+    emergencyContactNumber: string;
+    emergencyRelationship: string;
+    insurance: string;
+    medicalGroup: string;
+    healthPlan: string
 }
 
 type TCreatePatientResponseSuccess = {

@@ -49,14 +49,13 @@ const EditPrescription = (props: TProps) => {
                     <div className="form-group">
                         <label>Name</label>
                         <input value={name} onChange={(e) => setName(e.target.value)}
-                               type="text" placeholder="Enter prescription name" className="form-control"/>
+                               type="text" placeholder="Input prescription name" className="form-control"/>
                     </div>
 
                     <div className="form-group">
                         <label>Descriptions</label>
-                        <input value={descriptions} onChange={(e) => setDescriptions(e.target.value)}
-                               type="text" placeholder="Enter description"
-                               className="form-control"/>
+                        <textarea value={descriptions} onChange={(e) => setDescriptions(e.target.value)}
+                               placeholder="Input description" className="form-control"/>
                     </div>
                 </form>
             </div>
@@ -65,7 +64,7 @@ const EditPrescription = (props: TProps) => {
                     <div className="form-group">
                         <label>Date</label>
                         <input value={dateForInput} onChange={(e) => setDate(new Date(e.target.value).toISOString())}
-                               type="date" placeholder="Enter patient's last name" className="form-control"/>
+                               type="date" className="form-control"/>
                     </div>
                 </form>
             </div>

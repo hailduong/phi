@@ -16,9 +16,13 @@ const AddEvent = (props: TProps) => {
     const [descriptions, setDescriptions] = useState('')
 
     const [date, setDate] = useState(new Date().toISOString())
+    const [dateRemind, setDateRemind] = useState(new Date().toISOString())
     const newDate = new Date(date)
+    const newDateRemind = new Date(dateRemind)
     const dateForInput = newDate.toISOString().split('T')[0]
     const dateForServer = newDate.getTime() / 1000
+    const dateRemindForInput = newDateRemind.toISOString().split('T')[0]
+    const dateRemindFortServer = newDateRemind.getTime() / 1000
 
     const [shouldShowError, setShouldShowError] = useState(false)
 
@@ -27,7 +31,8 @@ const AddEvent = (props: TProps) => {
             const response = await eventService.createEvent(patientId, {
                 name,
                 date: dateForServer,
-                descriptions
+                descriptions,
+                dateRemind: dateRemindFortServer
             })
 
             if (response && response.status && response.status.code === 200) {
@@ -52,13 +57,13 @@ const AddEvent = (props: TProps) => {
                         <div className="form-group">
                             <label>Name</label>
                             <input value={name} onChange={(e) => setName(e.target.value)}
-                                   type="text" placeholder="Enter event name" className="form-control"/>
+                                   type="text" placeholder="Input event name" className="form-control"/>
                         </div>
                         <div className="form-group">
                             <label>Descriptions</label>
-                            <input value={descriptions} onChange={(e) => setDescriptions(e.target.value)}
-                                   type="text" placeholder="Enter description"
-                                   className="form-control"/>
+                            <textarea value={descriptions} onChange={(e) => setDescriptions(e.target.value)}
+                                      placeholder="Input description"
+                                      className="form-control"/>
                         </div>
                     </form>
                 </div>
@@ -68,7 +73,14 @@ const AddEvent = (props: TProps) => {
                             <label>Date</label>
                             <input value={dateForInput}
                                    onChange={(e) => setDate(new Date(e.target.value).toISOString())}
-                                   type="date" placeholder="Enter starting date"
+                                   type="date"
+                                   className="form-control"/>
+                        </div>
+                        <div className="form-group">
+                            <label>Date Remind</label>
+                            <input value={dateRemindForInput}
+                                   onChange={(e) => setDateRemind(new Date(e.target.value).toISOString())}
+                                   type="date"
                                    className="form-control"/>
                         </div>
                     </form>
