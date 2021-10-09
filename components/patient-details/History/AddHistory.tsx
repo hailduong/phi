@@ -2,6 +2,7 @@ import {useState} from "react";
 import historyService from "../../../services/history/historyService";
 import {useRouter} from "next/router";
 import s from "../../patients/AddPatient/index.module.scss";
+import {is} from "@babel/types";
 
 type TProps = {
     onHistoryAdded: () => void
@@ -46,6 +47,29 @@ const AddHistory = (props: TProps) => {
         }
     }
 
+    const [isNameError, setIsNameError] = useState(false)
+    const [isDescriptionError, setIsDescriptionError] = useState(false)
+
+    const validate = () => {
+        let isValid = true
+
+        //1. Validate NAME
+        if (name.trim().length === 0) {
+            isValid = false
+            setIsNameError(true)
+        } else setIsNameError(false)
+
+        //2. Validate DESCRIPTIONS
+        if (descriptions.trim().length===0){
+            isValid = false
+            setIsDescriptionError(true)
+        }   else setIsDescriptionError(false)
+
+        if (isValid) {
+            createHistory()
+        }
+    }
+
     const cancelAdd = () => props.onCancelAdding()
 
     return <div className={`${s.addPatient} animated fadeIn`}>
@@ -56,13 +80,19 @@ const AddHistory = (props: TProps) => {
                         <label>Name</label>
                         <input value={name} onChange={(e) => setName(e.target.value)}
                                type="text" placeholder="Input history name"
-                               className="form-control"/>
+                               className={`form-control ${isNameError ? 'is-invalid' : 'is-valid'}`}/>
+                        {isNameError ? <div className="invalid-feedback">
+                            History name can not be blank!
+                        </div> : null}
                     </div>
                     <div className="form-group">
                         <label>Description</label>
                         <textarea value={descriptions} onChange={(e) => setDescriptions(e.target.value)}
                                   placeholder="Input description"
-                                  className="form-control"/>
+                                  className={`form-control ${isDescriptionError ? 'is-invalid' : 'is-valid'}`}/>
+                        {isDescriptionError ? <div className="invalid-feedback">
+                            Descriptions can not be blank!
+                        </div> : null}
                     </div>
                 </form>
             </div>
@@ -77,7 +107,7 @@ const AddHistory = (props: TProps) => {
                     </div>
                     <div className="form-group">
                         <label>To Date</label>
-                        <input value={toDateForInput}
+                        <input value={toDateForInput} min={fromDateForInput}
                                onChange={(e) => setToDate(new Date(e.target.value).toISOString())}
                                type="date" className="form-control"/>
                     </div>
@@ -91,7 +121,7 @@ const AddHistory = (props: TProps) => {
                 </div>
 
             </div>}
-            <button className="btn btn-primary btn-sm float-left update" onClick={createHistory}>
+            <button className="btn btn-primary btn-sm float-left update" onClick={validate}>
                 Add History
             </button>
             <button className="btn btn-default btn-sm float-left update" onClick={cancelAdd}>

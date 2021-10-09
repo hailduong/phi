@@ -49,6 +49,28 @@ const AddAllergy = (props: TProps) => {
         }
     }
 
+    const [isNameError, setIsNameError] = useState(false)
+    const [isDescriptionError, setIsDescriptionError] = useState(false)
+
+    const validate = () => {
+        let isValid = true
+
+        //1. VALIDATE NAME
+        if (name.trim().length === 0) {
+            isValid = false
+            setIsNameError(true)
+        } else setIsNameError(false)
+
+        if (descriptions.trim().length === 0) {
+            isValid = false
+            setIsDescriptionError(true)
+        } else setIsDescriptionError(false)
+
+        if (isValid) {
+            createAllergy()
+        }
+    }
+
     const cancelAdd = () => props.onCancelAdding()
 
     return (
@@ -59,7 +81,11 @@ const AddAllergy = (props: TProps) => {
                         <div className="form-group">
                             <label>Name</label>
                             <input value={name} onChange={(e) => setName(e.target.value)}
-                                   type="text" placeholder="Input allergy name" className="form-control"/>
+                                   type="text" placeholder="Input allergy name"
+                                   className={`form-control ${isNameError ? 'is-invalid' : 'is-valid'}`}/>
+                            {isNameError ? <div className="invalid-feedback">
+                                Name cannot be blank!
+                            </div> : null}
                         </div>
                     </form>
                 </div>
@@ -76,7 +102,10 @@ const AddAllergy = (props: TProps) => {
                             <label>Descriptions</label>
                             <textarea value={descriptions} onChange={(e) => setDescriptions(e.target.value)}
                                       placeholder="Input description"
-                                      className="form-control"/>
+                                      className={`form-control  ${isDescriptionError ? 'is-invalid' : 'is-valid'}`}/>
+                            {isDescriptionError ? <div className="invalid-feedback">
+                                Descriptions can not be blank!
+                            </div> : null}
                         </div>
                     </form>
                 </div>
@@ -85,7 +114,7 @@ const AddAllergy = (props: TProps) => {
                         Invalid input
                     </div>
                 </div>}
-                <button className="btn btn-primary btn-sm float-left update" onClick={createAllergy}>
+                <button className="btn btn-primary btn-sm float-left update" onClick={validate}>
                     Add Allergy
                 </button>
                 <button className="btn btn-default btn-sm float-left update" onClick={cancelAdd}>

@@ -2,6 +2,7 @@ import {useRouter} from "next/router";
 import {useState} from "react";
 import eventService from "../../../services/eventService/eventService";
 import s from "../../patients/AddPatient/index.module.scss";
+import {is} from "@babel/types";
 
 type TProps = {
     onEventAdded: () => void
@@ -47,6 +48,29 @@ const AddEvent = (props: TProps) => {
         }
     }
 
+    const [isNameError, setIsNameError] = useState(false)
+    const [isDescriptionError, setIsDescriptionError] = useState(false)
+
+    const validate = () => {
+        let isValid = true
+
+        //1. Validate NAME
+        if (name.trim().length === 0) {
+            isValid = false
+            setIsNameError(true)
+        } else setIsNameError(false)
+
+        //2. Validate Description
+        if (descriptions.trim().length === 0) {
+            isValid = false
+            setIsDescriptionError(true)
+        } else setIsDescriptionError(false)
+
+        if (isValid) {
+            createEvent()
+        }
+    }
+
     const cancelAdd = () => props.onCancelAdding()
 
     return (
@@ -57,13 +81,20 @@ const AddEvent = (props: TProps) => {
                         <div className="form-group">
                             <label>Name</label>
                             <input value={name} onChange={(e) => setName(e.target.value)}
-                                   type="text" placeholder="Input event name" className="form-control"/>
+                                   type="text" placeholder="Input event name"
+                                   className={`form-control ${isNameError ? 'is-invalid' : 'is-valid'}`}/>
+                            {isNameError ? <div className="invalid-feedback">
+                                Name cannot be blank!
+                            </div> : null}
                         </div>
                         <div className="form-group">
                             <label>Descriptions</label>
                             <textarea value={descriptions} onChange={(e) => setDescriptions(e.target.value)}
                                       placeholder="Input description"
-                                      className="form-control"/>
+                                      className={`form-control ${isDescriptionError ? 'is-invalid' : 'is-valid'}`}/>
+                            {isDescriptionError ? <div className="invalid-feedback">
+                                Descriptions cannot be blank!
+                            </div> : null}
                         </div>
                     </form>
                 </div>
@@ -90,7 +121,7 @@ const AddEvent = (props: TProps) => {
                         Invalid input
                     </div>
                 </div>}
-                <button className="btn btn-primary btn-sm float-left update" onClick={createEvent}>
+                <button className="btn btn-primary btn-sm float-left update" onClick={validate}>
                     Add Event
                 </button>
                 <button className="btn btn-default btn-sm float-left update" onClick={cancelAdd}>

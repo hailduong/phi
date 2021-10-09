@@ -76,7 +76,7 @@ const EditHistory = (props: TProps) => {
                     </div>
                     <div className="form-group">
                         <label>To Date</label>
-                        <input value={toDateForInput}
+                        <input value={toDateForInput} min={fromDateForInput}
                                onChange={(e) => setToDate(new Date(e.target.value).toISOString())}
                                type="date" placeholder="Enter ending date" className="form-control"/>
                     </div>
