@@ -1,8 +1,8 @@
 import {useRouter} from "next/router";
 import {useState} from "react";
 import eventService from "../../../services/eventService/eventService";
-import s from "../../patients/AddPatient/index.module.scss";
-import {is} from "@babel/types";
+import addPatientStyle from "../../patients/AddPatient/index.module.scss";
+import s from "../History/index.module.scss"
 
 type TProps = {
     onEventAdded: () => void
@@ -18,8 +18,10 @@ const AddEvent = (props: TProps) => {
 
     const [date, setDate] = useState(new Date().toISOString())
     const [dateRemind, setDateRemind] = useState(new Date().toISOString())
+
     const newDate = new Date(date)
     const newDateRemind = new Date(dateRemind)
+
     const dateForInput = newDate.toISOString().split('T')[0]
     const dateForServer = newDate.getTime() / 1000
     const dateRemindForInput = newDateRemind.toISOString().split('T')[0]
@@ -74,60 +76,60 @@ const AddEvent = (props: TProps) => {
     const cancelAdd = () => props.onCancelAdding()
 
     return (
-        <div className={`${s.addPatient} animated fadeIn`}>
-            <div className="row pt-2">
-                <div className="col-sm-6 pt-2">
-                    <form role="form">
-                        <div className="form-group">
-                            <label>Name</label>
-                            <input value={name} onChange={(e) => setName(e.target.value)}
-                                   type="text" placeholder="Input event name"
-                                   className={`form-control ${isNameError ? 'is-invalid' : 'is-valid'}`}/>
-                            {isNameError ? <div className="invalid-feedback">
-                                Name cannot be blank!
-                            </div> : null}
-                        </div>
-                        <div className="form-group">
-                            <label>Descriptions</label>
-                            <textarea value={descriptions} onChange={(e) => setDescriptions(e.target.value)}
-                                      placeholder="Input description"
-                                      className={`form-control ${isDescriptionError ? 'is-invalid' : 'is-valid'}`}/>
-                            {isDescriptionError ? <div className="invalid-feedback">
-                                Descriptions cannot be blank!
-                            </div> : null}
-                        </div>
-                    </form>
-                </div>
-                <div className="col-sm-6 pt-2">
-                    <form role="form">
-                        <div className="form-group">
-                            <label>Date</label>
-                            <input value={dateForInput}
-                                   onChange={(e) => setDate(new Date(e.target.value).toISOString())}
-                                   type="date"
-                                   className="form-control"/>
-                        </div>
-                        <div className="form-group">
-                            <label>Date Remind</label>
-                            <input value={dateRemindForInput}
-                                   onChange={(e) => setDateRemind(new Date(e.target.value).toISOString())}
-                                   type="date"
-                                   className="form-control"/>
-                        </div>
-                    </form>
-                </div>
+        <div className={`${addPatientStyle.addPatient} animated fadeIn`}>
+            <div className={s.addHistory}>
+                <form role="form">
+                    <div className="form-group">
+                        <label>Name</label>
+                        <input value={name} onChange={(e) => setName(e.target.value)}
+                               type="text" placeholder="Input event name"
+                               className={`form-control ${isNameError ? 'is-invalid' : 'is-valid'}`}/>
+                        {isNameError ? <div className="invalid-feedback">
+                            Name cannot be blank!
+                        </div> : null}
+                    </div>
+                </form>
+                <form role="form">
+                    <div className="form-group">
+                        <label>Date</label>
+                        <input value={dateForInput} max={new Date(Date.now()).toISOString().split('T')[0]}
+                               onChange={(e) => setDate(new Date(e.target.value).toISOString())}
+                               type="date"
+                               className="form-control"/>
+                    </div>
+                </form>
+                <form role="form">
+                    <div className="form-group">
+                        <label>Date Remind</label>
+                        <input value={dateRemindForInput} min={new Date(Date.now()).toISOString().split('T')[0]}
+                               onChange={(e) => setDateRemind(new Date(e.target.value).toISOString())}
+                               type="date"
+                               className="form-control"/>
+                    </div>
+                </form>
+                <form role="form" className={s.description}>
+                    <div className="form-group">
+                        <label>Descriptions</label>
+                        <textarea value={descriptions} onChange={(e) => setDescriptions(e.target.value)}
+                                  placeholder="Input description"
+                                  className={`form-control ${isDescriptionError ? 'is-invalid' : 'is-valid'}`}/>
+                        {isDescriptionError ? <div className="invalid-feedback">
+                            Descriptions cannot be blank!
+                        </div> : null}
+                    </div>
+                </form>
                 {shouldShowError && <div className="col-sm-12">
                     <div className="alert alert-danger" role="alert">
                         Invalid input
                     </div>
                 </div>}
-                <button className="btn btn-primary btn-sm float-left update" onClick={validate}>
-                    Add Event
-                </button>
-                <button className="btn btn-default btn-sm float-left update" onClick={cancelAdd}>
-                    Cancel
-                </button>
             </div>
+            <button className="btn btn-primary btn-sm" onClick={validate}>
+                Add Event
+            </button>
+            <button className="btn btn-default btn-sm update" onClick={cancelAdd}>
+                Cancel
+            </button>
         </div>
     )
 }

@@ -196,7 +196,7 @@ const AddPatient = (props: TProps) => {
                     {/*3. Date Of Birth*/}
                     <div className="form-group">
                         <label>Date of Birth</label>
-                        <input value={dateForInput}
+                        <input value={dateForInput} max={new Date(Date.now()).toISOString().split('T')[0]}
                                onChange={(e) => setDateOfBirth(new Date(e.target.value).toISOString())}
                                type="date" placeholder="Input patient's contact number"
                                className="form-control"/>
@@ -237,9 +237,9 @@ const AddPatient = (props: TProps) => {
                     {/*7. Health Plan*/}
                     <div className="form-group">
                         <label>Health Plan</label>
-                        <input value={healthPlan}
+                        <textarea value={healthPlan}
                                onChange={(e) => setHealthPlan(e.target.value)}
-                               type="text" placeholder="Input patient's health plan"
+                               placeholder="Input patient's health plan"
                                className={`form-control ${isHealthPlanError ? 'is-invalid' : 'is-valid'}`}/>
                         {isHealthPlanError ? <div className="invalid-feedback">
                             Health plan cannot be left blank!

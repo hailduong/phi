@@ -2,3 +2,14 @@
   opacity: 0.5;
   margin-top: 3px;
 }
+
+.addHistory {
+  display: grid;
+  grid-template-columns: 2fr 1fr 2fr;
+  column-gap: 20px;
+}
+
+.description {
+  display: grid;
+  grid-column: span 3;
+}

@@ -1,12 +1,12 @@
-import {TEventData} from './index'
 import Image from 'next/image'
 import {useState} from 'react'
 import EditEvent from './EditEvent'
 import s from './index.module.scss'
 import {Button, Popover, PopoverBody} from "reactstrap";
+import {TEventEntity} from "../../../services/eventService/eventTypes";
 
 type TProps = {
-    eventData: TEventData
+    eventData: TEventEntity
     onDeleteEvent: (id: number) => void
 }
 
@@ -15,6 +15,9 @@ const EventItem = (props: TProps) => {
 
     const newDate = new Date(eventData.date * 1000)
     const dateForInput = newDate.toISOString().split('T')[0]
+
+    const newDateRemind = new Date(eventData.dateRemind * 1000 || Date.now())
+    const dateRemindForInput = newDateRemind.toISOString().split('T')[0]
 
     const [showEdit, setShowEdit] = useState(false)
 
@@ -35,9 +38,8 @@ const EventItem = (props: TProps) => {
                 <a href="#" className={`${s.icon} mr-1 float-left`}>
                     <Image alt="image" height={20} width={20} src={'/img/events--v2.png'}/>
                 </a>
-                <div className="media-body">
-                    <h4>{eventData.name}</h4></div>
-                <div>Description: {eventData.descriptions}</div>
+                <div className="media-body"><h4>{eventData.name}</h4></div>
+                <div>Description: {eventData.descriptions} | Date Remind: {dateRemindForInput}</div>
             </div>
             <div className="project-actions">
                 <div className="media-body from-toDate">{dateForInput}</div>
@@ -61,7 +63,7 @@ const EventItem = (props: TProps) => {
                 </Popover>
             </div>
             <div className="grid-item mt-2">
-                {showEdit ? <EditEvent onEventEdited={handleEdited} onCancelEditing={handleEdit}
+                {showEdit ? <EditEvent eventData={eventData} onEventEdited={handleEdited} onCancelEditing={handleEdit}
                                        eventId={eventData.id}/> : null}
             </div>
         </div>

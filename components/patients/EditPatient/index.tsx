@@ -1,31 +1,36 @@
 import {useState} from 'react'
 import s from './index.module.scss'
+import {TPatientEntity} from "../../../services/patients/types";
 
 type TProps = {
     onCancelEditing: () => void
+    patientData: TPatientEntity
 }
 
 const EditPatient = (props: TProps) => {
-    const [firstName, setFirstName] = useState('')
-    const [lastName, setLastName] = useState('')
-    const [phone, setPhone] = useState('')
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const [gender, setGender] = useState('')
-    const [dateOfBirth, setDateOfBirth] = useState(new Date().toISOString())
-    const [emergencyContactName, setEmergencyContactName] = useState('')
-    const [emergencyContactNumber, setEmergencyContactNumber] = useState('')
-    const [emergencyRelationship, setEmergencyRelationship] = useState('')
-    const [insurance, setInsurance] = useState('')
-    const [medicalGroup, setMedicalGroup] = useState('')
-    const [healthPlan, setHealthPlan] = useState('')
 
+    const {patientData} = props
+
+    const patientDOB = patientData.dateOfBirth
+
+    const [firstName, setFirstName] = useState(patientData.firstName)
+    const [lastName, setLastName] = useState(patientData.lastName)
+    const [phone, setPhone] = useState(patientData.phone)
+    const [email, setEmail] = useState(patientData.email)
+    const [password, setPassword] = useState('')
+    const [gender, setGender] = useState(patientData.gender)
+    const [dateOfBirth, setDateOfBirth] = useState(new Date(patientDOB*1000 || Date.now()).toISOString().split('T')[0])
+    const [emergencyContactName, setEmergencyContactName] = useState(patientData.emergencyContactName)
+    const [emergencyContactNumber, setEmergencyContactNumber] = useState(patientData.emergencyContactNumber)
+    const [emergencyRelationship, setEmergencyRelationship] = useState(patientData.emergencyRelationship)
+    const [insurance, setInsurance] = useState(patientData.insurance)
+    const [medicalGroup, setMedicalGroup] = useState(patientData.medicalGroup)
+    const [healthPlan, setHealthPlan] = useState(patientData.healthPlan)
     const newDate = new Date(dateOfBirth)
     const dateForInput = newDate.toISOString().split('T')[0]
     const dateForServer = newDate.getTime() / 1000
 
     const cancelEdit = () => props.onCancelEditing()
-
     return <div className={`${s.editPatient} animated fadeIn`}>
         <div className="row pt-2">
             <div className="col-sm-6 pt-2">
@@ -44,7 +49,7 @@ const EditPatient = (props: TProps) => {
                     {/*3. Date Of Birth*/}
                     <div className="form-group">
                         <label>Date of Birth</label>
-                        <input value={dateForInput}
+                        <input value={dateForInput} max={new Date(Date.now()).toISOString().split('T')[0]}
                                onChange={(e) => setDateOfBirth(new Date(e.target.value).toISOString())}
                                type="date" placeholder="Input patient's contact number"
                                className="form-control"/>
@@ -74,9 +79,9 @@ const EditPatient = (props: TProps) => {
                     {/*7. Health Plan*/}
                     <div className="form-group">
                         <label>Health Plan</label>
-                        <input value={healthPlan}
+                        <textarea value={healthPlan}
                                onChange={(e) => setHealthPlan(e.target.value)}
-                               type="text" placeholder="Input patient's health plan"
+                               placeholder="Input patient's health plan"
                                className="form-control"/>
                     </div>
                 </form>
@@ -127,7 +132,7 @@ const EditPatient = (props: TProps) => {
                         <label>Emergency Contact Number</label>
                         <input value={emergencyContactNumber}
                                onChange={(e) => setEmergencyContactNumber(e.target.value)}
-                               type="number" placeholder="Input emergency contact number"
+                               type="text" placeholder="Input emergency contact number"
                                className="form-control"/>
                     </div>
                     {/*5. Emergency Relationship*/}

@@ -1,7 +1,8 @@
 import {useState} from "react";
 import {useRouter} from "next/router";
 import prescriptionService from "../../../services/prescriptionService/prescriptionService";
-import s from "../../patients/AddPatient/index.module.scss";
+import addPatientStyle from "../../patients/AddPatient/index.module.scss";
+import s from "../Prescription/index.module.scss"
 
 type TProps = {
     onPrescriptionAdded: () => void
@@ -65,53 +66,51 @@ const AddPrescription = (props: TProps) => {
 
     const cancelAdd = () => props.onCancelAdding()
 
-    return <div className={`${s.addPatient} animated fadeIn`}>
-        <div className="row pt-2">
-            <div className="col-sm-6 pt-2">
-                <form role="form">
-                    <div className="form-group">
-                        <label>Name</label>
-                        <input value={name} onChange={(e) => setName(e.target.value)}
-                               type="text" placeholder="Input prescription name"
-                               className={`form-control ${isNameError ? 'is-invalid' : 'is-valid'}`}/>
-                        {isNameError ? <div className="invalid-feedback">
-                            Name cannot be blank!
-                        </div> : null}
-                    </div>
-
-                    <div className="form-group">
-                        <label>Descriptions</label>
-                        <textarea value={descriptions} onChange={(e) => setDescriptions(e.target.value)}
-                                  placeholder="Input description"
-                                  className={`form-control ${isDescriptionError ? 'is-invalid' : 'is-valid'}`}/>
-                        {isDescriptionError ? <div className="invalid-feedback">
-                            Descriptions cannot be blank!
-                        </div> : null}
-                    </div>
-                </form>
-            </div>
-            <div className="col-sm-6 pt-2">
-                <form role="form">
-                    <div className="form-group">
-                        <label>Date</label>
-                        <input value={dateForInput} onChange={(e) => setDate(new Date(e.target.value).toISOString)}
-                               type="date" className="form-control"/>
-                    </div>
-                </form>
-            </div>
+    return <div className={`${addPatientStyle.addPatient} animated fadeIn`}>
+        <div className={s.addHistory}>
+            <form role="form">
+                <div className="form-group">
+                    <label>Name</label>
+                    <input value={name} onChange={(e) => setName(e.target.value)}
+                           type="text" placeholder="Input prescription name"
+                           className={`form-control ${isNameError ? 'is-invalid' : 'is-valid'}`}/>
+                    {isNameError ? <div className="invalid-feedback">
+                        Name cannot be blank!
+                    </div> : null}
+                </div>
+            </form>
+            <form role="form">
+                <div className="form-group">
+                    <label>Date</label>
+                    <input value={dateForInput} onChange={(e) => setDate(new Date(e.target.value).toISOString)}
+                           type="date" className="form-control" max={new Date(Date.now()).toISOString().split('T')[0]}/>
+                </div>
+            </form>
+            <form role="form" className={s.description}>
+                <div className="form-group">
+                    <label> Descriptions</label>
+                    <textarea value={descriptions} onChange={(e) => setDescriptions(e.target.value)}
+                              placeholder="Input description"
+                              className={`form-control ${isDescriptionError ? 'is-invalid' : 'is-valid'}`}/>
+                    {isDescriptionError ? <div className="invalid-feedback">
+                        Descriptions cannot be blank!
+                    </div> : null}
+                </div>
+            </form>
             {shouldShowError && <div className="col-sm-12">
                 <div className="alert alert-danger" role="alert">
                     Invalid input or email existed
                 </div>
 
-            </div>}
-            <button className="btn btn-primary btn-sm float-left update" onClick={validate}>
-                Add Prescription
-            </button>
-            <button className="btn btn-default btn-sm float-left update" onClick={cancelAdd}>
-                Cancel
-            </button>
+            </div>
+            }
         </div>
+        <button className="btn btn-primary btn-sm" onClick={validate}>
+            Add Prescription
+        </button>
+        <button className="btn btn-default btn-sm update" onClick={cancelAdd}>
+            Cancel
+        </button>
     </div>
 }
 

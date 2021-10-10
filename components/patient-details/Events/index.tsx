@@ -8,6 +8,7 @@ export type TEventData = {
     name: string
     date: number
     descriptions: string
+    dateRemind: number
 }
 
 type TEvent = TEventData[]

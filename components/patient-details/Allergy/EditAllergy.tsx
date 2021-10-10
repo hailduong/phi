@@ -1,21 +1,25 @@
 import {useRouter} from 'next/router'
 import {useState} from 'react'
 import allergyService from '../../../services/allergyService/allergyService'
+import {TAllergyEntity} from "../../../services/allergyService/allergyTypes";
 
 type TProps = {
     allergyId: number
     onAllergyEdited: () => void
     onCancelEditing: () => void
+    allergyData: TAllergyEntity
 }
 
 const EditAllergy = (props: TProps) => {
 
+    const {allergyData} = props
+
     const router = useRouter()
     const {patientId} = router.query
     // 1. Get form data via state + onChange
-    const [name, setName] = useState('')
-    const [date, setDate] = useState(new Date().toISOString())
-    const [descriptions, setDescriptions] = useState('')
+    const [name, setName] = useState(allergyData.name)
+    const [date, setDate] = useState(new Date(allergyData.date*1000 || Date.now()).toISOString().split('T')[0])
+    const [descriptions, setDescriptions] = useState(allergyData.descriptions)
 
     const newDate = new Date(date)
     const dateForInput = newDate.toISOString().split('T')[0]

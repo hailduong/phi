@@ -59,7 +59,7 @@ const PatientItem = (props: TProps) => {
                     </PopoverBody>
                 </Popover>
             </div>
-            {showEditPatient ? <EditPatient onCancelEditing={cancelEdit}/> : null}
+            {showEditPatient ? <EditPatient patientData={patientData} onCancelEditing={cancelEdit}/> : null}
         </div>
 
     )

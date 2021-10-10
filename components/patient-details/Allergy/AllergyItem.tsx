@@ -63,7 +63,7 @@ const AllergyItem = (props: TProps) => {
 
             </div>
             <div className="grid-item mt-2">
-                {showEdit ? <EditAllergy allergyId={allergyData.id} onCancelEditing={handleEdit}
+                {showEdit ? <EditAllergy allergyData={allergyData} allergyId={allergyData.id} onCancelEditing={handleEdit}
                                          onAllergyEdited={handleEdited}/> : null}
             </div>
         </div>

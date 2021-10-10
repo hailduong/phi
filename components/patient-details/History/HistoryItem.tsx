@@ -67,7 +67,7 @@ const HistoryItem = (props: TProps) => {
                 </Popover>
             </div>
             <div className="grid-item mt-2">
-                {showEdit ? <EditHistory onCancelEditing={handleEdit} historyId={historyData.id}
+                {showEdit ? <EditHistory historyData={historyData} onCancelEditing={handleEdit} historyId={historyData.id}
                                          onHistoryEdited={handleEdited}/> : null}
             </div>
         </div>

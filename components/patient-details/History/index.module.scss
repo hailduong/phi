@@ -1,4 +1,18 @@
-.icon{
+.icon {
   opacity: 0.5;
   margin-top: 3px;
 }
+
+.addHistory {
+  display: grid;
+  grid-template-columns: 3fr 1fr 1fr;
+  column-gap: 20px;
+}
+
+.description {
+  display: grid;
+  grid-column: span 3;
+}
+
+
+

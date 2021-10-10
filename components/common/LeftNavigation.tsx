@@ -57,6 +57,12 @@ const LeftNavigation = () => {
                                 <span className="nav-label">My Profile</span>
                             </a>
                         </Link>
+                        <Link href="/news">
+                            <a>
+                                <i className="fa fa-th-large"/>
+                                <span className="nav-label">News</span>
+                            </a>
+                        </Link>
                     </li>
                 </ul>
 

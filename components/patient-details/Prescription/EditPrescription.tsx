@@ -1,21 +1,27 @@
 import {useState} from 'react'
 import {useRouter} from 'next/router'
 import prescriptionService from '../../../services/prescriptionService/prescriptionService'
+import addPatientStyle from "../../patients/AddPatient/index.module.scss"
+import editPrescriptionStyle from "../Prescription/index.module.scss"
+import {TPrescriptionEntity} from "../../../services/prescriptionService/prescriptionTypes";
+import s from "../History/index.module.scss"
 
 type TProps = {
     prescriptionId: number
     onPrescriptionEdited: () => void
     onCancelEditing: () => void
+    prescriptionData: TPrescriptionEntity
 }
 
 const EditPrescription = (props: TProps) => {
+    const {prescriptionData} = props
 
     const router = useRouter()
     const {patientId} = router.query
 
-    const [name, setName] = useState('')
-    const [descriptions, setDescriptions] = useState('')
-    const [date, setDate] = useState(new Date().toISOString())
+    const [name, setName] = useState(prescriptionData.name)
+    const [descriptions, setDescriptions] = useState(prescriptionData.descriptions)
+    const [date, setDate] = useState(new Date(prescriptionData.date*1000 || Date.now()).toISOString().split('T')[0])
     const [shouldShowError, setShouldShowError] = useState(false)
     const newDate = new Date(date)
     const dateForInput = newDate.toISOString().split('T') [0]
@@ -42,45 +48,43 @@ const EditPrescription = (props: TProps) => {
 
     const cancelEdit = () => props.onCancelEditing()
 
-    return <div className="updateBox animated fadeIn">
-        <div className="row pt-2">
-            <div className="col-sm-6 pt-2">
-                <form role="form">
-                    <div className="form-group">
-                        <label>Name</label>
-                        <input value={name} onChange={(e) => setName(e.target.value)}
-                               type="text" placeholder="Input prescription name" className="form-control"/>
-                    </div>
-
-                    <div className="form-group">
-                        <label>Descriptions</label>
-                        <textarea value={descriptions} onChange={(e) => setDescriptions(e.target.value)}
-                               placeholder="Input description" className="form-control"/>
-                    </div>
-                </form>
-            </div>
-            <div className="col-sm-6 pt-2">
-                <form role="form">
-                    <div className="form-group">
-                        <label>Date</label>
-                        <input value={dateForInput} onChange={(e) => setDate(new Date(e.target.value).toISOString())}
-                               type="date" className="form-control"/>
-                    </div>
-                </form>
-            </div>
+    return <div className={`updateBox animated fadeIn ${addPatientStyle.addPatient}`}>
+        <div className={editPrescriptionStyle.addHistory}>
+            <form role="form">
+                <div className="form-group">
+                    <label>Name</label>
+                    <input value={name} onChange={(e) => setName(e.target.value)}
+                           type="text" placeholder="Input prescription name" className="form-control"/>
+                </div>
+            </form>
+            <form role="form">
+                <div className="form-group">
+                    <label>Date</label>
+                    <input value={dateForInput} max={new Date(Date.now()).toISOString().split('T')[0]}
+                           onChange={(e) => setDate(new Date(e.target.value).toISOString())}
+                           type="date" className="form-control"/>
+                </div>
+            </form>
+            <form role="form" className={s.description}>
+                <div className="form-group">
+                    <label>Descriptions</label>
+                    <textarea value={descriptions} onChange={(e) => setDescriptions(e.target.value)}
+                              placeholder="Input description" className="form-control"/>
+                </div>
+            </form>
             {shouldShowError && <div className="col-sm-12">
                 <div className="alert alert-danger" role="alert">
                     Invalid input or email existed
                 </div>
 
             </div>}
-            <button className="btn btn-primary btn-sm float-left update" onClick={updatePrescription}>
-                <>Update Prescription</>
-            </button>
-            <button className="btn btn-default btn-sm float-left update" onClick={cancelEdit}>
-                <>Cancel</>
-            </button>
         </div>
+        <button className="btn btn-primary btn-sm" onClick={updatePrescription}>
+            <>Update Prescription</>
+        </button>
+        <button className="btn btn-default btn-sm update" onClick={cancelEdit}>
+            <>Cancel</>
+        </button>
     </div>
 }
 

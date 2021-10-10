@@ -59,7 +59,7 @@ const PrescriptionItem = (props: TProps) => {
                 </Popover>
             </div>
             <div className="grid-item mt-2">
-                {showEdit ? <EditPrescription onCancelEditing={handleEdit} prescriptionId={presData.id}
+                {showEdit ? <EditPrescription prescriptionData={presData} onCancelEditing={handleEdit} prescriptionId={presData.id}
                                               onPrescriptionEdited={handleEdited}/> : null}
             </div>
         </div>

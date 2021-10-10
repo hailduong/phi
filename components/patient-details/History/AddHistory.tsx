@@ -1,8 +1,8 @@
 import {useState} from "react";
 import historyService from "../../../services/history/historyService";
 import {useRouter} from "next/router";
-import s from "../../patients/AddPatient/index.module.scss";
-import {is} from "@babel/types";
+import addPatientStyle from "../../patients/AddPatient/index.module.scss";
+import s from "./index.module.scss"
 
 type TProps = {
     onHistoryAdded: () => void
@@ -60,10 +60,10 @@ const AddHistory = (props: TProps) => {
         } else setIsNameError(false)
 
         //2. Validate DESCRIPTIONS
-        if (descriptions.trim().length===0){
+        if (descriptions.trim().length === 0) {
             isValid = false
             setIsDescriptionError(true)
-        }   else setIsDescriptionError(false)
+        } else setIsDescriptionError(false)
 
         if (isValid) {
             createHistory()
@@ -72,63 +72,57 @@ const AddHistory = (props: TProps) => {
 
     const cancelAdd = () => props.onCancelAdding()
 
-    return <div className={`${s.addPatient} animated fadeIn`}>
-        <div className="row pt-2">
-            <div className="col-sm-6 pt-2">
-                <form role="form">
-                    <div className="form-group">
-                        <label>Name</label>
-                        <input value={name} onChange={(e) => setName(e.target.value)}
-                               type="text" placeholder="Input history name"
-                               className={`form-control ${isNameError ? 'is-invalid' : 'is-valid'}`}/>
-                        {isNameError ? <div className="invalid-feedback">
-                            History name can not be blank!
-                        </div> : null}
-                    </div>
-                    <div className="form-group">
-                        <label>Description</label>
-                        <textarea value={descriptions} onChange={(e) => setDescriptions(e.target.value)}
-                                  placeholder="Input description"
-                                  className={`form-control ${isDescriptionError ? 'is-invalid' : 'is-valid'}`}/>
-                        {isDescriptionError ? <div className="invalid-feedback">
-                            Descriptions can not be blank!
-                        </div> : null}
-                    </div>
-                </form>
-            </div>
-            <div className="col-sm-6 pt-2">
-                <form role="form">
-
-                    <div className="form-group">
-                        <label>From Date</label>
-                        <input value={fromDateForInput}
-                               onChange={(e) => setFromDate(new Date(e.target.value).toISOString())}
-                               type="date" className="form-control"/>
-                    </div>
-                    <div className="form-group">
-                        <label>To Date</label>
-                        <input value={toDateForInput} min={fromDateForInput}
-                               onChange={(e) => setToDate(new Date(e.target.value).toISOString())}
-                               type="date" className="form-control"/>
-                    </div>
-                </form>
-            </div>
-
-
-            {shouldShowError && <div className="col-sm-12">
-                <div className="alert alert-danger" role="alert">
-                    Invalid input or email existed
+    return (
+        <div className={`${addPatientStyle.addPatient} animated fadeIn`}>
+            <div className="pt-2">
+                <div className={s.addHistory}>
+                    <form role="form">
+                        <div className="form-group">
+                            <label>Name</label>
+                            <input value={name} onChange={(e) => setName(e.target.value)}
+                                   type="text" placeholder="Input history name"
+                                   className={`form-control ${isNameError ? 'is-invalid' : 'is-valid'}`}/>
+                            {isNameError ? <div className="invalid-feedback">
+                                History name can not be blank!
+                            </div> : null}
+                        </div>
+                    </form>
+                    <form role="form">
+                        <div className="form-group">
+                            <label>From Date</label>
+                            <input value={fromDateForInput} max={new Date(Date.now()).toISOString().split('T')[0]}
+                                   onChange={(e) => setFromDate(new Date(e.target.value).toISOString())}
+                                   type="date" className="form-control"/>
+                        </div>
+                    </form>
+                    <form role="form">
+                        <div className="form-group">
+                            <label>To Date</label>
+                            <input value={toDateForInput} min={fromDateForInput} max={new Date(Date.now()).toISOString().split('T')[0]}
+                                   onChange={(e) => setToDate(new Date(e.target.value).toISOString())}
+                                   type="date" className="form-control"/>
+                        </div>
+                    </form>
+                    <form role="form" className={s.description}>
+                        <div className="form-group">
+                            <label>Description</label>
+                            <textarea value={descriptions} onChange={(e) => setDescriptions(e.target.value)}
+                                      placeholder="Input description"
+                                      className={`form-control ${isDescriptionError ? 'is-invalid' : 'is-valid'}`}/>
+                            {isDescriptionError ? <div className="invalid-feedback">
+                                Descriptions can not be blank!
+                            </div> : null}
+                        </div>
+                    </form>
+                    {shouldShowError && <div className="alert alert-danger" role="alert">
+                        Invalid input or email existed
+                    </div>}
                 </div>
-
-            </div>}
-            <button className="btn btn-primary btn-sm float-left update" onClick={validate}>
-                Add History
-            </button>
-            <button className="btn btn-default btn-sm float-left update" onClick={cancelAdd}>
-                Cancel
-            </button>
+                <button className="btn btn-primary btn-sm" onClick={validate}>Add History</button>
+                <button className="btn btn-default btn-sm update" onClick={cancelAdd}>Cancel</button>
+            </div>
         </div>
-    </div>
+    )
 }
 
 export default AddHistory
