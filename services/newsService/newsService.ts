@@ -3,7 +3,7 @@ import {TNewsCreateBody, TNewsDataResponse} from "./newsTypes";
 import apiClient from "../apiClient";
 
 const newsService = {
-    getNews: async (pageNum = 2, pageSize = 3) => {
+    getNews: async (pageNum = 1, pageSize = 100) => {
         return await apiClient.get<TNewsDataResponse>(`${API_URL}/admin/news?pagenum=${pageNum}&pagesize=${pageSize}`)
     },
 

@@ -9,7 +9,8 @@ class AuthService {
         if (typeof window !== 'undefined') {
             const value = localStorage.getItem('user')
             if (value) {
-                return JSON.parse(window.atob(window.atob(value)))
+                // const decodedValue = encodeURIComponent(window.atob(window.atob(value)))
+                return JSON.parse(value)
             }
         }
         return null
@@ -17,7 +18,8 @@ class AuthService {
 
     setUser(user: TUserEntity | null) {
         if (typeof window !== 'undefined' && user) {
-            localStorage.setItem('user', window.btoa(window.btoa(encodeURIComponent(JSON.stringify(user)))))
+            // localStorage.setItem('user', window.btoa(window.btoa(encodeURIComponent(JSON.stringify(user)))))
+            localStorage.setItem('user', JSON.stringify(user))
         }
     }
 

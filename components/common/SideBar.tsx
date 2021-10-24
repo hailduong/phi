@@ -4,14 +4,20 @@ import {useEffect, useState} from 'react'
 import {TDoctorInfoEntity} from '../../services/authentication/authType'
 
 
-const LeftNavigation = () => {
+const SideBar = () => {
 
     /* Get user info */
     const [doctorInfo, setDoctorInfo] = useState<TDoctorInfoEntity | null>(null)
+    const [isAdmin, setIsAdmin] = useState<boolean>(false)
     useEffect(() => {
         const getUserInfo = async () => {
             const data = await authService.getDoctorBasicInfo()
             !!data && setDoctorInfo(data)
+
+            const user = authService.getUser()
+
+            const roleIsAdmin = user?.role === 'admin'
+            setIsAdmin(roleIsAdmin)
         }
         getUserInfo()
     }, [])
@@ -21,6 +27,7 @@ const LeftNavigation = () => {
         authService.logout()
     }
 
+    /* Render */
     return (
         <nav className="navbar-default navbar-static-side" role="navigation">
             <div className="sidebar-collapse">
@@ -57,12 +64,14 @@ const LeftNavigation = () => {
                                 <span className="nav-label">My Profile</span>
                             </a>
                         </Link>
-                        <Link href="/news">
+                        {
+                            isAdmin && <Link href="/news">
                             <a>
                                 <i className="fa fa-th-large"/>
                                 <span className="nav-label">News</span>
                             </a>
                         </Link>
+                        }
                     </li>
                 </ul>
 
@@ -71,4 +80,4 @@ const LeftNavigation = () => {
     )
 }
 
-export default LeftNavigation
+export default SideBar

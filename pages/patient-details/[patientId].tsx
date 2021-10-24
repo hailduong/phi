@@ -3,7 +3,7 @@ import patientService from '../../services/patients/patientService'
 import {useRouter} from 'next/router'
 import HeaderFooter from '../../components/common/HeaderFooter'
 import styles from '../../styles/Home.module.scss'
-import LeftNavigation from '../../components/common/LeftNavigation'
+import SideBar from '../../components/common/SideBar'
 import PageHeading from '../../components/common/PageHeading'
 import PatientTabHeading from '../../components/patient-details/PatientTabHeading'
 import {TPatientEntity} from '../../services/patients/types'
@@ -39,7 +39,7 @@ export default function PatientDetailsPage() {
         <HeaderFooter>
             <main className={styles.main}>
                 <div id="wrapper">
-                    <LeftNavigation/>
+                    <SideBar/>
                     <div id="page-wrapper" className="gray-bg">
                         <PageHeading pageName={'Patient Details'}/>
                         <div className="wrapper wrapper-content animated fadeInUp">

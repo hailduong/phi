@@ -27,7 +27,7 @@ const EditEvent = (props: TProps) => {
     const dateRemindForInput = newDateRemind.toISOString().split('T')[0]
     const dateForServer = newDate.getTime() / 1000
     const dateRemindForServer = newDateRemind.getTime() / 1000
-    debugger
+
     const [shouldShowError, setShouldShowError] = useState(false)
     async function updateEvent() {
         if (typeof patientId === 'string') {

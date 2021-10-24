@@ -1,5 +1,5 @@
 import styles from '../styles/Home.module.scss'
-import LeftNavigation from '../components/common/LeftNavigation'
+import SideBar from '../components/common/SideBar'
 import PageHeading from '../components/common/PageHeading'
 import NewsPageContent from "../components/news";
 import HeaderFooter from '../components/common/HeaderFooter'
@@ -11,7 +11,7 @@ export default function PatientPage() {
         <HeaderFooter>
             <main className={styles.main}>
                 <div id="wrapper">
-                    <LeftNavigation/>
+                    <SideBar/>
                     <div id="page-wrapper" className="gray-bg">
                         <PageHeading pageName={'News'}/>
                         <NewsPageContent/>

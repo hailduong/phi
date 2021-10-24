@@ -1,7 +1,7 @@
 import {useEffect, useState} from 'react'
 import HeaderFooter from '../components/common/HeaderFooter'
 import styles from '../styles/Home.module.scss'
-import LeftNavigation from '../components/common/LeftNavigation'
+import SideBar from '../components/common/SideBar'
 import PageHeading from '../components/common/PageHeading'
 import authService from '../services/authentication/authService'
 import {TDoctorInfoEntity} from '../services/authentication/authType'
@@ -51,7 +51,7 @@ export default function PatientDetailsPage() {
         <HeaderFooter>
             <main className={styles.main}>
                 <div id="wrapper">
-                    <LeftNavigation/>
+                    <SideBar/>
                     <div id="page-wrapper" className="gray-bg">
                         <PageHeading pageName={'My Profile'}/>
                         <div className="wrapper wrapper-content animated fadeInUp">

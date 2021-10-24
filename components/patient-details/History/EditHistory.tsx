@@ -51,7 +51,6 @@ const EditHistory = (props: TProps) => {
             }
         }
     }
-    debugger
 
     const cancelEdit = () => props.onCancelEditing()
 
