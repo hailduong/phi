@@ -9,7 +9,7 @@ export type TEventResponse = {
 
 export type TEventEntity = {
     id: number;
-    name?: string;
+    name: string;
     descriptions: string;
     date: number;
     dateRemind: number
