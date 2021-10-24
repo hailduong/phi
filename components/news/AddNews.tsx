@@ -47,8 +47,8 @@ const AddNews = (props: TProps) => {
                 window.dispatchEvent(event)
             }
 
-            // @ts-ignore
-        } else if (res?.error === 400) {
+
+        } else if (response && response?.error === 400) {
             setShouldShowError(true)
             setTimeout(() => {
                 setShouldShowError(false)

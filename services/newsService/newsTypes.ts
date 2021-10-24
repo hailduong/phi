@@ -4,6 +4,7 @@ export type TNewsDataResponse = {
         message: string;
     }
     data: TNewsEntity[];
+    error?: number
 }
 
 export type TNewsEntity = {

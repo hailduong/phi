@@ -156,7 +156,6 @@ const AddPatient = (props: TProps) => {
 
         //Validate gender
         if (gender.trim().length === 0) {
-            debugger
             isValid = false
             setIsGenderError(true)
         } else setIsGenderError(false)

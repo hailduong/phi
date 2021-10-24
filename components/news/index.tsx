@@ -12,7 +12,7 @@ const NewsPageContent = () => {
 
     const getData = async () => {
         const data = await newsService.getNews()
-        if (data?.status.code === 200) {
+        if (data?.status?.code === 200) {
             setNews(data.data)
         }
     }
