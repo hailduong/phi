@@ -20,14 +20,15 @@ const SignUp = () => {
         // Send data to server
         const data = await authService.signup(userName, password)
 
-        if (data.status.code === 200) {
+        if (data?.status?.code === 200) {
             // 'Registered successfully! You will now be redirected to the login page.'
             showSignUpSuccessAlert()
             // Navigate to the login page after 5 seconds
-            setTimeout(()=> {
+            setTimeout(() => {
                 navigateToTheLoginPage()
-            },3000)
-        } else {
+            }, 3000)
+        }
+        else {
             //Show alert if error
             showSignUpErrorAlert()
         }

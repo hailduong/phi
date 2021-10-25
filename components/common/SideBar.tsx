@@ -72,6 +72,14 @@ const SideBar = () => {
                             </a>
                         </Link>
                         }
+                        {
+                            isAdmin && <Link href="/admin">
+                                <a>
+                                    <i className="fa fa-th-large"/>
+                                    <span className="nav-label">Admin</span>
+                                </a>
+                            </Link>
+                        }
                     </li>
                 </ul>
 
