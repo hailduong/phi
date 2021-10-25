@@ -12,7 +12,7 @@ const defaultData: THistoryResponse = {
 }
 
 class HistoryService {
-    async getHistory(patientId = '', pageNumber = 1, pageSize = 5) {
+    async getHistory(patientId = '', pageNumber = 1, pageSize = 100) {
         if (patientId) {
             const response = await apiClient.get<THistoryResponse>(`${API_URL}/doctor/history/patient/${patientId}?pageNum=${pageNumber}&pageSize=${pageSize}`)
             return response
@@ -25,7 +25,7 @@ class HistoryService {
         return response
     }
 
-    async deleteHistory(patientId: string, historyId: number, pageNumber = 1, pageSize = 5) {
+    async deleteHistory(patientId: string, historyId: number, pageNumber = 1, pageSize = 100) {
         return await apiClient.delete<THistoryResponse>(`${API_URL}/doctor/history/${historyId}/patient/${patientId}?pageNum=${pageNumber}&pageSize=${pageSize}`)
     }
 

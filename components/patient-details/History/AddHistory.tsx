@@ -1,8 +1,8 @@
-import {useState} from "react";
-import historyService from "../../../services/history/historyService";
-import {useRouter} from "next/router";
-import addPatientStyle from "../../patients/AddPatient/index.module.scss";
-import s from "./index.module.scss"
+import {useState} from 'react'
+import historyService from '../../../services/history/historyService'
+import {useRouter} from 'next/router'
+import addPatientStyle from '../../patients/AddPatient/index.module.scss'
+import s from './index.module.scss'
 
 type TProps = {
     onHistoryAdded: () => void
@@ -37,7 +37,7 @@ const AddHistory = (props: TProps) => {
             fromDate: fromDateForServer,
             toDate: toDateForServer
         })
-
+        debugger
         if (response && response?.status && response?.status.code === 200) {
             props.onHistoryAdded()
             if (window !== 'undefined') {
@@ -73,37 +73,36 @@ const AddHistory = (props: TProps) => {
     const cancelAdd = () => props.onCancelAdding()
 
     return (
-        <div className={`${addPatientStyle.addPatient} animated fadeIn`}>
+        <form className={`${addPatientStyle.addPatient} animated fadeIn`}>
             <div className="pt-2">
                 <div className={s.addHistory}>
-                    <form role="form">
-                        <div className="form-group">
-                            <label>Name</label>
-                            <input value={name} onChange={(e) => setName(e.target.value)}
-                                   type="text" placeholder="Input history name"
-                                   className={`form-control ${isNameError ? 'is-invalid' : 'is-valid'}`}/>
-                            {isNameError ? <div className="invalid-feedback">
-                                History name can not be blank!
-                            </div> : null}
-                        </div>
-                    </form>
-                    <form role="form">
-                        <div className="form-group">
-                            <label>From Date</label>
-                            <input value={fromDateForInput} max={new Date(Date.now()).toISOString().split('T')[0]}
-                                   onChange={(e) => setFromDate(new Date(e.target.value).toISOString())}
-                                   type="date" className="form-control"/>
-                        </div>
-                    </form>
-                    <form role="form">
-                        <div className="form-group">
-                            <label>To Date</label>
-                            <input value={toDateForInput} min={fromDateForInput} max={new Date(Date.now()).toISOString().split('T')[0]}
-                                   onChange={(e) => setToDate(new Date(e.target.value).toISOString())}
-                                   type="date" className="form-control"/>
-                        </div>
-                    </form>
-                    <form role="form" className={s.description}>
+                    <div className="form-group">
+                        <label>Name</label>
+                        <input value={name} onChange={(e) => setName(e.target.value)}
+                               type="text" placeholder="Input history name"
+                               className={`form-control ${isNameError ? 'is-invalid' : 'is-valid'}`}/>
+                        {isNameError ? <div className="invalid-feedback">
+                            History name can not be blank!
+                        </div> : null}
+                    </div>
+
+                    <div className="form-group">
+                        <label>From Date</label>
+                        <input value={fromDateForInput} max={new Date(Date.now()).toISOString().split('T')[0]}
+                               onChange={(e) => setFromDate(new Date(e.target.value).toISOString())}
+                               type="date" className="form-control"/>
+                    </div>
+
+
+                    <div className="form-group">
+                        <label>To Date</label>
+                        <input value={toDateForInput} min={fromDateForInput}
+                               max={new Date(Date.now()).toISOString().split('T')[0]}
+                               onChange={(e) => setToDate(new Date(e.target.value).toISOString())}
+                               type="date" className="form-control"/>
+                    </div>
+
+                    <div className={s.description}>
                         <div className="form-group">
                             <label>Description</label>
                             <textarea value={descriptions} onChange={(e) => setDescriptions(e.target.value)}
@@ -113,7 +112,7 @@ const AddHistory = (props: TProps) => {
                                 Descriptions can not be blank!
                             </div> : null}
                         </div>
-                    </form>
+                    </div>
                     {shouldShowError && <div className="alert alert-danger" role="alert">
                         Invalid input or email existed
                     </div>}
@@ -121,7 +120,7 @@ const AddHistory = (props: TProps) => {
                 <button className="btn btn-primary btn-sm" onClick={validate}>Add History</button>
                 <button className="btn btn-default btn-sm update" onClick={cancelAdd}>Cancel</button>
             </div>
-        </div>
+        </form>
     )
 }
 
