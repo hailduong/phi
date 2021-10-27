@@ -1,49 +1,56 @@
 import {useEffect, useState} from "react";
-import {TNewsEntity} from "../../services/newsService/newsTypes";
-import newsService from "../../services/newsService/newsService"
 import s from "../patients/index.module.scss";
-import AddNews from "./AddNews";
-import NewsItem from "./NewsItem";
+import AddDoctor from "./AddDoctor";
+import DoctorItem from "./DoctorItem";
+import {TDoctorEntity} from "../../services/adminService/adminTypes";
+import adminService from "../../services/adminService/adminService";
 
+const DoctorPageContent = () => {
 
-const NewsPageContent = () => {
+    const [doctor, setDoctor] = useState<TDoctorEntity[]>([])
 
-    const [news, setNews] = useState<TNewsEntity[]>([])
-
-    const getData = async () => {
-        const data = await newsService.getNews()
-        if (data?.status?.code === 200) {
-            setNews(data.data)
+    const getDoctorList = async () => {
+        const doctorList = await adminService.getDoctorList()
+        if (doctorList.status.code === 200) {
+            setDoctor(doctorList.data)
         }
-    }
 
-    const handleDeleteNews = async (newsId: number) => {
-        const response = await newsService.deleteNews(newsId)
-
-        if (response?.status.code === 200) {
-            getData()
-        }
     }
+    // const [news, setNews] = useState<TNewsEntity[]>([])
+    //
+    // const getData = async () => {
+    //     const data = await newsService.getNews()
+    //     if (data?.status?.code === 200) {
+    //         setNews(data.data)
+    //     }
+    // }
+    //
+    // const handleDeleteNews = async (newsId: number) => {
+    //     const response = await newsService.deleteNews(newsId)
+    //
+    //     if (response?.status.code === 200) {
+    //         getData()
+    //     }
+    // }
 
     useEffect(() => {
-        getData()
+        getDoctorList()
     }, [])
 
-    const [showAddNewsForm, setShowAddNewsForm] = useState(false)
+    // const [showAddNewsForm, setShowAddNewsForm] = useState(false)
+    //
+    // const toggleAddNewsBox = () => {
+    //     setShowAddNewsForm(!showAddNewsForm)
+    // }
+    //
+    // const handleNewsAdded = async () => {
+    //     setShowAddNewsForm(false)
+    //     await getData()
+    // }
 
-    const toggleAddNewsBox = () => {
-        setShowAddNewsForm(!showAddNewsForm)
-    }
+    // const buttonAdd = showAddNewsForm ? 'btn-default' : 'btn-primary'
 
-    const handleNewsAdded = async () => {
-        setShowAddNewsForm(false)
-        await getData()
-    }
-
-    const buttonAdd = showAddNewsForm ? 'btn-default' : 'btn-primary'
-
-    const newsList = news.map(dataItem => <NewsItem onDeleteNews={handleDeleteNews} newsData={dataItem}
-                                                          key={dataItem.id}/>)
+    const newsList = doctor.map(dataItem => <DoctorItem key={dataItem.id}/>)
     return (
         <div className="wrapper wrapper-content animated fadeInUp">
             <div className="row">
@@ -51,13 +58,13 @@ const NewsPageContent = () => {
                     <div className="ibox">
                         <div className={`${s.boxTitle} ibox-title`}>
                             <h5>News List</h5>
-                            {showAddNewsForm ? null :
-                                <div className={`${s.addButton} ibox-tools`}>
-                                    <a onClick={toggleAddNewsBox}
-                                       className={`btn ${buttonAdd}`}>Add News</a>
-                                </div>}
-                            {showAddNewsForm ? <AddNews onCancelAdding={toggleAddNewsBox}
-                                                              onNewsAdded={handleNewsAdded}/> : null}
+                            {/*{showAddNewsForm ? null :*/}
+                            {/*    <div className={`${s.addButton} ibox-tools`}>*/}
+                            {/*        <a onClick={toggleAddNewsBox}*/}
+                            {/*           className={`btn ${buttonAdd}`}>Add News</a>*/}
+                            {/*    </div>}*/}
+                            {/*{showAddNewsForm ? <AddDoctor onCancelAdding={toggleAddNewsBox}*/}
+                            {/*                              onNewsAdded={handleNewsAdded}/> : null}*/}
                         </div>
                         <div className="ibox-content">
                             <div className="patient-list">
@@ -75,4 +82,4 @@ const NewsPageContent = () => {
     )
 }
 
-export default NewsPageContent
+export default DoctorPageContent

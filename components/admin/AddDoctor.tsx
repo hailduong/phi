@@ -9,7 +9,7 @@ type TProps = {
     onCancelAdding: () => void
 }
 
-const AddNews = (props: TProps) => {
+const AddDoctor = (props: TProps) => {
 
     const router = useRouter()
     const {newsId} = router.query
@@ -134,7 +134,7 @@ const AddNews = (props: TProps) => {
                 </div>
             }
             <button className="btn btn-primary btn-sm" onClick={validate}>
-                Add News
+                Add Doctor
             </button>
             <button className="btn btn-default btn-sm update" onClick={cancelAdd}>
                 Cancel
@@ -142,4 +142,4 @@ const AddNews = (props: TProps) => {
         </div>
     )
 }
-export default AddNews
+export default AddDoctor
