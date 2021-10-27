@@ -12,7 +12,7 @@ type TProps = {
     newsData: TNewsEntity
 }
 
-const EditNews = (props: TProps) => {
+const EditDoctor = (props: TProps) => {
     const {newsData} = props
 
     const router = useRouter()
@@ -106,4 +106,4 @@ const EditNews = (props: TProps) => {
     </div>
 }
 
-export default EditNews
+export default EditDoctor
