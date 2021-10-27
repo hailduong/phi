@@ -1,9 +1,8 @@
-import {useEffect, useState} from "react";
-import s from "../patients/index.module.scss";
-import AddDoctor from "./AddDoctor";
-import DoctorItem from "./DoctorItem";
-import {TDoctorEntity} from "../../services/adminService/adminTypes";
-import adminService from "../../services/adminService/adminService";
+import {useEffect, useState} from 'react'
+import s from '../patients/index.module.scss'
+import DoctorItem from './DoctorItem'
+import {TDoctorEntity} from '../../services/adminService/adminTypes'
+import adminService from '../../services/adminService/adminService'
 
 const DoctorPageContent = () => {
 
@@ -57,7 +56,7 @@ const DoctorPageContent = () => {
                 <div className="col-lg-12 tab-seeContent">
                     <div className="ibox">
                         <div className={`${s.boxTitle} ibox-title`}>
-                            <h5>News List</h5>
+                            <h5>Doctors</h5>
                             {/*{showAddNewsForm ? null :*/}
                             {/*    <div className={`${s.addButton} ibox-tools`}>*/}
                             {/*        <a onClick={toggleAddNewsBox}*/}

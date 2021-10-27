@@ -11,7 +11,7 @@ type TProps = {
 
 const DoctorItem = (props: TProps) => {
 
-    // // const {newsData, onDeleteNews} = props
+    // const {newsData, onDeleteNews} = props
     // const newFromDate = new Date(newsData.fromDate * 1000 || Date.now())
     // const newToDate = new Date(newsData.toDate * 1000 || Date.now())
     //
@@ -34,43 +34,44 @@ const DoctorItem = (props: TProps) => {
     // const cancelEdit = () => {
     //     setShowEditNews(false)
     // }
-    // return (
-    //     <div className={`grid-container ibox-content ${s.patientItem}`}>
-    //         <div className="project-title">
-    //             <a>{newsData.id} {newsData.title}
-    //                 <br/>
-    //                 <small>{newsData.content} </small>
-    //             </a>
-    //         </div>
-    //         <div className="project-actions">
-    //             <div className="media-body">
-    //                 <div className="float-right from-toDate">
-    //                     {fromDateForInput} to {toDateForInput}
-    //                 </div>
-    //             </div>
-    //             {showEditNews ? null : <a onClick={handleEditNews} className="btn btn-white btn-sm">
-    //                 <i className="fa fa-pencil"/> Edit
-    //             </a>}
-    //             {/*</Link>*/}
-    //             <a id={'confirmDelete' + newsData.id.toString()} onClick={togglePopover}
-    //                className="btn btn-white btn-sm ml-2">
-    //                 <i className="fa fa-trash"/> Delete
-    //             </a>
-    //             <Popover target={'confirmDelete' + newsData.id.toString()} isOpen={popoverOpen} placement={"auto"}>
-    //                 <PopoverBody>
-    //                     <div>Are you sure you want to delete?</div>
-    //                     <div className='grid-container justify-content-center mt-1'>
-    //                         <Button className='btn btn-sm btn-danger' onClick={() => {
-    //                             onDeleteNews(newsData.id)
-    //                         }}>Delete</Button>
-    //                         <Button className='btn btn-white btn-sm ml-2' onClick={togglePopover}>Cancel</Button>
-    //                     </div>
-    //                 </PopoverBody>
-    //             </Popover>
-    //         </div>
-    //         {showEditNews ? <EditDoctor newsId={newsData.id} newsData={newsData} onNewsEdited={handleEdited}
-    //                                     onCancelEditing={cancelEdit}/> : null}
-    //     </div>
+    return (
+        <div className={`grid-container ibox-content ${s.patientItem}`}>
+            Doctor Item
+            {/*<div className="project-title">*/}
+            {/*    <a>{newsData.id} {newsData.title}*/}
+            {/*        <br/>*/}
+            {/*        <small>{newsData.content} </small>*/}
+            {/*    </a>*/}
+            {/*</div>*/}
+            {/*<div className="project-actions">*/}
+            {/*    <div className="media-body">*/}
+            {/*        <div className="float-right from-toDate">*/}
+            {/*            {fromDateForInput} to {toDateForInput}*/}
+            {/*        </div>*/}
+            {/*    </div>*/}
+            {/*    {showEditNews ? null : <a onClick={handleEditNews} className="btn btn-white btn-sm">*/}
+            {/*        <i className="fa fa-pencil"/> Edit*/}
+            {/*    </a>}*/}
+            {/*    /!*</Link>*!/*/}
+            {/*    <a id={'confirmDelete' + newsData.id.toString()} onClick={togglePopover}*/}
+            {/*       className="btn btn-white btn-sm ml-2">*/}
+            {/*        <i className="fa fa-trash"/> Delete*/}
+            {/*    </a>*/}
+            {/*    <Popover target={'confirmDelete' + newsData.id.toString()} isOpen={popoverOpen} placement={"auto"}>*/}
+            {/*        <PopoverBody>*/}
+            {/*            <div>Are you sure you want to delete?</div>*/}
+            {/*            <div className='grid-container justify-content-center mt-1'>*/}
+            {/*                <Button className='btn btn-sm btn-danger' onClick={() => {*/}
+            {/*                    onDeleteNews(newsData.id)*/}
+            {/*                }}>Delete</Button>*/}
+            {/*                <Button className='btn btn-white btn-sm ml-2' onClick={togglePopover}>Cancel</Button>*/}
+            {/*            </div>*/}
+            {/*        </PopoverBody>*/}
+            {/*    </Popover>*/}
+            {/*</div>*/}
+            {/*{showEditNews ? <EditDoctor newsId={newsData.id} newsData={newsData} onNewsEdited={handleEdited}*/}
+            {/*                            onCancelEditing={cancelEdit}/> : null}*/}
+        </div>
 
     )
 }

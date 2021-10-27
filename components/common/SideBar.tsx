@@ -67,7 +67,7 @@ const SideBar = () => {
                         {
                             isAdmin && <Link href="/news">
                             <a>
-                                <i className="fa fa-th-large"/>
+                                <i className="fa fa-bullhorn"/>
                                 <span className="nav-label">News</span>
                             </a>
                         </Link>
@@ -75,7 +75,7 @@ const SideBar = () => {
                         {
                             isAdmin && <Link href="/admin">
                                 <a>
-                                    <i className="fa fa-th-large"/>
+                                    <i className="fa fa-users"/>
                                     <span className="nav-label">Admin</span>
                                 </a>
                             </Link>
