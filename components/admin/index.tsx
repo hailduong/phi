@@ -2,18 +2,26 @@ import {useEffect, useState} from 'react'
 import s from '../patients/index.module.scss'
 import DoctorItem from './DoctorItem'
 import {TDoctorEntity} from '../../services/adminService/adminTypes'
-import adminService from '../../services/adminService/adminService'
+
+import {unwrapResult} from '@reduxjs/toolkit'
+import {fetchDoctorList} from '../../services/adminService/adminSlice'
+import {useAppDispatch} from '../../store/hook'
 
 const DoctorPageContent = () => {
-
+    const dispatch = useAppDispatch()
     const [doctor, setDoctor] = useState<TDoctorEntity[]>([])
 
     const getDoctorList = async () => {
-        const doctorList = await adminService.getDoctorList()
-        if (doctorList.status.code === 200) {
-            setDoctor(doctorList.data)
+        // const doctorList = await adminService.getDoctorList()
+        // if (doctorList.status.code === 200) {
+        //     setDoctor(doctorList.data)
+        // }
+        try {
+            const result = await dispatch(fetchDoctorList())
+            unwrapResult(result)
+        } catch (e) {
+            console.log(e)
         }
-
     }
     // const [news, setNews] = useState<TNewsEntity[]>([])
     //
