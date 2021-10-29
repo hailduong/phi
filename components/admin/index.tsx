@@ -3,6 +3,7 @@ import s from '../patients/index.module.scss'
 import DoctorItem from './DoctorItem'
 import {TDoctorEntity} from '../../services/adminService/adminTypes'
 import adminService from '../../services/adminService/adminService'
+import AddDoctor from "./AddDoctor";
 
 const DoctorPageContent = () => {
 
@@ -15,41 +16,33 @@ const DoctorPageContent = () => {
         }
 
     }
-    // const [news, setNews] = useState<TNewsEntity[]>([])
-    //
-    // const getData = async () => {
-    //     const data = await newsService.getNews()
-    //     if (data?.status?.code === 200) {
-    //         setNews(data.data)
-    //     }
-    // }
-    //
-    // const handleDeleteNews = async (newsId: number) => {
-    //     const response = await newsService.deleteNews(newsId)
-    //
-    //     if (response?.status.code === 200) {
-    //         getData()
-    //     }
-    // }
+
+    const handleDeleteDoctor = async (doctorId: number) => {
+        const response = await adminService.deleteDoctor(doctorId)
+
+        if (response?.status.code === 200) {
+            getData()
+        }
+    }
 
     useEffect(() => {
         getData()
     }, [])
 
-    // const [showAddNewsForm, setShowAddNewsForm] = useState(false)
-    //
-    // const toggleAddNewsBox = () => {
-    //     setShowAddNewsForm(!showAddNewsForm)
-    // }
-    //
-    // const handleNewsAdded = async () => {
-    //     setShowAddNewsForm(false)
-    //     await getData()
-    // }
+    const [showAddDoctorForm, setShowAddDoctorForm] = useState(false)
 
-    // const buttonAdd = showAddNewsForm ? 'btn-default' : 'btn-primary'
+    const toggleAddDoctorBox = () => {
+        setShowAddDoctorForm(!showAddDoctorForm)
+    }
 
-    const listDoctor = doctorList.map(dataItem => <DoctorItem doctorData={dataItem} key={dataItem.id}/>)
+    const handleDoctorAdded = async () => {
+        setShowAddDoctorForm(false)
+        await getData()
+    }
+
+    const buttonAdd = showAddDoctorForm ? 'btn-default' : 'btn-primary'
+
+    const listDoctor = doctorList.map(dataItem => <DoctorItem onDeleteDoctor={handleDeleteDoctor} doctorData={dataItem} key={dataItem.id}/>)
     return (
         <div className="wrapper wrapper-content animated fadeInUp">
             <div className="row">
@@ -57,13 +50,13 @@ const DoctorPageContent = () => {
                     <div className="ibox">
                         <div className={`${s.boxTitle} ibox-title`}>
                             <h5>Doctors</h5>
-                            {/*{showAddNewsForm ? null :*/}
-                            {/*    <div className={`${s.addButton} ibox-tools`}>*/}
-                            {/*        <a onClick={toggleAddNewsBox}*/}
-                            {/*           className={`btn ${buttonAdd}`}>Add News</a>*/}
-                            {/*    </div>}*/}
-                            {/*{showAddNewsForm ? <AddDoctor onCancelAdding={toggleAddNewsBox}*/}
-                            {/*                              onNewsAdded={handleNewsAdded}/> : null}*/}
+                            {showAddDoctorForm ? null :
+                                <div className={`${s.addButton} ibox-tools`}>
+                                    <a onClick={toggleAddDoctorBox}
+                                       className={`btn ${buttonAdd}`}>Add Doctor</a>
+                                </div>}
+                            {showAddDoctorForm ? <AddDoctor onCancelAdding={toggleAddDoctorBox}
+                                                          onDoctorAdded={handleDoctorAdded}/> : null}
                         </div>
                         <div className="ibox-content">
                             <div className="patient-list">

@@ -14,5 +14,11 @@
   grid-column: span 3;
 }
 
+.addDoctor {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 20px
+}
+
 
 
