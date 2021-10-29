@@ -6,12 +6,12 @@ import adminService from '../../services/adminService/adminService'
 
 const DoctorPageContent = () => {
 
-    const [doctor, setDoctor] = useState<TDoctorEntity[]>([])
+    const [doctorList, setDoctorList] = useState<TDoctorEntity[]>([])
 
-    const getDoctorList = async () => {
-        const doctorList = await adminService.getDoctorList()
-        if (doctorList.status.code === 200) {
-            setDoctor(doctorList.data)
+    const getData = async () => {
+        const data = await adminService.getDoctorList()
+        if (data.status.code === 200) {
+            setDoctorList(data.data)
         }
 
     }
@@ -33,7 +33,7 @@ const DoctorPageContent = () => {
     // }
 
     useEffect(() => {
-        getDoctorList()
+        getData()
     }, [])
 
     // const [showAddNewsForm, setShowAddNewsForm] = useState(false)
@@ -49,7 +49,7 @@ const DoctorPageContent = () => {
 
     // const buttonAdd = showAddNewsForm ? 'btn-default' : 'btn-primary'
 
-    const newsList = doctor.map(dataItem => <DoctorItem key={dataItem.id}/>)
+    const listDoctor = doctorList.map(dataItem => <DoctorItem doctorData={dataItem} key={dataItem.id}/>)
     return (
         <div className="wrapper wrapper-content animated fadeInUp">
             <div className="row">
@@ -69,7 +69,7 @@ const DoctorPageContent = () => {
                             <div className="patient-list">
                                 <table className="table table-hover">
                                     <tbody>
-                                    {newsList}
+                                    {listDoctor}
                                     </tbody>
                                 </table>
                             </div>
