@@ -11,12 +11,10 @@ export type TDoctorEntity = {
     firstName: string
     lastName: string
     email: string
-    role: string
-    address: string
     title: string
-    phone: number
+    phone: string
     gender: string
-    dob: string
+    password: string
 }
 
 export type TDoctorCreateBody = Omit<TDoctorEntity, 'id'>
