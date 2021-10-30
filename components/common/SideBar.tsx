@@ -52,12 +52,19 @@ const SideBar = () => {
                         </div>
                     </li>
                     <li className="active">
-                        <Link href="/">
-                            <a>
-                                <i className="fa fa-th-large"/>
-                                <span className="nav-label">Patients</span>
-                            </a>
-                        </Link>
+                        {
+                            isAdmin ? <Link href="/doctors">
+                                <a>
+                                    <i className="fa fa-users"/>
+                                    <span className="nav-label">Doctors</span>
+                                </a>
+                            </Link> : <Link href="/">
+                                <a>
+                                    <i className="fa fa-th-large"/>
+                                    <span className="nav-label">Patients</span>
+                                </a>
+                            </Link>
+                        }
                         <Link href="/my-profile">
                             <a>
                                 <i className="fa fa-user-circle"/>
@@ -66,17 +73,9 @@ const SideBar = () => {
                         </Link>
                         {
                             isAdmin && <Link href="/news">
-                            <a>
-                                <i className="fa fa-bullhorn"/>
-                                <span className="nav-label">News</span>
-                            </a>
-                        </Link>
-                        }
-                        {
-                            isAdmin && <Link href="/admin">
                                 <a>
-                                    <i className="fa fa-users"/>
-                                    <span className="nav-label">Admin</span>
+                                    <i className="fa fa-bullhorn"/>
+                                    <span className="nav-label">News</span>
                                 </a>
                             </Link>
                         }

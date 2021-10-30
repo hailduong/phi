@@ -3,10 +3,11 @@ import s from '../patients/index.module.scss'
 import DoctorItem from './DoctorItem'
 import {TDoctorEntity} from '../../services/adminService/adminTypes'
 import adminService from '../../services/adminService/adminService'
-import AddDoctor from "./AddDoctor";
+import {useAppDispatch} from '../../store/hook'
+import AddDoctor from './AddDoctor'
 
 const DoctorPageContent = () => {
-
+    const dispatch = useAppDispatch()
     const [doctorList, setDoctorList] = useState<TDoctorEntity[]>([])
 
     const getData = async () => {
@@ -14,8 +15,19 @@ const DoctorPageContent = () => {
         if (data.status.code === 200) {
             setDoctorList(data.data)
         }
-
     }
+
+    // const getDoctorList = async () => {
+    //     // const doctorList = await adminService.getDoctorList()
+    //     // if (doctorList.status.code === 200) {
+    //     //     setDoctor(doctorList.data)
+    //     // }
+    //     try {
+    //         const result = await dispatch(fetchDoctorList())
+    //         unwrapResult(result)
+    //     } catch (e) {
+    //         console.log(e)
+    // }
 
     const handleDeleteDoctor = async (doctorId: number) => {
         const response = await adminService.deleteDoctor(doctorId)
@@ -42,7 +54,8 @@ const DoctorPageContent = () => {
 
     const buttonAdd = showAddDoctorForm ? 'btn-default' : 'btn-primary'
 
-    const listDoctor = doctorList.map(dataItem => <DoctorItem onDeleteDoctor={handleDeleteDoctor} doctorData={dataItem} key={dataItem.id}/>)
+    const listDoctor = doctorList.map(dataItem => <DoctorItem onDeleteDoctor={handleDeleteDoctor}
+                                                              doctorData={dataItem} key={dataItem.id}/>)
     return (
         <div className="wrapper wrapper-content animated fadeInUp">
             <div className="row">
@@ -56,7 +69,7 @@ const DoctorPageContent = () => {
                                        className={`btn ${buttonAdd}`}>Add Doctor</a>
                                 </div>}
                             {showAddDoctorForm ? <AddDoctor onCancelAdding={toggleAddDoctorBox}
-                                                          onDoctorAdded={handleDoctorAdded}/> : null}
+                                                            onDoctorAdded={handleDoctorAdded}/> : null}
                         </div>
                         <div className="ibox-content">
                             <div className="patient-list">
@@ -73,5 +86,6 @@ const DoctorPageContent = () => {
         </div>
     )
 }
+
 
 export default DoctorPageContent
