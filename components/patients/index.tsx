@@ -10,10 +10,16 @@ const PatientPageContent = () => {
     const [data, setData] = useState<TPatientEntity[]>([])
 
     const getData = async () => {
-        const data = await patientService.getPatientList()
-        if (data?.status.code === 200) {
-            setData(data.data)
-        }
+        // let data
+        // if (isAdmin ){
+        //     data = await adminPatientService.getPatientByDoctor(doctorId)
+        // } else {
+        //     data = await patientService.getPatientList()
+        // }
+        //
+        // if (data?.status.code === 200) {
+        //     setData(data.data)
+        // }
     }
 
     const handleDeletePatient = async (patientId: number) => {

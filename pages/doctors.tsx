@@ -14,7 +14,7 @@ export default function PatientPage() {
                 <div id="wrapper">
                     <SideBar/>
                     <div id="page-wrapper" className="gray-bg">
-                        <PageHeading pageName={'Admin'}/>
+                        <PageHeading pageName={'Doctors'}/>
                         <DoctorPageContent/>
                     </div>
                 </div>
