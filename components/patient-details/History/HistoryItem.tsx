@@ -4,6 +4,7 @@ import {useState} from 'react'
 import EditHistory from './EditHistory'
 import s from './index.module.scss'
 import {Button, Popover, PopoverBody} from "reactstrap";
+import {useIsAdmin} from "../../common/SideBar";
 
 type TProps = {
     historyData: THistoryEntity
@@ -11,7 +12,7 @@ type TProps = {
 }
 
 const HistoryItem = (props: TProps) => {
-
+    const isAdmin = useIsAdmin()
     const {historyData, onDeleteHistory} = props
     const newFromDate = new Date(historyData.fromDate * 1000)
     const newToDate = new Date(historyData.toDate * 1000)
@@ -48,12 +49,12 @@ const HistoryItem = (props: TProps) => {
                         {fromDateForInput} to {toDateForInput}
                     </div>
                 </div>
-                {showEdit ? null : <a className="btn btn-white btn-sm" onClick={handleEdit}>
+                {!isAdmin && !showEdit && <a className="btn btn-white btn-sm" onClick={handleEdit}>
                     <i className="fa fa-pencil"/> Edit</a>}
-                <a id={"Delete" + historyData.id.toString()} onClick={togglePopover}
+                {!isAdmin && <a id={"Delete" + historyData.id.toString()} onClick={togglePopover}
                    className="btn btn-white btn-sm ml-2">
                     <i className="fa fa-trash"/> Delete
-                </a>
+                </a>}
                 <Popover target={"Delete" + historyData.id.toString()} isOpen={popoverOpen} placement={"auto"}>
                     <PopoverBody>
                         Are you sure you want to delete?

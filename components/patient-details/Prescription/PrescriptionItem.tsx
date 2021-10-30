@@ -4,6 +4,7 @@ import {useState} from 'react'
 import EditPrescription from './EditPrescription'
 import s from './index.module.scss'
 import {Button, Popover, PopoverBody} from "reactstrap";
+import {useIsAdmin} from "../../common/SideBar";
 
 type TProps = {
     presData: TPresData
@@ -13,7 +14,9 @@ type TProps = {
 const PrescriptionItem = (props: TProps) => {
     const {presData, onDeletePrescription} = props
 
+
     const newDate = new Date(presData.date * 1000)
+    const isAdmin = useIsAdmin()
     const dateForInput = newDate.toISOString().split('T')[0]
 
     const [showEdit, setShowEdit] = useState(false)
@@ -42,11 +45,11 @@ const PrescriptionItem = (props: TProps) => {
             </div>
             <div className="project-actions">
                 <div className="media-body from-toDate">{dateForInput}</div>
-                {showEdit ? null : <a className="btn btn-white btn-sm" onClick={handleEdit}>
+                {!isAdmin && !showEdit && <a className="btn btn-white btn-sm" onClick={handleEdit}>
                     <i className="fa fa-pencil"/> Edit</a>}
-                <a id={"Delete" + presData.id.toString()} className="btn btn-white btn-sm ml-2" onClick={togglePopover}>
+                {!isAdmin && <a id={"Delete" + presData.id.toString()} className="btn btn-white btn-sm ml-2" onClick={togglePopover}>
                     <i className="fa fa-trash"/> Delete
-                </a>
+                </a>}
                 <Popover target={"Delete" + presData.id.toString()} isOpen={popoverOpen} placement={"auto"}>
                     <PopoverBody>
                         Are you sure you want to delete?

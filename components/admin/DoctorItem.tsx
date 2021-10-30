@@ -1,4 +1,4 @@
-import {TNewsEntity} from "../../services/newsService/newsTypes";
+import Link from 'next/link'
 import {useState} from 'react'
 import EditDoctor from "./EditDoctor";
 import s from "../patients/PatientItem/index.module.scss"
@@ -20,12 +20,15 @@ const DoctorItem = (props: TProps) => {
 
     return (
         <div className={`grid-container ibox-content ${s.patientItem}`}>
-            <div className="project-title">
-                <a>{doctorData.id} {doctorData.firstName} {doctorData.lastName}
-                    <br/>
-                    <small>Gender: {doctorData.gender} | Phone: {doctorData.phone} | Email: {doctorData.email}</small>
-                </a>
-            </div>
+            <Link href={`patient/${doctorData.id}`}>
+                <div className="project-title">
+                    <a>{doctorData.id} {doctorData.firstName} {doctorData.lastName}
+                        <br/>
+                        <small>Gender: {doctorData.gender} | Phone: {doctorData.phone} |
+                            Email: {doctorData.email}</small>
+                    </a>
+                </div>
+            </Link>
             <div className="project-actions">
                 <div className="media-body">
                     <div className="float-right from-toDate">

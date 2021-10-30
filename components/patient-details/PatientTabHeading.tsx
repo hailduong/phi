@@ -1,10 +1,10 @@
 import {useEffect, useState} from 'react'
 import AddHistory from "./History/AddHistory";
 import AddEvent from "./Events/AddEvent";
-import AddDoctor from "./Doctor/AddDoctor";
+import {useIsAdmin} from "../common/SideBar";
 import AddAllergy from "./Allergy/AddAllergy";
 import AddPrescription from "./Prescription/AddPrescription";
-import {use} from "ast-types";
+
 
 type TTab = {
     tabHash: string
@@ -36,6 +36,7 @@ type TProps = {
 
 const PatientTabHeading = (props: TProps) => {
 
+    const isAdmin = useIsAdmin()
     const [activeTabHash, setActiveTabHash] = useState(`#tab-1`)
     //Change tab hash
     const changeTabHash = (tabHash: string) => {
@@ -88,7 +89,7 @@ const PatientTabHeading = (props: TProps) => {
     return <div>
         <ul className="nav nav-tabs">
             {liList}
-            {showAddButton ? null :
+            {!isAdmin && !showAddButton &&
                 <button className={`${buttonStyle} btn-sm btn float-right addCustom`} onClick={handleAddButton}>
                     Add {displayTabName?.tabName}
                 </button>}

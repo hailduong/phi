@@ -3,24 +3,30 @@ import authService from '../../services/authentication/authService'
 import {useEffect, useState} from 'react'
 import {TDoctorInfoEntity} from '../../services/authentication/authType'
 
+export function useIsAdmin() {
+    const [isAdmin, setIsAdmin] = useState<boolean>(false)
+    useEffect(() => {
+        const user = authService.getUser()
+        const roleIsAdmin = user?.role === 'admin'
+        setIsAdmin(roleIsAdmin)
+    }, [])
+    return isAdmin
+}
 
 const SideBar = () => {
 
     /* Get user info */
     const [doctorInfo, setDoctorInfo] = useState<TDoctorInfoEntity | null>(null)
-    const [isAdmin, setIsAdmin] = useState<boolean>(false)
+
     useEffect(() => {
         const getUserInfo = async () => {
             const data = await authService.getDoctorBasicInfo()
             !!data && setDoctorInfo(data)
-
-            const user = authService.getUser()
-
-            const roleIsAdmin = user?.role === 'admin'
-            setIsAdmin(roleIsAdmin)
         }
         getUserInfo()
     }, [])
+
+    const isAdmin = useIsAdmin()
 
     /* Logout */
     function logout() {

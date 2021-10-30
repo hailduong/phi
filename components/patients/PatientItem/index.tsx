@@ -4,6 +4,7 @@ import {useState} from 'react'
 import EditPatient from '../EditPatient'
 import s from './index.module.scss'
 import {Button, Popover, PopoverBody} from "reactstrap";
+import {useIsAdmin} from "../../common/SideBar";
 
 type TProps = {
     patientData: TPatientEntity
@@ -11,6 +12,8 @@ type TProps = {
 }
 
 const PatientItem = (props: TProps) => {
+
+    const isAdmin = useIsAdmin()
 
     const {patientData, onDeletePatient} = props
 
@@ -39,14 +42,13 @@ const PatientItem = (props: TProps) => {
                 </Link>
             </div>
             <div className="project-actions">
-                {showEditPatient ? null : <a onClick={handleEditPatient} className="btn btn-white btn-sm">
+                {!isAdmin && !showEditPatient && <a onClick={handleEditPatient} className="btn btn-white btn-sm">
                     <i className="fa fa-pencil"/> Edit
                 </a>}
-                {/*</Link>*/}
-                <a id={'confirmDelete' + patientData.id.toString()} onClick={togglePopover}
+                {!isAdmin && <a id={'confirmDelete' + patientData.id.toString()} onClick={togglePopover}
                    className="btn btn-white btn-sm ml-2">
                     <i className="fa fa-trash"/> Delete
-                </a>
+                </a>}
                 <Popover target={'confirmDelete' + patientData.id.toString()} isOpen={popoverOpen} placement={"auto"}>
                     <PopoverBody>
                         <div>Are you sure you want to delete?</div>

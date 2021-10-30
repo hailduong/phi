@@ -55,43 +55,35 @@ const EditNews = (props: TProps) => {
     const cancelUpdate = () => props.onCancelEditing()
 
     return <div className={`animated fadeIn ${styles.editPatient}`}>
-        <div className={`${s.addHistory} pt-2`}>
-            <form role="form">
-                <div className="form-group">
-                    <label>Title</label>
-                    <input value={title} onChange={(e) => setTitle(e.target.value)}
-                           type="text" placeholder="Input title news"
-                           className="form-control"/>
-                </div>
-            </form>
-            <form role="form">
-                <div className="form-group">
-                    <label>From Date</label>
-                    <input value={fromDateForInput} max={new Date(Date.now()).toISOString().split('T')[0]}
-                           onChange={(e) => setFromDate(new Date(e.target.value).toISOString())}
-                           type="date"
-                           className="form-control"/>
-                </div>
-            </form>
-            <form role="form">
-                <div className="form-group">
-                    <label>To Date</label>
-                    <input value={toDateForInput} min={fromDateForInput}
-                           max={new Date(Date.now()).toISOString().split('T')[0]}
-                           onChange={(e) => setToDate(new Date(e.target.value).toISOString())}
-                           type="date"
-                           className="form-control"/>
-                </div>
-            </form>
-            <form role="form" className={s.description}>
-                <div className="form-group">
-                    <label>Content</label>
-                    <textarea value={content} onChange={(e) => setContent(e.target.value)}
-                              placeholder="Input description"
-                              className="form-control"/>
-                </div>
-            </form>
-        </div>
+        <form role="form" className={`${s.addHistory} pt-2`}>
+            <div className="form-group">
+                <label>Title</label>
+                <input value={title} onChange={(e) => setTitle(e.target.value)}
+                       type="text" placeholder="Input title news"
+                       className="form-control"/>
+            </div>
+            <div className="form-group">
+                <label>From Date</label>
+                <input value={fromDateForInput} max={new Date(Date.now()).toISOString().split('T')[0]}
+                       onChange={(e) => setFromDate(new Date(e.target.value).toISOString())}
+                       type="date"
+                       className="form-control"/>
+            </div>
+            <div className="form-group">
+                <label>To Date</label>
+                <input value={toDateForInput} min={fromDateForInput}
+                       max={new Date(Date.now()).toISOString().split('T')[0]}
+                       onChange={(e) => setToDate(new Date(e.target.value).toISOString())}
+                       type="date"
+                       className="form-control"/>
+            </div>
+            <div className={`form-group ${s.description}`}>
+                <label>Content</label>
+                <textarea value={content} onChange={(e) => setContent(e.target.value)}
+                          placeholder="Input description"
+                          className="form-control"/>
+            </div>
+        </form>
         {shouldShowError && <div className="col-sm-12">
             <div className="alert alert-danger" role="alert">
                 Invalid input

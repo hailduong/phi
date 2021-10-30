@@ -2,6 +2,8 @@ import {useRouter} from 'next/router'
 import {useState} from 'react'
 import allergyService from '../../../services/allergyService/allergyService'
 import {TAllergyEntity} from "../../../services/allergyService/allergyTypes";
+import s from "../../patients/AddPatient/index.module.scss";
+import addDoctorStyle from "../../patient-details/History/index.module.scss"
 
 type TProps = {
     allergyId: number
@@ -18,7 +20,7 @@ const EditAllergy = (props: TProps) => {
     const {patientId} = router.query
     // 1. Get form data via state + onChange
     const [name, setName] = useState(allergyData.name)
-    const [date, setDate] = useState(new Date(allergyData.date*1000 || Date.now()).toISOString().split('T')[0])
+    const [date, setDate] = useState(new Date(allergyData.date * 1000 || Date.now()).toISOString().split('T')[0])
     const [descriptions, setDescriptions] = useState(allergyData.descriptions)
 
     const newDate = new Date(date)
@@ -57,47 +59,33 @@ const EditAllergy = (props: TProps) => {
     const cancelUpdate = () => props.onCancelEditing()
 
     return (
-        <div className="updateBox animated fadeIn">
-            <div className="row pt-2">
-                <div className="col-sm-6 pt-2">
-                    <form role="form">
-                        <div className="form-group">
-                            <label>Name</label>
-                            <input value={name} onChange={(e) => setName(e.target.value)}
-                                   type="text" placeholder="Input allergy name" className="form-control"/>
-                        </div>
-                    </form>
+        <div className={`updateBox animated fadeIn ${s.addPatient}`}>
+            <form role="form" className={addDoctorStyle.addDoctor}>
+                <div className="form-group">
+                    <label>Name</label>
+                    <input value={name} onChange={(e) => setName(e.target.value)}
+                           type="text" placeholder="Input allergy name" className="form-control"/>
                 </div>
-                <div className="col-sm-6 pt-2">
-                    <form role="form">
-                        {/*<div className="form-group">*/}
-                        {/*    <label>Date</label>*/}
-                        {/*    <input value={dateForInput}*/}
-                        {/*           onChange={(e) => setDate(new Date(e.target.value).toISOString())}*/}
-                        {/*           type="date"*/}
-                        {/*           className="form-control"/>*/}
-                        {/*</div>*/}
-                        <div className="form-group">
-                            <label>Descriptions</label>
-                            <textarea value={descriptions} onChange={(e) => setDescriptions(e.target.value)}
-                                      placeholder="Input description"
-                                      className="form-control"/>
-                        </div>
-                    </form>
+                <div className="form-group">
+                    <label>Descriptions</label>
+                    <textarea value={descriptions} onChange={(e) => setDescriptions(e.target.value)}
+                              placeholder="Input description"
+                              className="form-control"/>
                 </div>
-                {shouldShowError && <div className="col-sm-12">
-                    <div className="alert alert-danger" role="alert">
-                        Invalid input
-                    </div>
-                </div>}
-                <button className="btn btn-primary btn-sm float-left update" onClick={updateAllergy}>
-                    <>Update Allergy</>
-                </button>
-                <button className="btn btn-default float-left update" onClick={cancelUpdate}>
-                    <>Cancel</>
-                </button>
-            </div>
+            </form>
+            {shouldShowError && <div className="col-sm-12">
+                <div className="alert alert-danger" role="alert">
+                    Invalid input
+                </div>
+            </div>}
+            <button className="btn btn-primary btn-sm" onClick={updateAllergy}>
+                <>Update Allergy</>
+            </button>
+            <button className="btn btn-default update" onClick={cancelUpdate}>
+                <>Cancel</>
+            </button>
         </div>
+
     )
 }
 export default EditAllergy

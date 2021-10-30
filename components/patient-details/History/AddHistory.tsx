@@ -85,15 +85,12 @@ const AddHistory = (props: TProps) => {
                             History name can not be blank!
                         </div> : null}
                     </div>
-
                     <div className="form-group">
                         <label>From Date</label>
                         <input value={fromDateForInput} max={new Date(Date.now()).toISOString().split('T')[0]}
                                onChange={(e) => setFromDate(new Date(e.target.value).toISOString())}
                                type="date" className="form-control"/>
                     </div>
-
-
                     <div className="form-group">
                         <label>To Date</label>
                         <input value={toDateForInput} min={fromDateForInput}
@@ -101,7 +98,6 @@ const AddHistory = (props: TProps) => {
                                onChange={(e) => setToDate(new Date(e.target.value).toISOString())}
                                type="date" className="form-control"/>
                     </div>
-
                     <div className={s.description}>
                         <div className="form-group">
                             <label>Description</label>

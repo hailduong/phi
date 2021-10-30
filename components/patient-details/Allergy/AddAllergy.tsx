@@ -2,6 +2,7 @@ import {useRouter} from "next/router";
 import {useState} from "react";
 import allergyService from "../../../services/allergyService/allergyService";
 import s from "../../patients/AddPatient/index.module.scss";
+import addDoctorStyle from "../../patient-details/History/index.module.scss"
 
 type TProps = {
     onAllergyAdded: () => void
@@ -41,7 +42,7 @@ const AddAllergy = (props: TProps) => {
             }
 
             // @ts-ignore
-        } else if (res?.error === 400) {
+        } else if (response?.error === 400) {
             setShouldShowError(true)
             setTimeout(() => {
                 setShouldShowError(false)
@@ -75,52 +76,40 @@ const AddAllergy = (props: TProps) => {
 
     return (
         <div className={`${s.addPatient} animated fadeIn`}>
-            <div className="row pt-2">
-                <div className="col-sm-6 pt-2">
-                    <form role="form">
-                        <div className="form-group">
-                            <label>Name</label>
-                            <input value={name} onChange={(e) => setName(e.target.value)}
-                                   type="text" placeholder="Input allergy name"
-                                   className={`form-control ${isNameError ? 'is-invalid' : 'is-valid'}`}/>
-                            {isNameError ? <div className="invalid-feedback">
-                                Name cannot be blank!
-                            </div> : null}
-                        </div>
-                    </form>
+            <form role="form" className={addDoctorStyle.addDoctor}>
+                <div className="form-group">
+                    <label>Name</label>
+                    <input value={name} onChange={(e) => setName(e.target.value)}
+                           type="text" placeholder="Input allergy name"
+                           className={`form-control ${isNameError ? 'is-invalid' : 'is-valid'}`}/>
+                    {isNameError ? <div className="invalid-feedback">
+                        Name cannot be blank!
+                    </div> : null}
                 </div>
-                <div className="col-sm-6 pt-2">
-                    <form role="form">
-                        {/*<div className="form-group">*/}
-                        {/*    <label>Date</label>*/}
-                        {/*    <input value={dateForInput}*/}
-                        {/*           onChange={(e) => setDate(new Date(e.target.value).toISOString())}*/}
-                        {/*           type="date"*/}
-                        {/*           className="form-control"/>*/}
-                        {/*</div>*/}
-                        <div className="form-group">
-                            <label>Descriptions</label>
-                            <textarea value={descriptions} onChange={(e) => setDescriptions(e.target.value)}
-                                      placeholder="Input description"
-                                      className={`form-control  ${isDescriptionError ? 'is-invalid' : 'is-valid'}`}/>
-                            {isDescriptionError ? <div className="invalid-feedback">
-                                Descriptions can not be blank!
-                            </div> : null}
-                        </div>
-                    </form>
+                <div className="form-group">
+                    <label>Descriptions</label>
+                    <textarea value={descriptions} onChange={(e) => setDescriptions(e.target.value)}
+                              placeholder="Input description"
+                              className={`form-control  ${isDescriptionError ? 'is-invalid' : 'is-valid'}`}/>
+                    {isDescriptionError ? <div className="invalid-feedback">
+                        Descriptions can not be blank!
+                    </div> : null}
                 </div>
-                {shouldShowError && <div className="col-sm-12">
+            </form>
+
+            {
+                shouldShowError && <div className="col-sm-12">
                     <div className="alert alert-danger" role="alert">
                         Invalid input
                     </div>
-                </div>}
-                <button className="btn btn-primary btn-sm float-left update" onClick={validate}>
-                    Add Allergy
-                </button>
-                <button className="btn btn-default btn-sm float-left update" onClick={cancelAdd}>
-                    Cancel
-                </button>
-            </div>
+                </div>
+            }
+            <button className="btn btn-primary btn-sm" onClick={validate}>
+                Add Allergy
+            </button>
+            <button className="btn btn-default btn-sm update" onClick={cancelAdd}>
+                Cancel
+            </button>
         </div>
     )
 }

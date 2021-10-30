@@ -77,53 +77,47 @@ const AddEvent = (props: TProps) => {
 
     return (
         <div className={`${addPatientStyle.addPatient} animated fadeIn`}>
-            <div className={s.addHistory}>
-                <form role="form">
-                    <div className="form-group">
-                        <label>Name</label>
-                        <input value={name} onChange={(e) => setName(e.target.value)}
-                               type="text" placeholder="Input event name"
-                               className={`form-control ${isNameError ? 'is-invalid' : 'is-valid'}`}/>
-                        {isNameError ? <div className="invalid-feedback">
-                            Name cannot be blank!
-                        </div> : null}
-                    </div>
-                </form>
-                <form role="form">
-                    <div className="form-group">
-                        <label>Date</label>
-                        <input value={dateForInput} max={new Date(Date.now()).toISOString().split('T')[0]}
-                               onChange={(e) => setDate(new Date(e.target.value).toISOString())}
-                               type="date"
-                               className="form-control"/>
-                    </div>
-                </form>
-                <form role="form">
-                    <div className="form-group">
-                        <label>Date Remind</label>
-                        <input value={dateRemindForInput} min={new Date(Date.now()).toISOString().split('T')[0]}
-                               onChange={(e) => setDateRemind(new Date(e.target.value).toISOString())}
-                               type="date"
-                               className="form-control"/>
-                    </div>
-                </form>
-                <form role="form" className={s.description}>
-                    <div className="form-group">
-                        <label>Descriptions</label>
-                        <textarea value={descriptions} onChange={(e) => setDescriptions(e.target.value)}
-                                  placeholder="Input description"
-                                  className={`form-control ${isDescriptionError ? 'is-invalid' : 'is-valid'}`}/>
-                        {isDescriptionError ? <div className="invalid-feedback">
-                            Descriptions cannot be blank!
-                        </div> : null}
-                    </div>
-                </form>
-                {shouldShowError && <div className="col-sm-12">
-                    <div className="alert alert-danger" role="alert">
-                        Invalid input
-                    </div>
-                </div>}
-            </div>
+            <form role="form" className={s.addHistory}>
+                <div className="form-group">
+                    <label>Name</label>
+                    <input value={name} onChange={(e) => setName(e.target.value)}
+                           type="text" placeholder="Input event name"
+                           className={`form-control ${isNameError ? 'is-invalid' : 'is-valid'}`}/>
+                    {isNameError ? <div className="invalid-feedback">
+                        Name cannot be blank!
+                    </div> : null}
+                </div>
+                <div className="form-group">
+                    <label>Date</label>
+                    <input value={dateForInput} max={new Date(Date.now()).toISOString().split('T')[0]}
+                           onChange={(e) => setDate(new Date(e.target.value).toISOString())}
+                           type="date"
+                           className="form-control"/>
+                </div>
+                <div className="form-group">
+                    <label>Date Remind</label>
+                    <input value={dateRemindForInput} min={new Date(Date.now()).toISOString().split('T')[0]}
+                           onChange={(e) => setDateRemind(new Date(e.target.value).toISOString())}
+                           type="date"
+                           className="form-control"/>
+                </div>
+
+                <div className={`form-group ${s.description}`}>
+                    <label>Descriptions</label>
+                    <textarea value={descriptions} onChange={(e) => setDescriptions(e.target.value)}
+                              placeholder="Input description"
+                              className={`form-control ${isDescriptionError ? 'is-invalid' : 'is-valid'}`}/>
+                    {isDescriptionError ? <div className="invalid-feedback">
+                        Descriptions cannot be blank!
+                    </div> : null}
+                </div>
+            </form>
+            {shouldShowError && <div className="col-sm-12">
+                <div className="alert alert-danger" role="alert">
+                    Invalid input
+                </div>
+            </div>}
+
             <button className="btn btn-primary btn-sm" onClick={validate}>
                 Add Event
             </button>

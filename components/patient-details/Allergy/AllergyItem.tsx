@@ -4,6 +4,7 @@ import {useState} from 'react'
 import EditAllergy from './EditAllergy'
 import s from './index.module.scss'
 import {Button, Popover, PopoverBody} from "reactstrap";
+import {useIsAdmin} from "../../common/SideBar";
 
 type TProps = {
     allergyData: TAllergyData
@@ -11,6 +12,7 @@ type TProps = {
 }
 
 const AllergyItem = (props: TProps) => {
+    const isAdmin = useIsAdmin()
     const {allergyData, onDeleteAllergy} = props
 
     const newDate = new Date(allergyData.date * 1000)
@@ -40,16 +42,13 @@ const AllergyItem = (props: TProps) => {
                 <div>Description: {allergyData.descriptions}</div>
             </div>
             <div className="project-actions">
-                {/*<div className="media-body from-toDate">*/}
-                {/*    <div>{dateForInput}</div>*/}
-                {/*</div>*/}
-                {showEdit ? null :
+                {!isAdmin && !showEdit &&
                     <a className="btn btn-white btn-sm" onClick={handleEdit}>
                         <i className="fa fa-pencil"/> Edit</a>}
-                <a className="btn btn-white btn-sm ml-2" id={"Delete" + allergyData.id.toString()}
+                {!isAdmin && <a className="btn btn-white btn-sm ml-2" id={"Delete" + allergyData.id.toString()}
                    onClick={togglePopover}>
                     <i className="fa fa-trash"/> Delete
-                </a>
+                </a>}
                 <Popover target={"Delete" + allergyData.id.toString()} isOpen={popoverOpen} placement={"auto"}>
                     <PopoverBody>
                         Are you sure you want to delete?

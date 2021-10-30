@@ -4,6 +4,7 @@ import EditEvent from './EditEvent'
 import s from './index.module.scss'
 import {Button, Popover, PopoverBody} from "reactstrap";
 import {TEventEntity} from "../../../services/eventService/eventTypes";
+import {useIsAdmin} from "../../common/SideBar";
 
 type TProps = {
     eventData: TEventEntity
@@ -11,6 +12,8 @@ type TProps = {
 }
 
 const EventItem = (props: TProps) => {
+
+    const isAdmin = useIsAdmin()
     const {eventData, onDeleteEvent} = props
 
     const newDate = new Date(eventData.date * 1000)
@@ -43,13 +46,13 @@ const EventItem = (props: TProps) => {
             </div>
             <div className="project-actions">
                 <div className="media-body from-toDate">{dateForInput}</div>
-                {showEdit ? null : <a className="btn btn-white btn-sm" onClick={handleEdit}>
+                {!isAdmin && !showEdit && <a className="btn btn-white btn-sm" onClick={handleEdit}>
                     <i className="fa fa-pencil"/> Edit</a>}
 
-                <a id={"Delete" + eventData.id.toString()} onClick={togglePopover}
+                {!isAdmin && <a id={"Delete" + eventData.id.toString()} onClick={togglePopover}
                    className="btn btn-white btn-sm ml-2">
                     <i className="fa fa-trash"/> Delete
-                </a>
+                </a>}
                 <Popover target={"Delete" + eventData.id.toString()} isOpen={popoverOpen} placement={"auto"}>
                     <PopoverBody>
                         Are you sure you want to delete?

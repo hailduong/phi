@@ -21,7 +21,7 @@ const EditPrescription = (props: TProps) => {
 
     const [name, setName] = useState(prescriptionData.name)
     const [descriptions, setDescriptions] = useState(prescriptionData.descriptions)
-    const [date, setDate] = useState(new Date(prescriptionData.date*1000 || Date.now()).toISOString().split('T')[0])
+    const [date, setDate] = useState(new Date(prescriptionData.date * 1000 || Date.now()).toISOString().split('T')[0])
     const [shouldShowError, setShouldShowError] = useState(false)
     const newDate = new Date(date)
     const dateForInput = newDate.toISOString().split('T') [0]
@@ -49,36 +49,30 @@ const EditPrescription = (props: TProps) => {
     const cancelEdit = () => props.onCancelEditing()
 
     return <div className={`updateBox animated fadeIn ${addPatientStyle.addPatient}`}>
-        <div className={editPrescriptionStyle.addHistory}>
-            <form role="form">
-                <div className="form-group">
-                    <label>Name</label>
-                    <input value={name} onChange={(e) => setName(e.target.value)}
-                           type="text" placeholder="Input prescription name" className="form-control"/>
-                </div>
-            </form>
-            <form role="form">
-                <div className="form-group">
-                    <label>Date</label>
-                    <input value={dateForInput} max={new Date(Date.now()).toISOString().split('T')[0]}
-                           onChange={(e) => setDate(new Date(e.target.value).toISOString())}
-                           type="date" className="form-control"/>
-                </div>
-            </form>
-            <form role="form" className={s.description}>
-                <div className="form-group">
-                    <label>Descriptions</label>
-                    <textarea value={descriptions} onChange={(e) => setDescriptions(e.target.value)}
-                              placeholder="Input description" className="form-control"/>
-                </div>
-            </form>
-            {shouldShowError && <div className="col-sm-12">
-                <div className="alert alert-danger" role="alert">
-                    Invalid input or email existed
-                </div>
+        <form role="form" className={editPrescriptionStyle.addHistory}>
+            <div className="form-group">
+                <label>Name</label>
+                <input value={name} onChange={(e) => setName(e.target.value)}
+                       type="text" placeholder="Input prescription name" className="form-control"/>
+            </div>
+            <div className="form-group">
+                <label>Date</label>
+                <input value={dateForInput} max={new Date(Date.now()).toISOString().split('T')[0]}
+                       onChange={(e) => setDate(new Date(e.target.value).toISOString())}
+                       type="date" className="form-control"/>
+            </div>
+            <div className={`form-group ${s.description}`}>
+                <label>Descriptions</label>
+                <textarea value={descriptions} onChange={(e) => setDescriptions(e.target.value)}
+                          placeholder="Input description" className="form-control"/>
+            </div>
+        </form>
+        {shouldShowError && <div className="col-sm-12">
+            <div className="alert alert-danger" role="alert">
+                Invalid input or email existed
+            </div>
 
-            </div>}
-        </div>
+        </div>}
         <button className="btn btn-primary btn-sm" onClick={updatePrescription}>
             <>Update Prescription</>
         </button>

@@ -4,22 +4,28 @@ import AddPatient from './AddPatient'
 import patientService from '../../services/patients/patientService'
 import {TPatientEntity} from '../../services/patients/types'
 import s from './index.module.scss'
+import {useRouter} from "next/router";
+import adminPatientService from "../../services/adminPatientService/adminPatientService";
+import {useIsAdmin} from "../common/SideBar";
 
 const PatientPageContent = () => {
 
+    const isAdmin = useIsAdmin()
+
     const [data, setData] = useState<TPatientEntity[]>([])
+    const {doctorId} = useRouter().query
 
     const getData = async () => {
-        // let data
-        // if (isAdmin ){
-        //     data = await adminPatientService.getPatientByDoctor(doctorId)
-        // } else {
-        //     data = await patientService.getPatientList()
-        // }
-        //
-        // if (data?.status.code === 200) {
-        //     setData(data.data)
-        // }
+        let data
+        if (doctorId) {
+            data = await adminPatientService.getPatientDoctor(doctorId as string)
+        } else {
+            data = await patientService.getPatientList()
+        }
+
+        if (data?.status.code === 200) {
+            setData(data.data)
+        }
     }
 
     const handleDeletePatient = async (patientId: number) => {
@@ -61,13 +67,12 @@ const PatientPageContent = () => {
                     <div className="ibox">
                         <div className={`${s.boxTitle} ibox-title`}>
                             <h5>Patient List</h5>
-                            {showAddPatientForm ? null :
-                                <div className={`${s.addButton} ibox-tools`}>
-                                    <a onClick={toggleAddPatientBox}
-                                       className={`btn ${buttonAdd}`}>Add Patient</a>
-                                </div>}
-                            {showAddPatientForm ? <AddPatient onCancelAdding={toggleAddPatientBox}
-                                                              onPatientAdded={handlePatientAdded}/> : null}
+                            {!isAdmin && !showAddPatientForm && <div className={`${s.addButton} ibox-tools`}>
+                                <a onClick={toggleAddPatientBox}
+                                   className={`btn ${buttonAdd}`}>Add Patient</a>
+                            </div>}
+                            {showAddPatientForm && <AddPatient onCancelAdding={toggleAddPatientBox}
+                                                              onPatientAdded={handlePatientAdded}/>}
                         </div>
                         <div className="ibox-content">
                             <div className="patient-list">

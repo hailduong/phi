@@ -1,10 +1,8 @@
 import styles from '../styles/Home.module.scss'
 import SideBar from '../components/common/SideBar'
 import PageHeading from '../components/common/PageHeading'
-import NewsPageContent from "../components/news";
 import HeaderFooter from '../components/common/HeaderFooter'
 import DoctorPageContent from "../components/admin";
-// import './externalScripts'
 
 export default function PatientPage() {
 
