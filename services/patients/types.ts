@@ -17,9 +17,6 @@ export type TPatientEntity = {
     phone: string;
     gender?: string;
     dateOfBirth: number;
-    emergencyContactName?: string;
-    emergencyContactNumber?: string;
-    emergencyRelationship?: string;
     insurance?: string;
     medicalGroup?: string;
     healthPlan?: string
