@@ -8,7 +8,7 @@ import {useIsAdmin} from '../../common/SideBar'
 
 type TProps = {
     patientData: TPatientEntity
-    onDeletePatient: (id: number) => void
+    onDeletePatient: (id: string) => void
 }
 
 const PatientItem = (props: TProps) => {
@@ -27,6 +27,9 @@ const PatientItem = (props: TProps) => {
 
     const togglePopover = () => setPopoverOpen(!popoverOpen)
 
+    const handleEdited = () => {
+        setShowEditPatient(false)
+    }
     const cancelEdit = () => {
         setShowEditPatient(false)
     }
@@ -65,7 +68,8 @@ const PatientItem = (props: TProps) => {
                     </PopoverBody>
                 </Popover>
             </div>
-            {showEditPatient ? <EditPatient patientData={patientData} onCancelEditing={cancelEdit}/> : null}
+            {showEditPatient ?
+                <EditPatient patientId={patientData.id} onPatientEdited={handleEdited} patientData={patientData} onCancelEditing={cancelEdit}/> : null}
         </div>
     )
 }

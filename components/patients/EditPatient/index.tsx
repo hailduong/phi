@@ -2,15 +2,23 @@ import {useState} from 'react'
 import s from './index.module.scss'
 import {TPatientEntity} from "../../../services/patients/types";
 import addDoctorStyle from "../../patient-details/History/index.module.scss"
+import {useRouter} from "next/router";
+import apiClient from "../../../services/apiClient";
+import patientService from "../../../services/patients/patientService";
 
 type TProps = {
     onCancelEditing: () => void
     patientData: TPatientEntity
+    onPatientEdited: () => void
+    patientId: string
 }
 
 const EditPatient = (props: TProps) => {
 
     const {patientData} = props
+
+    const router = useRouter()
+    const {patientId} = router.query
 
     const patientDOB = patientData.dateOfBirth
 
@@ -27,6 +35,31 @@ const EditPatient = (props: TProps) => {
     const newDate = new Date(dateOfBirth)
     const dateForInput = newDate.toISOString().split('T')[0]
     const dateForServer = newDate.getTime() / 1000
+
+    async function updatePatient() {
+
+        if (typeof patientId === 'string') {
+            const response = await patientService.updatePatientDetail(patientId, {
+                firstName,
+                lastName,
+                phone,
+                email,
+                password,
+                gender,
+                dateOfBirth: dateForServer,
+                insurance,
+                medicalGroup,
+                healthPlan
+            })
+            if (response && response?.status && response.status.code === 200) {
+                props.onPatientEdited()
+                if (window !== 'undefined') {
+                    const event = new Event('patientEdited')
+                    window.dispatchEvent(event)
+                }
+            }
+        }
+    }
 
     const cancelEdit = () => props.onCancelEditing()
     return <div className={`${s.editPatient} animated fadeIn pt-3`}>
@@ -122,7 +155,7 @@ const EditPatient = (props: TProps) => {
                        className="form-control"/>
             </div>
         </form>
-        <button className="btn btn-primary btn-sm">
+        <button className="btn btn-primary btn-sm" onClick={updatePatient}>
             Update Patient
         </button>
         <button className="btn btn-default update" onClick={cancelEdit}>

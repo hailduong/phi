@@ -28,7 +28,7 @@ const PatientPageContent = () => {
         }
     }
 
-    const handleDeletePatient = async (patientId: number) => {
+    const handleDeletePatient = async (patientId: string) => {
         // Call API to server to delete
         const response = await patientService.deletePatient(patientId)
 
@@ -42,7 +42,6 @@ const PatientPageContent = () => {
     useEffect(() => {
         // Get data
         getData()
-
     }, [])
 
     const [showAddPatientForm, setShowAddPatientForm] = useState(false)
@@ -55,6 +54,17 @@ const PatientPageContent = () => {
         setShowAddPatientForm(false)
         await getData()
     }
+
+    useEffect(() => {
+        if (window !== 'undefined') {
+            window.addEventListener('patientEdited', () => {
+                getData()
+            })
+            window.addEventListener('patientAdded', () => {
+                getData()
+            })
+        }
+    })
 
     const buttonAdd = showAddPatientForm ? 'btn-default' : 'btn-primary'
 

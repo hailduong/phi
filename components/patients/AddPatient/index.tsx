@@ -44,6 +44,10 @@ const AddPatient = (props: TProps) => {
         if (res && res?.status && res.status.code === 200) {
             props.onPatientAdded()
             // @ts-ignore
+            if (window !== 'undefined') {
+                const event = new Event('patientAdded')
+                window.dispatchEvent(event)
+            }
         } else if (res?.error === 400) {
             setShouldShowError(true)
             setTimeout(() => {
