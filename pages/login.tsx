@@ -37,9 +37,9 @@ export default function LoginPage() {
         if (data && data?.status?.code === 200) {
             // Redirect if success
             if (data.data.role === 'admin'){
-                location.assign('/')
-            } else {
                 location.assign('/doctors')
+            } else {
+                location.assign('/')
             }
 
         } else {
