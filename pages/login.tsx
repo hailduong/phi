@@ -35,8 +35,13 @@ export default function LoginPage() {
         const data = await authService.login(userName, password)
 
         if (data && data?.status?.code === 200) {
-            // Go to patient page if success
-            navigateToThePatientPage()
+            // Redirect if success
+            if (data.data.role === 'admin'){
+                location.assign('/')
+            } else {
+                location.assign('/doctors')
+            }
+
         } else {
             // Show error if fail
             showLoginAlert()// Show an error message
@@ -53,10 +58,6 @@ export default function LoginPage() {
         }, 5000)
     }
 
-    // 4. If success, navigate to the `patient` page
-    const navigateToThePatientPage = () => {
-        location.assign('/')
-    }
 
 
     /* Render */

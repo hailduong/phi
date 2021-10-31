@@ -1,10 +1,8 @@
 import {useState} from 'react'
 import s from './index.module.scss'
-import {TPatientEntity} from "../../../services/patients/types";
-import addDoctorStyle from "../../patient-details/History/index.module.scss"
-import {useRouter} from "next/router";
-import apiClient from "../../../services/apiClient";
-import patientService from "../../../services/patients/patientService";
+import {TPatientEntity} from '../../../services/patients/types'
+import addDoctorStyle from '../../patient-details/History/index.module.scss'
+import patientService from '../../../services/patients/patientService'
 
 type TProps = {
     onCancelEditing: () => void
@@ -15,10 +13,10 @@ type TProps = {
 
 const EditPatient = (props: TProps) => {
 
-    const {patientData} = props
+    const {patientData, patientId} = props
 
-    const router = useRouter()
-    const {patientId} = router.query
+    // const router = useRouter()
+    // const {patientId} = router.query
 
     const patientDOB = patientData.dateOfBirth
 
@@ -37,28 +35,26 @@ const EditPatient = (props: TProps) => {
     const dateForServer = newDate.getTime() / 1000
 
     async function updatePatient() {
-
-        if (typeof patientId === 'string') {
-            const response = await patientService.updatePatientDetail(patientId, {
-                firstName,
-                lastName,
-                phone,
-                email,
-                password,
-                gender,
-                dateOfBirth: dateForServer,
-                insurance,
-                medicalGroup,
-                healthPlan
-            })
-            if (response && response?.status && response.status.code === 200) {
-                props.onPatientEdited()
-                if (window !== 'undefined') {
-                    const event = new Event('patientEdited')
-                    window.dispatchEvent(event)
-                }
+        const response = await patientService.updatePatientDetail(patientId, {
+            firstName,
+            lastName,
+            phone,
+            email,
+            password,
+            gender,
+            dateOfBirth: dateForServer,
+            insurance,
+            medicalGroup,
+            healthPlan
+        })
+        if (response && response?.status && response.status.code === 200) {
+            props.onPatientEdited()
+            if (window !== 'undefined') {
+                const event = new Event('patientEdited')
+                window.dispatchEvent(event)
             }
         }
+
     }
 
     const cancelEdit = () => props.onCancelEditing()
