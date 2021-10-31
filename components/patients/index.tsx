@@ -4,9 +4,9 @@ import AddPatient from './AddPatient'
 import patientService from '../../services/patients/patientService'
 import {TPatientEntity} from '../../services/patients/types'
 import s from './index.module.scss'
-import {useRouter} from "next/router";
-import adminPatientService from "../../services/adminPatientService/adminPatientService";
-import {useIsAdmin} from "../common/SideBar";
+import {useRouter} from 'next/router'
+import adminPatientService from '../../services/adminPatientService/adminPatientService'
+import {useIsAdmin} from '../common/SideBar'
 
 const PatientPageContent = () => {
 
@@ -86,11 +86,7 @@ const PatientPageContent = () => {
                         </div>
                         <div className="ibox-content">
                             <div className="patient-list">
-                                <table className="table table-hover">
-                                    <tbody>
-                                    {patientList}
-                                    </tbody>
-                                </table>
+                                {patientList}
                             </div>
                         </div>
                     </div>

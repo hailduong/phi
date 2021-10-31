@@ -42,7 +42,7 @@ const SideBar = () => {
                         <div className="dropdown profile-element">
                                         <span data-toggle="dropdown" className="dropdown-toggle">
                                             <span
-                                                className="block m-t-xs font-bold">{doctorInfo?.firstName} {doctorInfo?.lastName}</span>
+                                                className="block m-t-xs font-bold text-white">{doctorInfo?.firstName} {doctorInfo?.lastName}</span>
                                             <span className="text-muted text-xs block">{doctorInfo?.role}
                                                 <b className="caret"/>
                                                 </span>
@@ -53,9 +53,9 @@ const SideBar = () => {
                                 </li>
                             </ul>
                         </div>
-                        <div className="logo-element">
-                            PHI
-                        </div>
+                        {/*<div className="logo-element">*/}
+                        {/*    <Image src={'/img/logo.png'}/>*/}
+                        {/*</div>*/}
                     </li>
                     <li className="active">
                         {
@@ -71,12 +71,6 @@ const SideBar = () => {
                                 </a>
                             </Link>
                         }
-                        <Link href="/my-profile">
-                            <a>
-                                <i className="fa fa-user-circle"/>
-                                <span className="nav-label">My Profile</span>
-                            </a>
-                        </Link>
                         {
                             isAdmin && <Link href="/news">
                                 <a>
@@ -85,6 +79,13 @@ const SideBar = () => {
                                 </a>
                             </Link>
                         }
+                        <Link href="/my-profile">
+                            <a>
+                                <i className="fa fa-user-circle"/>
+                                <span className="nav-label">My Profile</span>
+                            </a>
+                        </Link>
+
                     </li>
                 </ul>
 

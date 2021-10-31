@@ -3,6 +3,14 @@ import Link from 'next/link'
 import {ChangeEvent, useState} from 'react'
 import LoginAlert from '../components/login/LoginAlert'
 import authService from '../services/authentication/authService'
+import Image from 'next/image'
+import styled from 'styled-components'
+
+const SDivLoginPageWrapper = styled.div`
+  .logo {
+    transform: scale(2);
+  }
+`
 
 export default function LoginPage() {
 
@@ -53,7 +61,7 @@ export default function LoginPage() {
 
     /* Render */
     return (
-        <div className="gray-bg middle-box text-center loginscreen animated fadeInDown">
+        <SDivLoginPageWrapper className="gray-bg middle-box text-center loginscreen animated fadeInDown">
             <style dangerouslySetInnerHTML={{__html: `body{background: #f3f3f4}`}}/>
             <Head>
                 <title>Login</title>
@@ -71,10 +79,8 @@ export default function LoginPage() {
             </Head>
 
             <div>
-                <div>
-
-                    <h1 className="logo-name">PHI</h1>
-
+                <div className="logo">
+                    <Image width={500} height={250} src="/img/logo.png" alt="Phi Logo"/>
                 </div>
                 <h3>Welcome to PHI</h3>
                 <p>Login in. To see it in action.</p>
@@ -101,6 +107,6 @@ export default function LoginPage() {
                     </Link>
                 </div>
             </div>
-        </div>
+        </SDivLoginPageWrapper>
     )
 }

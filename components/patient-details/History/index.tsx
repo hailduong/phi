@@ -41,7 +41,6 @@ const HistoryPatient = () => {
     useEffect(() => {
         if (window !== 'undefined') {
             window.addEventListener('historyAdded', () => {
-                debugger
                 getData()
             })
             window.addEventListener('historyEdited', () => {

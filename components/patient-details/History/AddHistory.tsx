@@ -37,7 +37,7 @@ const AddHistory = (props: TProps) => {
             fromDate: fromDateForServer,
             toDate: toDateForServer
         })
-        debugger
+
         if (response && response?.status && response?.status.code === 200) {
             props.onHistoryAdded()
             if (window !== 'undefined') {
@@ -113,8 +113,8 @@ const AddHistory = (props: TProps) => {
                         Invalid input or email existed
                     </div>}
                 </div>
-                <button className="btn btn-primary btn-sm" onClick={validate}>Add History</button>
-                <button className="btn btn-default btn-sm update" onClick={cancelAdd}>Cancel</button>
+                <button type='button' className="btn btn-primary btn-sm" onClick={validate}>Add History</button>
+                <button type='button' className="btn btn-default btn-sm update" onClick={cancelAdd}>Cancel</button>
             </div>
         </form>
     )

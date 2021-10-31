@@ -4,6 +4,7 @@ export type TDoctorResponse = {
         message: string
     },
     data: TDoctorEntity[]
+    error?: number
 }
 
 export type TDoctorEntity = {
