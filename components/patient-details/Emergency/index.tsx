@@ -1,6 +1,5 @@
 import {useEffect, useState} from 'react'
 import EmergencyItem from './EmergencyItem'
-import allergyService from '../../../services/allergyService/allergyService'
 import {useRouter} from 'next/router'
 import emergencyService from "../../../services/emergencyService/emergencyService";
 

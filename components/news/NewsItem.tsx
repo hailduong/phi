@@ -37,7 +37,7 @@ const NewsItem = (props: TProps) => {
     return (
         <div className={`grid-container ibox-content ${s.patientItem}`}>
             <div className="project-title">
-                <a>{newsData.id} {newsData.title}
+                <a>{newsData.title}
                     <br/>
                     <small>{newsData.content} </small>
                 </a>

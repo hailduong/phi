@@ -34,7 +34,7 @@ const EmergencyItem = (props: TProps) => {
                     <Image alt="icon" width={20} height={20} src="/img/icons8-allergies-32.png"/>
                 </a>
                 <div className="media-body">
-                    <h4>{emergencyData.id} {emergencyData.name} - {emergencyData.relationship}</h4>
+                    <h4>{emergencyData.name} - {emergencyData.relationship}</h4>
                 </div>
                 <div>Gender: {emergencyData.gender} | Phone: {emergencyData.phone} | Email: {emergencyData.email} |
                     Address: {emergencyData.address}</div>
