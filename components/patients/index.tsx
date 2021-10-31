@@ -28,7 +28,7 @@ const PatientPageContent = () => {
         }
     }
 
-    const handleDeletePatient = async (patientId: string) => {
+    const handleDeletePatient = async (patientId: number) => {
         // Call API to server to delete
         const response = await patientService.deletePatient(patientId)
 

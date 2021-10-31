@@ -8,7 +8,7 @@ import {useIsAdmin} from '../../common/SideBar'
 
 type TProps = {
     patientData: TPatientEntity
-    onDeletePatient: (id: string) => void
+    onDeletePatient: (id: number) => void
 }
 
 const PatientItem = (props: TProps) => {
