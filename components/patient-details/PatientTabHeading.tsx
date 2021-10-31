@@ -29,10 +29,10 @@ const data: TTab = [
         tabName: 'Prescription',
         tabHash: '#tab-5'
     },
-    {
-        tabName: 'Emergency',
-        tabHash: '#tab-6'
-    }
+    // {
+    //     tabName: 'Emergency',
+    //     tabHash: '#tab-6'
+    // }
 ]
 
 type TProps = {
