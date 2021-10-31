@@ -1,9 +1,8 @@
-import newsService from "../../services/newsService/newsService";
-import {TNewsEntity} from "../../services/newsService/newsTypes";
-import {useRouter} from "next/router";
-import {useState} from "react";
-import s from "../patient-details/History/index.module.scss";
-import styles from "../patients/EditPatient/index.module.scss"
+import newsService from '../../services/newsService/newsService'
+import {TNewsEntity} from '../../services/newsService/newsTypes'
+import {useState} from 'react'
+import s from '../patient-details/History/index.module.scss'
+import styles from '../patients/EditPatient/index.module.scss'
 
 type TProps = {
     newsId: number
@@ -13,10 +12,7 @@ type TProps = {
 }
 
 const EditNews = (props: TProps) => {
-    const {newsData} = props
-
-    const router = useRouter()
-    const {newsId} = router.query
+    const {newsData, newsId} = props
 
     const [title, setTitle] = useState(newsData.title)
     const [content, setContent] = useState(newsData.content)
@@ -34,22 +30,21 @@ const EditNews = (props: TProps) => {
     const [shouldShowError, setShouldShowError] = useState(false)
 
     async function updateNews() {
-        if (typeof newsId === 'string') {
-            const response = await newsService.updateNews(props.newsId, {
-                title,
-                fromDate: fromDateForServer,
-                toDate: toDateForServer,
-                content
-            })
-            if (response && response.status && response.status.code === 200) {
-                props.onNewsEdited()
+        const response = await newsService.updateNews(newsId, {
+            title,
+            fromDate: fromDateForServer,
+            toDate: toDateForServer,
+            content
+        })
+        if (response && response.status && response.status.code === 200) {
+            props.onNewsEdited()
 
-                if (typeof window !== 'undefined') {
-                    const event = new Event('newsEdited')
-                    window.dispatchEvent(event)
-                }
+            if (typeof window !== 'undefined') {
+                const event = new Event('newsEdited')
+                window.dispatchEvent(event)
             }
         }
+
     }
 
     const cancelUpdate = () => props.onCancelEditing()

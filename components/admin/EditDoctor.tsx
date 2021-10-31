@@ -98,7 +98,7 @@ const EditDoctor = (props: TProps) => {
             </div>
         </div>}
         <button className="btn btn-primary btn-sm" onClick={updateNews}>
-            Update News
+            Update Doctor
         </button>
         <button className="btn btn-default btn-sm update" onClick={cancelUpdate}>
             Cancel
