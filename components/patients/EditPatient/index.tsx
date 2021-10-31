@@ -8,7 +8,7 @@ type TProps = {
     onCancelEditing: () => void
     patientData: TPatientEntity
     onPatientEdited: () => void
-    patientId: string
+    patientId: number
 }
 
 const EditPatient = (props: TProps) => {

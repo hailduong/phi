@@ -6,10 +6,11 @@ export type TPatientDataResponse = {
         message: string;
     };
     data: TPatientEntity[];
+    error?: number
 }
 
 export type TPatientEntity = {
-    id: string;
+    id: number;
     email: string;
     firstName: string;
     lastName: string;
