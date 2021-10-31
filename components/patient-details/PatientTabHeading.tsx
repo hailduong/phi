@@ -4,6 +4,7 @@ import AddEvent from "./Events/AddEvent";
 import {useIsAdmin} from "../common/SideBar";
 import AddAllergy from "./Allergy/AddAllergy";
 import AddPrescription from "./Prescription/AddPrescription";
+import AddEmergency from "./Emergency/AddEmergency";
 
 
 type TTab = {
@@ -27,6 +28,10 @@ const data: TTab = [
     {
         tabName: 'Prescription',
         tabHash: '#tab-5'
+    },
+    {
+        tabName: 'Emergency',
+        tabHash: '#tab-6'
     }
 ]
 
@@ -100,6 +105,7 @@ const PatientTabHeading = (props: TProps) => {
         {(showAddButton) && activeTabHash === '#tab-4' &&
         <AddEvent onCancelAdding={handleAddButton} onEventAdded={handleAdded}/>}
         {(showAddButton) && activeTabHash === '#tab-5' && <AddPrescription onCancelAdding={handleAddButton} onPrescriptionAdded={handleAdded}/>}
+        {(showAddButton) && activeTabHash === '#tab-6' && <AddEmergency onCancelAdding={handleAddButton} onEmergencyAdded={handleAdded}/>}
     </div>
 }
 

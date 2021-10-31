@@ -12,6 +12,7 @@ import HistoryPatient from '../../components/patient-details/History'
 import Allergy from '../../components/patient-details/Allergy'
 import EventPatient from '../../components/patient-details/Events'
 import PrescriptionPatient from '../../components/patient-details/Prescription'
+import Emergency from "../../components/patient-details/Emergency";
 
 export default function PatientDetailsPage() {
 
@@ -67,6 +68,7 @@ export default function PatientDetailsPage() {
                                                                         {activeTabIndex === 1 && <Allergy/>}
                                                                         {activeTabIndex === 2 && <EventPatient/>}
                                                                         {activeTabIndex === 3 && <PrescriptionPatient/>}
+                                                                        {activeTabIndex === 4 && <Emergency/>}
                                                                     </div>
                                                                 </div>
                                                             </div>
