@@ -1,5 +1,11 @@
 import {API_URL} from '../../env'
-import {TCreatePatientResponse, TDeletePatientResponse, TPatientDataResponse, TPatientEntity} from './types'
+import {
+    TCreatePatientResponse,
+    TDeletePatientResponse,
+    TPatientCreateBody,
+    TPatientDataResponse,
+    TPatientEntity
+} from './types'
 import apiClient from '../apiClient'
 
 const patientService = {
@@ -7,12 +13,12 @@ const patientService = {
         return apiClient.get<TPatientDataResponse>(`${API_URL}/doctor/info/patients`)
     },
     createPatient: (patient: Partial<TPatientEntity & { password: string }>) => {
-        return apiClient.post<TCreatePatientResponse>(`${API_URL}/doctor/info/patient`, patient)
+        return apiClient.post<TPatientDataResponse>(`${API_URL}/doctor/info/patient`, patient)
     },
-    updatePatientDetail: () => {
-
+    updatePatientDetail: (id: string, patient: TPatientCreateBody & { password: string }) => {
+        return apiClient.put<TPatientDataResponse>(`${API_URL}/doctor/info/patient/${id}`, patient)
     },
-    deletePatient: (id: number) => {
+    deletePatient: (id: string) => {
         return apiClient.delete<TDeletePatientResponse>(`${API_URL}/doctor/info/patient/${id}`)
     }
 }

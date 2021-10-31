@@ -9,11 +9,10 @@ export type TPatientDataResponse = {
 }
 
 export type TPatientEntity = {
-    id: number;
+    id: string;
     email: string;
     firstName: string;
     lastName: string;
-    title: string;
     phone: string;
     gender?: string;
     dateOfBirth: number;
@@ -21,6 +20,8 @@ export type TPatientEntity = {
     medicalGroup?: string;
     healthPlan?: string
 }
+
+export type TPatientCreateBody = Omit<TPatientEntity, 'id'>
 
 type TCreatePatientResponseSuccess = {
     status: {

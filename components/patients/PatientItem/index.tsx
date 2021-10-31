@@ -8,7 +8,7 @@ import {useIsAdmin} from "../../common/SideBar";
 
 type TProps = {
     patientData: TPatientEntity
-    onDeletePatient: (id: number) => void
+    onDeletePatient: (id: string) => void
 }
 
 const PatientItem = (props: TProps) => {
@@ -27,6 +27,9 @@ const PatientItem = (props: TProps) => {
 
     const togglePopover = () => setPopoverOpen(!popoverOpen)
 
+    const handleEdited = () => {
+        setShowEditPatient(false)
+    }
     const cancelEdit = () => {
         setShowEditPatient(false)
     }
@@ -46,7 +49,7 @@ const PatientItem = (props: TProps) => {
                     <i className="fa fa-pencil"/> Edit
                 </a>}
                 {!isAdmin && <a id={'confirmDelete' + patientData.id.toString()} onClick={togglePopover}
-                   className="btn btn-white btn-sm ml-2">
+                                className="btn btn-white btn-sm ml-2">
                     <i className="fa fa-trash"/> Delete
                 </a>}
                 <Popover target={'confirmDelete' + patientData.id.toString()} isOpen={popoverOpen} placement={"auto"}>
@@ -61,7 +64,8 @@ const PatientItem = (props: TProps) => {
                     </PopoverBody>
                 </Popover>
             </div>
-            {showEditPatient ? <EditPatient patientData={patientData} onCancelEditing={cancelEdit}/> : null}
+            {showEditPatient ?
+                <EditPatient patientId={patientData.id} onPatientEdited={handleEdited} patientData={patientData} onCancelEditing={cancelEdit}/> : null}
         </div>
 
     )
