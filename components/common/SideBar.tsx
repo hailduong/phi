@@ -71,12 +71,6 @@ const SideBar = () => {
                                 </a>
                             </Link>
                         }
-                        <Link href="/my-profile">
-                            <a>
-                                <i className="fa fa-user-circle"/>
-                                <span className="nav-label">My Profile</span>
-                            </a>
-                        </Link>
                         {
                             isAdmin && <Link href="/news">
                                 <a>
@@ -85,6 +79,13 @@ const SideBar = () => {
                                 </a>
                             </Link>
                         }
+                        <Link href="/my-profile">
+                            <a>
+                                <i className="fa fa-user-circle"/>
+                                <span className="nav-label">My Profile</span>
+                            </a>
+                        </Link>
+
                     </li>
                 </ul>
 
