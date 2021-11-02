@@ -99,7 +99,7 @@ class AuthService {
     }
 
     //3. Forgot password
-    async forgotPassword(email: string, password: string) {
+    async forgotPassword(email: string) {
         const response = await fetch(`${API_URL}/doctor/auth/forgot-password`, {
             method: 'post',
             headers: {
@@ -107,7 +107,6 @@ class AuthService {
             },
             body: JSON.stringify({
                 email: email,
-                password: password
             })
         })
         const emailData: TAuthResponse = await response.json()
