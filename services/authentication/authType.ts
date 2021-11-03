@@ -9,6 +9,7 @@ export type TAuthResponse = {
         message: string
     }
     data: TUserEntity
+    error?: number
 }
 
 export type TUserEntity = {

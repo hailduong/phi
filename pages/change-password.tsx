@@ -3,7 +3,7 @@ import authService from "../services/authentication/authService";
 import Head from "next/head";
 import ChangePasswordSuccessAlert from "../components/login/ChangePasswordSuccessAlert";
 import ChangePasswordErrorAlert from "../components/login/ChangePasswordErrorAlert";
-import {Image} from "antd";
+import Image from 'next/image'
 import styled from "styled-components";
 import PasswordError from "../components/login/PasswordError";
 
@@ -74,7 +74,7 @@ const ChangePassword = () => {
     }
 
     const validate = () => {
-        let isValid
+        let isValid = true
 
         if (password !== passwordRepeat) {
             isValid = false
