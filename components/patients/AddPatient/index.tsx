@@ -264,7 +264,7 @@ const AddPatient = (props: TProps) => {
             {/*6. Medical Group*/}
             <div className="form-group">
                 <label>Insurance</label>
-                <input value={medicalGroup}
+                <input value={insurance}
                        onChange={(e) => setInsurance(e.target.value)}
                        type="text" placeholder="Input patient's insurance"
                        className={`form-control ${isInsuranceError ? 'is-invalid' : 'is-valid'}`}/>

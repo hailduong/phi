@@ -38,6 +38,7 @@ const ChangePassword = () => {
             setTimeout(() => {
                 navigateToTheLoginPage()
             }, 3000)
+            // @ts-ignore
         } else if (passwordChange?.error === 400) {
             showChangePasswordErrorAlert()
         }

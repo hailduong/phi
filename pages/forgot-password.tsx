@@ -27,6 +27,7 @@ const ForgotPassword = () => {
             setTimeout(()=>{
                 navigateToChangePassword()
             }, 5000)
+            //@ts-ignore
         } else if (data?.error === 400) {
             showWrongEmailAlert()
         }
