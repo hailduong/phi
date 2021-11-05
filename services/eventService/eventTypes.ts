@@ -12,7 +12,8 @@ export type TEventEntity = {
     name: string;
     descriptions: string;
     date: number;
-    dateRemind: number
+    dateRemind: number;
+    time?: number
 }
 
 export type TEventCreateBody =Omit<TEventEntity, 'id'>

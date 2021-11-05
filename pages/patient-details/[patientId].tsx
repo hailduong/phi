@@ -51,7 +51,8 @@ export default function PatientDetailsPage() {
                                             <div className="row">
                                                 <div className="col-lg-12 tab-seeContent">
                                                     <PatientHeading
-                                                        patientName={`${currentPatient?.firstName || ''} ${currentPatient?.lastName || ''}`}/>
+                                                        patientName={`${currentPatient?.firstName || ''} ${currentPatient?.lastName || ''}`}
+                                                    emailPatient={`${currentPatient?.email}`}/>
                                                     <div className="row m-t-sm">
                                                         <div className="col-lg-12">
                                                             <div className="panel blank-panel">

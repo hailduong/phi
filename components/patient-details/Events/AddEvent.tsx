@@ -22,7 +22,7 @@ const AddEvent = (props: TProps) => {
     const newDate = new Date(date)
     const newDateRemind = new Date(dateRemind)
 
-    const dateForInput = newDate.toISOString().split('T')[0]
+    const dateForInput = newDate.toISOString().split('.')[0]
     const dateForServer = newDate.getTime() / 1000
     const dateRemindForInput = newDateRemind.toISOString().split('T')[0]
     const dateRemindFortServer = newDateRemind.getTime() / 1000
@@ -89,9 +89,9 @@ const AddEvent = (props: TProps) => {
                 </div>
                 <div className="form-group">
                     <label>Date</label>
-                    <input value={dateForInput} max={new Date(Date.now()).toISOString().split('T')[0]}
+                    <input value={dateForInput} max={new Date(Date.now()).toISOString().split('.')[0]}
                            onChange={(e) => setDate(new Date(e.target.value).toISOString())}
-                           type="date"
+                           type="datetime-local"
                            className="form-control"/>
                 </div>
                 <div className="form-group">

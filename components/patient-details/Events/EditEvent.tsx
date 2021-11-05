@@ -19,12 +19,12 @@ const EditEvent = (props: TProps) => {
     const {patientId} = router.query
     const [name, setName] = useState(eventData.name)
     const [descriptions, setDescriptions] = useState(eventData.descriptions)
-    const [date, setDate] = useState(new Date(eventData.date * 1000 || Date.now()).toISOString().split('T')[0])
-    const [dateRemind, setDateRemind] = useState(new Date(eventData.dateRemind * 1000 || Date.now()).toISOString().split('T')[0])
+    const [date, setDate] = useState(new Date(eventData.date * 1000 || Date.now()).toISOString())
+    const [dateRemind, setDateRemind] = useState(new Date(eventData.dateRemind * 1000 || Date.now()).toISOString())
     const newDate = new Date(date)
     const newDateRemind = new Date(dateRemind)
-    const dateForInput = newDate.toISOString().split('T')[0]
-    const dateRemindForInput = newDateRemind.toISOString().split('T')[0]
+    const dateForInput = newDate.toISOString().split('.')[0]
+    const dateRemindForInput = newDateRemind.toISOString().split('.')[0]
     const dateForServer = newDate.getTime() / 1000
     const dateRemindForServer = newDateRemind.getTime() / 1000
 
@@ -63,8 +63,8 @@ const EditEvent = (props: TProps) => {
             <div className="form-group">
                 <label>Date</label>
                 <input value={dateForInput} onChange={(e) => setDate(new Date(e.target.value).toISOString())}
-                       type="date" placeholder="Input starting date"
-                       max={new Date(Date.now()).toISOString().split('T')[0]}
+                       type="datetime-local" placeholder="Input starting date"
+                       max={new Date(Date.now()).toISOString().split('.')[0]}
                        className="form-control"/>
             </div>
             <div className="form-group">
