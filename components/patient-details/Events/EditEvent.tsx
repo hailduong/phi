@@ -24,8 +24,7 @@ const EditEvent = (props: TProps) => {
     const [dateRemind, setDateRemind] = useState(new Date(eventData.dateRemind * 1000 || Date.now()).toISOString())
     const newDate = new Date(date)
     const newDateRemind = new Date(dateRemind)
-    const dateForInput = newDate.toISOString().substr(0, 16)
-    const a = dayjs().format('{YYYY} MM-DDTHH:mm:ss SSS [Z] A')
+    const dateForInput = dayjs(newDate).format('YYYY-MM-DDTHH:mm')
     const dateRemindForInput = newDateRemind.toISOString().split('T')[0]
     const dateForServer = newDate.getTime() / 1000
     const dateRemindForServer = newDateRemind.getTime() / 1000
@@ -64,7 +63,10 @@ const EditEvent = (props: TProps) => {
             </div>
             <div className="form-group">
                 <label>Date</label>
-                <input value={dateForInput} onChange={(e) => setDate(new Date(e.target.value).toISOString())}
+                <input value={dateForInput} onChange={(e) => {
+                    debugger
+                    setDate(e.target.value)
+                }}
                        type="datetime-local" placeholder="Input starting date"
                        max={new Date(Date.now()).toISOString().split('.')[0]}
                        className="form-control"/>
