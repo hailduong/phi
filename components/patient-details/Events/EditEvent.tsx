@@ -1,9 +1,10 @@
 import {useRouter} from 'next/router'
 import {useState} from 'react'
 import eventService from '../../../services/eventService/eventService'
-import {TEventEntity} from "../../../services/eventService/eventTypes";
-import addPatientStyle from "../../patients/AddPatient/index.module.scss"
-import s from "../History/index.module.scss"
+import {TEventEntity} from '../../../services/eventService/eventTypes'
+import addPatientStyle from '../../patients/AddPatient/index.module.scss'
+import s from '../History/index.module.scss'
+import dayjs from 'dayjs'
 
 type TProps = {
     eventId: number
@@ -23,8 +24,9 @@ const EditEvent = (props: TProps) => {
     const [dateRemind, setDateRemind] = useState(new Date(eventData.dateRemind * 1000 || Date.now()).toISOString())
     const newDate = new Date(date)
     const newDateRemind = new Date(dateRemind)
-    const dateForInput = newDate.toISOString().split('.')[0]
-    const dateRemindForInput = newDateRemind.toISOString().split('.')[0]
+    const dateForInput = newDate.toISOString().substr(0, 16)
+    const a = dayjs().format('{YYYY} MM-DDTHH:mm:ss SSS [Z] A')
+    const dateRemindForInput = newDateRemind.toISOString().split('T')[0]
     const dateForServer = newDate.getTime() / 1000
     const dateRemindForServer = newDateRemind.getTime() / 1000
 
