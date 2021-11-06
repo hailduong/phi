@@ -25,7 +25,7 @@ const EditEvent = (props: TProps) => {
     const newDate = new Date(date)
     const newDateRemind = new Date(dateRemind)
     const dateForInput = dayjs(newDate).format('YYYY-MM-DDTHH:mm')
-    const dateRemindForInput = newDateRemind.toISOString().split('T')[0]
+    const dateRemindForInput = dayjs(newDateRemind).format('YYYY-MM-DDTHH:mm')
     const dateForServer = newDate.getTime() / 1000
     const dateRemindForServer = newDateRemind.getTime() / 1000
 
@@ -62,20 +62,17 @@ const EditEvent = (props: TProps) => {
                        type="text" placeholder="Input event name" className="form-control"/>
             </div>
             <div className="form-group">
-                <label>Date</label>
-                <input value={dateForInput} onChange={(e) => {
-                    debugger
-                    setDate(e.target.value)
-                }}
+                <label>Date and Time</label>
+                <input value={dateForInput} onChange={(e) => setDate(e.target.value)}
                        type="datetime-local" placeholder="Input starting date"
-                       max={new Date(Date.now()).toISOString().split('.')[0]}
+                       max={dayjs(new Date(Date.now())).format('YYYY-MM-DDTHH:mm')}
                        className="form-control"/>
             </div>
             <div className="form-group">
-                <label>Date Remind</label>
-                <input value={dateRemindForInput} min={new Date(Date.now()).toISOString().split('T')[0]}
-                       onChange={(e) => setDateRemind(new Date(e.target.value).toISOString())}
-                       type="date" className="form-control"/>
+                <label>Date and Time Remind</label>
+                <input value={dateRemindForInput} min={dateForInput}
+                       onChange={(e) => setDateRemind(e.target.value)}
+                       type="datetime-local" className="form-control"/>
             </div>
             <div className={`form-group ${s.description}`}>
                 <label>Descriptions</label>

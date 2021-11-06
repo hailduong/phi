@@ -3,6 +3,7 @@ import {useState} from "react";
 import eventService from "../../../services/eventService/eventService";
 import addPatientStyle from "../../patients/AddPatient/index.module.scss";
 import s from "../History/index.module.scss"
+import dayjs from "dayjs";
 
 type TProps = {
     onEventAdded: () => void
@@ -22,9 +23,9 @@ const AddEvent = (props: TProps) => {
     const newDate = new Date(date)
     const newDateRemind = new Date(dateRemind)
 
-    const dateForInput = newDate.toISOString().split('.')[0]
+    const dateForInput = dayjs(newDate).format('YYYY-MM-DDTHH:mm')
     const dateForServer = newDate.getTime() / 1000
-    const dateRemindForInput = newDateRemind.toISOString().split('T')[0]
+    const dateRemindForInput = dayjs(newDateRemind).format('YYYY-MM-DDTHH:mm')
     const dateRemindFortServer = newDateRemind.getTime() / 1000
 
     const [shouldShowError, setShouldShowError] = useState(false)
@@ -88,17 +89,17 @@ const AddEvent = (props: TProps) => {
                     </div> : null}
                 </div>
                 <div className="form-group">
-                    <label>Date</label>
-                    <input value={dateForInput} max={new Date(Date.now()).toISOString().split('.')[0]}
-                           onChange={(e) => setDate(new Date(e.target.value).toISOString())}
+                    <label>Date and Time</label>
+                    <input value={dateForInput} max={dayjs(new Date(Date.now())).format('YYYY-MM-DDTHH:mm')}
+                           onChange={(e) => setDate(e.target.value)}
                            type="datetime-local"
                            className="form-control"/>
                 </div>
                 <div className="form-group">
-                    <label>Date Remind</label>
-                    <input value={dateRemindForInput} min={new Date(Date.now()).toISOString().split('T')[0]}
-                           onChange={(e) => setDateRemind(new Date(e.target.value).toISOString())}
-                           type="date"
+                    <label>Date and Time Remind</label>
+                    <input value={dateRemindForInput} min={dateForInput}
+                           onChange={(e) => setDateRemind(e.target.value)}
+                           type="datetime-local"
                            className="form-control"/>
                 </div>
 

@@ -21,7 +21,7 @@ const EventItem = (props: TProps) => {
     const dateForInput = dayjs(newDate).format(`YYYY/MM/DD - HH:mm`)
 
     const newDateRemind = new Date(eventData.dateRemind * 1000 || Date.now())
-    const dateRemindForInput = newDateRemind.toISOString().split('T')[0]
+    const dateRemindForInput = dayjs(newDateRemind).format('YYYY/MM/DD - HH:mm')
 
     const [showEdit, setShowEdit] = useState(false)
 
@@ -43,7 +43,7 @@ const EventItem = (props: TProps) => {
                     <Image alt="image" height={20} width={20} src={'/img/events--v2.png'}/>
                 </a>
                 <div className="media-body"><h4>{eventData.name}</h4></div>
-                <div>Description: {eventData.descriptions} | Date: {dateForInput} | Date Remind: {dateRemindForInput}</div>
+                <div>Description: {eventData.descriptions} | Date Remind: {dateRemindForInput}</div>
             </div>
             <div className="project-actions">
                 <div className="media-body from-toDate">{dateForInput}</div>
