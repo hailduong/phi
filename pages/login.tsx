@@ -36,7 +36,7 @@ export default function LoginPage() {
 
         if (data && data?.status?.code === 200) {
             // Redirect if success
-            if (data.data.role === 'admin'){
+            if (data.data.role === 'admin') {
                 location.assign('/doctors')
             } else {
                 location.assign('/')
@@ -58,7 +58,11 @@ export default function LoginPage() {
         }, 5000)
     }
 
-
+    const handleKeyPress = (event: React.KeyboardEvent) => {
+        if (event.key === 'Enter') {
+            handleClickSignIn()
+        }
+    }
 
     /* Render */
     return (
@@ -88,11 +92,12 @@ export default function LoginPage() {
                 <div className="m-t">
                     <div className="form-group">
                         <input type="email" onChange={handleUserNameInputChange} value={userName}
-                               className="form-control" placeholder="Email"
+                               className="form-control" placeholder="Email" onKeyPress={handleKeyPress}
                                required/>
                     </div>
                     <div className="form-group">
                         <input type="password" onChange={handlePasswordInputChange} value={password}
+                               onKeyPress={handleKeyPress}
                                className="form-control" placeholder="Password" required/>
                     </div>
                     {showLogin ? <LoginAlert/> : null}

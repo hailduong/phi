@@ -10,8 +10,8 @@ export type TEmergencyResponse = {
 export type TEmergencyEntity = {
     id: number;
     name: string
-    email: string
-    address: string
+    email?: string
+    address?: string
     gender: string
     phone: string
     relationship: string

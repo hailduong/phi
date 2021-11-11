@@ -9,6 +9,15 @@ export type TPatientDataResponse = {
     error?: number
 }
 
+export type TPatientInfoResponse = {
+    status: {
+        code: number;
+        message: string;
+    };
+    data: TPatientEntity;
+    error?: number
+}
+
 export type TPatientEntity = {
     id: number;
     email: string;
@@ -20,6 +29,15 @@ export type TPatientEntity = {
     insurance?: string;
     medicalGroup?: string;
     healthPlan?: string
+    emergencyContact?: TEmergency[]
+}
+
+export type TEmergency = {
+    id: number;
+    name: string;
+    gender: string;
+    phone: string;
+    relationship: string
 }
 
 export type TPatientCreateBody = Omit<TPatientEntity, 'id'>

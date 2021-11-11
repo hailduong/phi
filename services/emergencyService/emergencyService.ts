@@ -1,11 +1,13 @@
 import apiClient from '../apiClient'
 import {API_URL} from '../../env'
 import {TEmergencyCreateBody, TEmergencyResponse} from './emergencyTypes'
+import patientService from "../patients/patientService";
 
 class EmergencyService {
-    async getEmergency(patientId = '') {
+    async getEmergency(patientId: string) {
         if (patientId) {
-            return await apiClient.get<TEmergencyResponse>(`${API_URL}/doctor/allergy/patient/${patientId}`)
+            const patientInfoData = await patientService.getPatientInfo(patientId)
+            return patientInfoData.data.emergencyContact
         }
     }
     async createEmergency(patientId='', emergencyData: TEmergencyCreateBody){

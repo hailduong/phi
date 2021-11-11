@@ -1,4 +1,4 @@
-import {TEmergencyData} from './index'
+import {TEmergency} from "../../../services/patients/types";
 import Image from 'next/image'
 import {useState} from 'react'
 import EditEmergency from './EditEmergency'
@@ -7,7 +7,7 @@ import {Button, Popover, PopoverBody} from "reactstrap";
 import {useIsAdmin} from "../../common/SideBar";
 
 type TProps = {
-    emergencyData: TEmergencyData
+    emergencyData: TEmergency
     onDeleteEmergency: (id: number) => void
 }
 
@@ -36,8 +36,7 @@ const EmergencyItem = (props: TProps) => {
                 <div className="media-body">
                     <h4>{emergencyData.name} - {emergencyData.relationship}</h4>
                 </div>
-                <div>Gender: {emergencyData.gender} | Phone: {emergencyData.phone} | Email: {emergencyData.email} |
-                    Address: {emergencyData.address}</div>
+                <div>Gender: {emergencyData.gender} | Phone: {emergencyData.phone}</div>
             </div>
             <div className="project-actions">
                 {!isAdmin && !showEdit &&

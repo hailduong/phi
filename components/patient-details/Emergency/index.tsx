@@ -2,28 +2,19 @@ import {useEffect, useState} from 'react'
 import EmergencyItem from './EmergencyItem'
 import {useRouter} from 'next/router'
 import emergencyService from "../../../services/emergencyService/emergencyService";
-
-export type TEmergencyData = {
-    id: number;
-    name: string
-    email: string
-    address: string
-    gender: string
-    phone: string
-    relationship: string
-}
-
-type TEmergency = TEmergencyData[]
+import patientService from "../../../services/patients/patientService";
+import {TEmergency} from "../../../services/patients/types";
 
 const Emergency = () => {
     const router = useRouter()
     const {patientId = ''} = router.query
 
-    const [emergencyData, setEmergencyData] = useState<TEmergency>([])
+    const [emergencyData, setEmergencyData] = useState<TEmergency[]>([])
     const getData = async () => {
-        const data = await emergencyService.getEmergency(patientId as string)
-        if (data?.status.code === 200) {
-            setEmergencyData(data.data)
+        const statusCode = await patientService.getPatientInfo(patientId as string)
+        if (statusCode.status.code === 200) {
+            const data = await emergencyService.getEmergency(patientId as string)
+            data && setEmergencyData(data)
         }
     }
 
@@ -31,7 +22,7 @@ const Emergency = () => {
         const response = await emergencyService.deleteEmergency(patientId as string, emergencyId)
 
         if (response.status.code === 200) {
-            getData()
+            await getData()
         }
     }
 
@@ -52,7 +43,7 @@ const Emergency = () => {
 
 
     const emergencyList = emergencyData.map(emergency => <EmergencyItem onDeleteEmergency={handleDeleteEmergency}
-                                                                  key={emergency.id} emergencyData={emergency}/>)
+                                                                        key={emergency.id} emergencyData={emergency}/>)
     return (
         <div className="tab-pane active show" id="tab-4">
             <div className="feed-activity-list">

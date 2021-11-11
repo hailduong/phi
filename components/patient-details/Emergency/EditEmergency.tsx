@@ -22,11 +22,11 @@ const EditEmergency = (props: TProps) => {
     const [name, setName] = useState(emergencyData.name)
     // const [date, setDate] = useState(new Date(emergencyData.date * 1000 || Date.now()).toISOString().split('T')[0])
     // const [descriptions, setDescriptions] = useState(emergencyData.descriptions)
-    const [email, setEmail] = useState('')
-    const [gender, setGender] = useState('')
-    const [address, setAddress] = useState('')
-    const [phone, setPhone] = useState('')
-    const [relationship, setRelationship] = useState('')
+    // const [email, setEmail] = useState('')
+    const [gender, setGender] = useState(emergencyData.gender)
+    // const [address, setAddress] = useState('')
+    const [phone, setPhone] = useState(emergencyData.phone)
+    const [relationship, setRelationship] = useState(emergencyData.relationship)
 
     // const newDate = new Date(date)
     // const dateForInput = newDate.toISOString().split('T')[0]
@@ -39,9 +39,7 @@ const EditEmergency = (props: TProps) => {
         if (typeof patientId === 'string') {
             const response = await emergencyService.updateEmergency(patientId as string, props.emergencyId, {
                 name,
-                email,
                 gender,
-                address,
                 phone,
                 relationship
             })
@@ -73,18 +71,6 @@ const EditEmergency = (props: TProps) => {
                     <label>Name</label>
                     <input value={name} onChange={(e) => setName(e.target.value)}
                            type="text" placeholder="Input name" className="form-control"/>
-                </div>
-                <div className="form-group">
-                    <label>Email</label>
-                    <input type='text' value={email} onChange={(e) => setEmail(e.target.value)}
-                           placeholder="Input email"
-                           className="form-control"/>
-                </div>
-                <div className="form-group">
-                    <label>Address</label>
-                    <input type='text' value={address} onChange={(e) => setAddress(e.target.value)}
-                           placeholder="Input address"
-                           className="form-control"/>
                 </div>
                 <div className="form-group">
                     <label>Phone</label>

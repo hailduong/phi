@@ -32,8 +32,6 @@ const AddEmergency = (props: TProps) => {
         const myPatientId = typeof patientId === 'string' ? patientId : ''
         const response = await emergencyService.createEmergency(myPatientId, {
             name,
-            email,
-            address,
             gender,
             phone,
             relationship
@@ -82,10 +80,10 @@ const AddEmergency = (props: TProps) => {
             setIsGenderError(true)
         } else setIsGenderError(false)
 
-        if (address.trim().length === 0) {
-            isValid = false
-            setIsAddressError(true)
-        } else setIsAddressError(false)
+        // if (address.trim().length === 0) {
+        //     isValid = false
+        //     setIsAddressError(true)
+        // } else setIsAddressError(false)
 
         let phoneRegex: RegExp = /[0-9+\-()]{5,20}/g
 
@@ -94,12 +92,12 @@ const AddEmergency = (props: TProps) => {
             setIsPhoneError(true)
         } else setIsPhoneError(false)
 
-        let emailRegex: RegExp = /[\w.-]+@[\w.-]+\.\w{2,4}/g
-
-        if (!emailRegex.test(email.trim())) {
-            isValid = false
-            setIsEmailError(true)
-        } else setIsEmailError(false)
+        // let emailRegex: RegExp = /[\w.-]+@[\w.-]+\.\w{2,4}/g
+        //
+        // if (!emailRegex.test(email.trim())) {
+        //     isValid = false
+        //     setIsEmailError(true)
+        // } else setIsEmailError(false)
 
         if (isValid) {
             createEmergency()
@@ -118,24 +116,6 @@ const AddEmergency = (props: TProps) => {
                            className={`form-control ${isNameError ? 'is-invalid' : 'is-valid'}`}/>
                     {isNameError ? <div className="invalid-feedback">
                         Name cannot be blank!
-                    </div> : null}
-                </div>
-                <div className="form-group">
-                    <label>Email</label>
-                    <input type='text' value={email} onChange={(e) => setEmail(e.target.value)}
-                           placeholder="Input email"
-                           className={`form-control  ${isEmailError ? 'is-invalid' : 'is-valid'}`}/>
-                    {isEmailError ? <div className="invalid-feedback">
-                        Email is invalid!
-                    </div> : null}
-                </div>
-                <div className="form-group">
-                    <label>Address</label>
-                    <input type='text' value={address} onChange={(e) => setAddress(e.target.value)}
-                           placeholder="Input address"
-                           className={`form-control  ${isAddressError ? 'is-invalid' : 'is-valid'}`}/>
-                    {isAddressError ? <div className="invalid-feedback">
-                        Address cannot be left blank!
                     </div> : null}
                 </div>
                 <div className="form-group">
