@@ -65,7 +65,7 @@ const PatientTabHeading = (props: TProps) => {
     useEffect(() => {
         if (typeof window !== 'undefined') {
             const currentTab = location.hash
-            currentTab && setActiveTabHash(currentTab)
+            currentTab && changeTabHash(currentTab)
         }
     }, [])
     // Create list of tabs

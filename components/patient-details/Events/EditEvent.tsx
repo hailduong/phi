@@ -54,7 +54,7 @@ const EditEvent = (props: TProps) => {
 
     const cancelEdit = () => props.onCancelEditing()
 
-    return <div className={`updateBox animated fadeIn ${addPatientStyle.addPatient}`}>
+    return <div className={`updateBox animated fadeIn ${addPatientStyle.addPatent}`}>
         <form role="form" className={s.addHistory}>
             <div className="form-group">
                 <label>Name</label>

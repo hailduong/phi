@@ -13,7 +13,7 @@ const defaultData: TPrescriptionResponse = {
 }
 
 class PrescriptionService {
-    async getAllPrescriptions(patientId = '', pageNumber = 1, pageSize = 100) {
+    async getAllPrescriptions(patientId = '', pageNumber = 1, pageSize = 10) {
         if (patientId) {
             const response = await apiClient.get<TPrescriptionResponse>(`${API_URL}/doctor/prescription/patient/${patientId}?pagenum=${pageNumber}&pagesize=${pageSize}`)
             return response

@@ -3,6 +3,7 @@ import {useRouter} from "next/router";
 import prescriptionService from "../../../services/prescriptionService/prescriptionService";
 import addPatientStyle from "../../patients/AddPatient/index.module.scss";
 import s from "../Prescription/index.module.scss"
+import dayjs from "dayjs";
 
 type TProps = {
     onPrescriptionAdded: () => void

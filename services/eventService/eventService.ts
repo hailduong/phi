@@ -13,7 +13,7 @@ const defaultData: TEventResponse = {
 }
 
 class EventService {
-    async getAllEvents(patientId = '', pageNumber = 1, pageSize = 100) {
+    async getAllEvents(patientId = '', pageNumber: number = 1, pageSize: number = 10) {
         if (patientId) {
             const response = await apiClient.get<TEventResponse>(`${API_URL}/doctor/event/patient/${patientId}?pagenum=${pageNumber}&pagesize=${pageSize}`)
             return response

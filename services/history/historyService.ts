@@ -12,7 +12,7 @@ const defaultData: THistoryResponse = {
 }
 
 class HistoryService {
-    async getHistory(patientId = '', pageNumber = 1, pageSize = 100) {
+    async getHistory(patientId = '', pageNumber = 1, pageSize = 10) {
         if (patientId) {
             const response = await apiClient.get<THistoryResponse>(`${API_URL}/doctor/history/patient/${patientId}?pageNum=${pageNumber}&pageSize=${pageSize}`)
             return response

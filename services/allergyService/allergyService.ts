@@ -13,7 +13,7 @@ const defaultData: TAllergyResponse = {
 }
 
 class AllergyService {
-    async getAllAllergies(patientId = '', pageNumber = 1, pageSize = 100) {
+    async getAllAllergies(patientId = '', pageNumber = 1, pageSize = 10) {
         if (patientId) {
             const response = await apiClient.get<TAllergyResponse>(`${API_URL}/doctor/allergy/patient/${patientId}?pagenum=${pageNumber}&pagesize=${pageSize}`)
             return response
