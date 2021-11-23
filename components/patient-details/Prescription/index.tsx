@@ -4,6 +4,7 @@ import {useRouter} from 'next/router'
 import {TPrescriptionEntity} from '../../../services/prescriptionService/prescriptionTypes'
 import prescriptionService from '../../../services/prescriptionService/prescriptionService'
 import {Pagination} from "antd";
+import {list} from "postcss";
 
 export type TPresData = {
     id: number
@@ -57,12 +58,13 @@ const PrescriptionPatient = () => {
                                                             presData={pres} key={pres.id}/>)
     return (
         <div className="tab-pane active show" id="tab-5">
-            <div className="feed-activity-list">
+            {presData.length !== 0 ? <div className="feed-activity-list">
                 {presList}
-            </div>
-            <div className="text-center mt-3">
-                <Pagination onChange={handlePageChange} total={total}/>
-            </div>
+                <div className="text-center mt-3">
+                    <Pagination onChange={handlePageChange} total={total}/>
+                </div>
+            </div> : <div className="feed-activity-list text-center">There is no prescription.</div>}
+
         </div>
     )
 }

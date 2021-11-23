@@ -55,12 +55,13 @@ const Allergy = () => {
                                                                 key={allergy.id} allergyData={allergy}/>)
     return (
         <div className="tab-pane active show" id="tab-3">
-            <div className="feed-activity-list">
-                <div>{allergyList}</div>
-            </div>
-            <div className="text-center mt-3">
-                <Pagination onChange={handlePageChange} total={total}/>
-            </div>
+            {allergyData.length !== 0 ? <div className="feed-activity-list">
+                {allergyList}
+                <div className="text-center mt-3">
+                    <Pagination onChange={handlePageChange} total={total}/>
+                </div>
+            </div> : <div className="text-center">There is no allergy.</div>
+            }
         </div>
     )
 }

@@ -19,7 +19,6 @@ const EventPatient = () => {
 
     const getData = async (pageNo: number = page) => {
         // Get Data
-        debugger
         const data = await eventService.getAllEvents(patientId as string, pageNo)
 
         if (data?.status.code === 200) {
@@ -36,7 +35,7 @@ const EventPatient = () => {
         getData(page)
     }, [patientId])
 
-    useEffect(()=>{
+    useEffect(() => {
         getData(page)
     }, [page])
 
@@ -48,10 +47,10 @@ const EventPatient = () => {
     useEffect(() => {
         if (typeof window !== 'undefined') {
             window.addEventListener('eventAdded', () => {
-                getData()
+                getData(page)
             })
             window.addEventListener('eventUpdated', () => {
-                getData()
+                getData(page)
             })
         }
     }, [])
@@ -61,10 +60,11 @@ const EventPatient = () => {
                                                         key={event.id}/>)
     return <div className="tab-pane active show" id="tab-4">
         <div className="feed-activity-list">
-            <div>{eventList}</div>
-            <div className="text-center mt-3">
-                <Pagination onChange={handlePaginationChange} total={total}/>
-            </div>
+            {eventData.length !== 0 ? <div>{eventList}
+                <div className="text-center mt-3">
+                    <Pagination onChange={handlePaginationChange} total={total}/>
+                </div>
+            </div> : <div className="text-center">There is no event.</div>}
         </div>
     </div>
 }

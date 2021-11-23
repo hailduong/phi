@@ -46,9 +46,9 @@ const Emergency = () => {
                                                                         key={emergency.id} emergencyData={emergency}/>)
     return (
         <div className="tab-pane active show" id="tab-4">
-            <div className="feed-activity-list">
+            {emergencyData.length !== 0 ? <div className="feed-activity-list">
                 <div>{emergencyList}</div>
-            </div>
+            </div> : <div className="text-center">There is no emergency.</div>}
         </div>
     )
 }

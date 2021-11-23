@@ -84,11 +84,11 @@ const PatientPageContent = () => {
                             {showAddPatientForm && <AddPatient onCancelAdding={toggleAddPatientBox}
                                                                onPatientAdded={handlePatientAdded}/>}
                         </div>
-                        <div className="ibox-content">
+                        {data.length !== 0 ? <div className="ibox-content">
                             <div className="patient-list">
                                 {patientList}
                             </div>
-                        </div>
+                        </div> : <div className="ibox-content text-center">There is no patients.</div>}
                     </div>
                 </div>
             </div>

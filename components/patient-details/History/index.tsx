@@ -18,6 +18,8 @@ const HistoryPatient = () => {
     }
 
     const getData = async (pageNo: number = page) => {
+
+        debugger
         const data = await historyService.getHistory(patientId as string, pageNo)
         if (data && data.status.code === 200) {
             setHistoryData(data.data)
@@ -28,6 +30,10 @@ const HistoryPatient = () => {
     useEffect(() => {
         getData(page)
     }, [patientId])
+
+    useEffect(() => {
+        getData(page)
+    }, [page])
 
     const handleDeleteHistory = async (historyId: number) => {
         const response = await historyService.deleteHistory(patientId as string, historyId)
@@ -52,12 +58,13 @@ const HistoryPatient = () => {
                                                                 historyData={history} key={history.id}/>)
     return (
         <div className="tab-pane active show" id="tab-1">
-            <div className="feed-activity-list">
+            {historyData.length !== 0 ? <div className="feed-activity-list">
                 <div>{historyList}</div>
-            </div>
-            <div className="text-center mt-3">
-                <Pagination onChange={handlePageChange} total={total}/>
-            </div>
+
+                <div className="text-center mt-3">
+                    <Pagination onChange={handlePageChange} total={total}/>
+                </div>
+            </div> : <div className="text-center">There is no history.</div>}
         </div>
     )
 }
