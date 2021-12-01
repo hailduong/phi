@@ -3,7 +3,6 @@ import {useRouter} from "next/router";
 import prescriptionService from "../../../services/prescriptionService/prescriptionService";
 import addPatientStyle from "../../patients/AddPatient/index.module.scss";
 import s from "../Prescription/index.module.scss"
-import dayjs from "dayjs";
 
 type TProps = {
     onPrescriptionAdded: () => void
@@ -38,6 +37,8 @@ const AddPrescription = (props: TProps) => {
                     const event = new Event('prescriptionAdded')
                     window.dispatchEvent(event)
                 }
+            } else {
+                setShouldShowError(true)
             }
         }
     }
@@ -80,7 +81,7 @@ const AddPrescription = (props: TProps) => {
             </div>
             <div className="form-group">
                 <label>Date</label>
-                <input value={dateForInput} onChange={(e) => setDate(new Date(e.target.value).toISOString)}
+                <input value={dateForInput} onChange={(e) => setDate(new Date(e.target.value).toISOString())}
                        type="date" className="form-control" max={new Date(Date.now()).toISOString().split('T')[0]}/>
             </div>
             <div className={`form-group ${s.description}`}>
