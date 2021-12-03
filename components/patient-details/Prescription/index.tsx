@@ -52,7 +52,7 @@ const PrescriptionPatient = () => {
                 getData(page)
             })
         }
-    })
+    }, [])
 
     const presList = presData.map(pres => <PrescriptionItem onDeletePrescription={handleDeletePrescription}
                                                             presData={pres} key={pres.id}/>)

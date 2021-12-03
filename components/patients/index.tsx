@@ -64,7 +64,7 @@ const PatientPageContent = () => {
                 getData()
             })
         }
-    })
+    }, [])
 
     const buttonAdd = showAddPatientForm ? 'btn-default' : 'btn-primary'
 

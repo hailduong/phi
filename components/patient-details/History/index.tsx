@@ -18,8 +18,6 @@ const HistoryPatient = () => {
     }
 
     const getData = async (pageNo: number = page) => {
-
-        debugger
         const data = await historyService.getHistory(patientId as string, pageNo)
         if (data && data.status.code === 200) {
             setHistoryData(data.data)
