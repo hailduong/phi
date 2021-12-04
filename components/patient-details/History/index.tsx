@@ -15,8 +15,11 @@ const HistoryPatient = () => {
 
     const handlePageChange = async (pageNo: number) => {
         setPage(pageNo)
-        await getData(pageNo)
     }
+
+    useEffect(() => {
+        getData(page)
+    }, [page])
 
     const getData = async (pageNo: number = page) => {
         const data = await historyService.getHistory(patientId as string, pageNo)
@@ -30,10 +33,6 @@ const HistoryPatient = () => {
             }, 5000)
         }
     }
-
-    useEffect(() => {
-        getData(page)
-    })
 
     const handleDeleteHistory = async (historyId: number) => {
         const response = await historyService.deleteHistory(patientId as string, historyId)
