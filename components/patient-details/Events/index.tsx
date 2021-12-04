@@ -16,8 +16,11 @@ const EventPatient = () => {
 
     const handlePaginationChange = async (page: number) => {
         setPage(page)
-        await getData(page)
     }
+
+    useEffect(() => {
+        getData(page)
+    }, [page])
 
     const getData = async (pageNo: number = page) => {
         // Get Data
@@ -37,10 +40,6 @@ const EventPatient = () => {
             },5000)
         }
     }
-
-    useEffect(() => {
-        getData(page)
-    }, [])
 
     const handleDeleteEvent = async (eventId: number) => {
         await eventService.deleteEvent(patientId as string, eventId)
