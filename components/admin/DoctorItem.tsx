@@ -4,6 +4,7 @@ import EditDoctor from "./EditDoctor";
 import s from "../patients/PatientItem/index.module.scss"
 import {Button, Popover, PopoverBody} from "reactstrap";
 import {TDoctorEntity} from "../../services/adminService/adminTypes";
+import {UrlObject} from 'url'
 
 type TProps = {
     doctorData: TDoctorEntity
@@ -18,9 +19,18 @@ const DoctorItem = (props: TProps) => {
 
     const togglePopover = () => setPopoverOpen(!popoverOpen)
 
+    const doctorLinkHref: UrlObject = {
+        href: `patient/${doctorData.id}`,
+        query: {
+            doctorId: doctorData.id
+        }
+    }
+
+
+    /* Render */
     return (
         <div className={`grid-container ibox-content ${s.patientItem}`}>
-            <Link href={`patient/${doctorData.id}`}>
+            <Link href={`patient-list/${doctorData.id}`}>
                 <div className="project-title">
                     <a>{doctorData.firstName} {doctorData.lastName}
                         <br/>

@@ -6,7 +6,7 @@ import {THistoryResponse} from "../history/historyTypes";
 import {TPrescriptionResponse} from "../prescriptionService/prescriptionTypes";
 
 const adminPatientService = {
-    getPatientDoctor: async (doctorId: string) => {
+    getPatientListByDoctor: async (doctorId: string) => {
         return await apiClient.get<TPatientDataResponse>(`${API_URL}/admin-doctor/${doctorId}/info/patients`)
     },
     getPatientEvent: async (doctorId: number, patientId: number) => {

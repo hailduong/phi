@@ -9,13 +9,14 @@ import {useIsAdmin} from '../../common/SideBar'
 type TProps = {
     patientData: TPatientEntity
     onDeletePatient: (id: number) => void
+    doctorId?: string
 }
 
 const PatientItem = (props: TProps) => {
 
     const isAdmin = useIsAdmin()
 
-    const {patientData, onDeletePatient} = props
+    const {patientData, onDeletePatient, doctorId} = props
 
     const [showEditPatient, setShowEditPatient] = useState(false)
     const handleEditPatient = () => {
@@ -33,11 +34,12 @@ const PatientItem = (props: TProps) => {
     const cancelEdit = () => {
         setShowEditPatient(false)
     }
-    return (
 
+    /* Render */
+    return (
         <div className={`grid-container ibox-content ${s.patientItem}`}>
             <div className="project-title">
-                <Link href={`/patient-details/${patientData.id}`}>
+                <Link href={`/patient-details/${patientData.id}?doctorId=${doctorId}`}>
                     <a>{patientData.firstName} {patientData.lastName}
                         <br/>
                         <small>Gender: {patientData.gender} | Phone: {patientData.phone} |

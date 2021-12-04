@@ -9,7 +9,7 @@ import {
 import apiClient from '../apiClient'
 
 const patientService = {
-    getPatientList: async () => {
+    getPatientListByCurrentDoctor: async () => {
         return apiClient.get<TPatientDataResponse>(`${API_URL}/doctor/info/patients`)
     },
     createPatient: (patient: Partial<TPatientEntity & { password: string }>) => {
