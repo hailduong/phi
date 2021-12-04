@@ -35,11 +35,19 @@ const PatientItem = (props: TProps) => {
         setShowEditPatient(false)
     }
 
+    const patientDetailLink = (() => {
+        if (doctorId) {
+            return `/patient-details/${patientData.id}?doctorId=${doctorId}`
+        }
+        return `/patient-details/${patientData.id}`
+
+    })()
+
     /* Render */
     return (
         <div className={`grid-container ibox-content ${s.patientItem}`}>
             <div className="project-title">
-                <Link href={`/patient-details/${patientData.id}?doctorId=${doctorId}`}>
+                <Link href={patientDetailLink}>
                     <a>{patientData.firstName} {patientData.lastName}
                         <br/>
                         <small>Gender: {patientData.gender} | Phone: {patientData.phone} |
@@ -71,7 +79,8 @@ const PatientItem = (props: TProps) => {
                 </Popover>
             </div>
             {showEditPatient ?
-                <EditPatient patientId={patientData.id} onPatientEdited={handleEdited} patientData={patientData} onCancelEditing={cancelEdit}/> : null}
+                <EditPatient patientId={patientData.id} onPatientEdited={handleEdited} patientData={patientData}
+                             onCancelEditing={cancelEdit}/> : null}
         </div>
     )
 }

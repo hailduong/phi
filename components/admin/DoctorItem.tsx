@@ -19,13 +19,6 @@ const DoctorItem = (props: TProps) => {
 
     const togglePopover = () => setPopoverOpen(!popoverOpen)
 
-    const doctorLinkHref: UrlObject = {
-        href: `patient/${doctorData.id}`,
-        query: {
-            doctorId: doctorData.id
-        }
-    }
-
 
     /* Render */
     return (
