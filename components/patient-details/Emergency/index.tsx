@@ -9,18 +9,24 @@ const Emergency = () => {
     const router = useRouter()
     const {patientId = ''} = router.query
 
+    const [shouldShowError, setShouldShowError] = useState(false)
+
     const [emergencyData, setEmergencyData] = useState<TEmergency[]>([])
     const getData = async () => {
         const statusCode = await patientService.getPatientInfo(patientId as string)
         if (statusCode.status.code === 200) {
             const data = await emergencyService.getEmergency(patientId as string)
             data && setEmergencyData(data)
+        } else if (statusCode?.error === 400) {
+            setShouldShowError(true)
+            setTimeout(()=>{
+                setShouldShowError(false)
+            },5000)
         }
     }
 
     const handleDeleteEmergency = async (emergencyId: number) => {
         const response = await emergencyService.deleteEmergency(patientId as string, emergencyId)
-
         if (response.status.code === 200) {
             await getData()
         }
@@ -28,7 +34,7 @@ const Emergency = () => {
 
     useEffect(() => {
         getData()
-    }, [patientId])
+    }, [])
 
     useEffect(() => {
         if (typeof window !== 'undefined') {
@@ -49,6 +55,11 @@ const Emergency = () => {
             {emergencyData.length !== 0 ? <div className="feed-activity-list">
                 <div>{emergencyList}</div>
             </div> : <div className="text-center">There is no emergency.</div>}
+            {shouldShowError && <div className="col-sm-12">
+                <div className="alert alert-danger" role="alert">
+                    Data error.
+                </div>
+            </div>}
         </div>
     )
 }

@@ -14,6 +14,8 @@ const Allergy = () => {
     const [total, setTotal] = useState(0)
     const [page, setPage] = useState(1)
 
+    const [shouldShowError, setShouldShowError] = useState(false)
+
     const handlePageChange = async (page: number) => {
         setPage(page)
         await getData(page)
@@ -24,6 +26,11 @@ const Allergy = () => {
         if (data?.status.code === 200) {
             setAllergyData(data.data)
             setTotal(data.total)
+        } else if (data?.error === 400) {
+            setShouldShowError(true)
+            setTimeout(()=>{
+                setShouldShowError(false)
+            }, 5000)
         }
     }
 
@@ -37,7 +44,7 @@ const Allergy = () => {
 
     useEffect(() => {
         getData(page)
-    }, [patientId])
+    }, [])
 
     useEffect(() => {
         if (typeof window !== 'undefined') {
@@ -57,11 +64,16 @@ const Allergy = () => {
         <div className="tab-pane active show" id="tab-3">
             {allergyData.length !== 0 ? <div className="feed-activity-list">
                 {allergyList}
-                <div className="text-center mt-3">
+                {total>10 && <div className="text-center mt-3">
                     <Pagination onChange={handlePageChange} total={total}/>
-                </div>
+                </div>}
             </div> : <div className="text-center">There is no allergy.</div>
             }
+            {shouldShowError && <div className="col-sm-12">
+                <div className="alert alert-danger" role="alert">
+                    Data error.
+                </div>
+            </div>}
         </div>
     )
 }

@@ -5,6 +5,7 @@ export type THistoryResponse = {
     }
     total: number;
     data: THistoryEntity[];
+    error?: number
 }
 
 export type THistoryEntity = {

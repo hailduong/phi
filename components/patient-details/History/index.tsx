@@ -11,6 +11,7 @@ const HistoryPatient = () => {
     const [historyData, setHistoryData] = useState<THistoryEntity[]>([])
     const [total, setTotal] = useState(0)
     const [page, setPage] = useState(1)
+    const [shouldShowError, setShouldShowError] = useState(false)
 
     const handlePageChange = async (pageNo: number) => {
         setPage(pageNo)
@@ -22,16 +23,17 @@ const HistoryPatient = () => {
         if (data && data.status.code === 200) {
             setHistoryData(data.data)
             setTotal(data.total)
+        } else if (data?.error === 400) {
+            setShouldShowError(true)
+            setTimeout(()=>{
+                setShouldShowError(false)
+            }, 5000)
         }
     }
 
     useEffect(() => {
         getData(page)
-    }, [patientId])
-
-    useEffect(() => {
-        getData(page)
-    }, [page])
+    })
 
     const handleDeleteHistory = async (historyId: number) => {
         const response = await historyService.deleteHistory(patientId as string, historyId)
@@ -58,10 +60,14 @@ const HistoryPatient = () => {
         <div className="tab-pane active show" id="tab-1">
             {historyData.length !== 0 ? <div className="feed-activity-list">
                 <div>{historyList}</div>
-
-                <div className="text-center mt-3">
+                {shouldShowError && <div className="col-sm-12">
+                    <div className="alert alert-danger" role="alert">
+                        Data error.
+                    </div>
+                </div>}
+                {total>10 && <div className="text-center mt-3">
                     <Pagination onChange={handlePageChange} total={total}/>
-                </div>
+                </div>}
             </div> : <div className="text-center">There is no history.</div>}
         </div>
     )

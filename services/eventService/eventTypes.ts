@@ -5,6 +5,7 @@ export type TEventResponse = {
     };
     total: number;
     data: TEventEntity[];
+    error?: number
 }
 
 export type TEventEntity = {

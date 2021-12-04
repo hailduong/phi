@@ -34,6 +34,8 @@ const EditPatient = (props: TProps) => {
     const dateForInput = newDate.toISOString().split('T')[0]
     const dateForServer = newDate.getTime() / 1000
 
+    const [shouldShowError, setShouldShowError] = useState(false)
+
     async function updatePatient() {
         const response = await patientService.updatePatientDetail(patientId, {
             firstName,
@@ -53,8 +55,12 @@ const EditPatient = (props: TProps) => {
                 const event = new Event('patientEdited')
                 window.dispatchEvent(event)
             }
+        } else if (response?.error === 400) {
+            setShouldShowError(true)
+            setTimeout(()=>{
+                setShouldShowError(false)
+            }, 5000)
         }
-
     }
 
     const cancelEdit = () => props.onCancelEditing()
@@ -141,8 +147,6 @@ const EditPatient = (props: TProps) => {
                     </div>
                 </div>
             </div>
-            {/*4. Emergency Contact Number*/}
-            {/*6. Medical Group*/}
             <div className="form-group">
                 <label>Insurance</label>
                 <input value={insurance}
@@ -157,6 +161,11 @@ const EditPatient = (props: TProps) => {
         <button className="btn btn-default update" onClick={cancelEdit}>
             Cancel
         </button>
+        {shouldShowError && <div className="col-sm-12">
+            <div className="alert alert-danger" role="alert">
+                Invalid input!
+            </div>
+        </div>}
     </div>
 }
 

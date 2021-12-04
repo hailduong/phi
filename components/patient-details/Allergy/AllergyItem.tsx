@@ -1,4 +1,4 @@
-import {TAllergyData} from './index'
+import {TAllergyEntity} from "../../../services/allergyService/allergyTypes";
 import Image from 'next/image'
 import {useState} from 'react'
 import EditAllergy from './EditAllergy'
@@ -7,7 +7,7 @@ import {Button, Popover, PopoverBody} from "reactstrap";
 import {useIsAdmin} from "../../common/SideBar";
 
 type TProps = {
-    allergyData: TAllergyData
+    allergyData: TAllergyEntity
     onDeleteAllergy: (id: number) => void
 }
 

@@ -5,6 +5,7 @@ export type TAllergyResponse = {
     };
     total: number;
     data: TAllergyEntity[];
+    error?: number
 }
 
 export type TAllergyEntity = {

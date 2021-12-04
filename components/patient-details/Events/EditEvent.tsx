@@ -46,6 +46,11 @@ const EditEvent = (props: TProps) => {
                     const event = new Event('eventUpdated')
                     window.dispatchEvent(event)
                 }
+            } else if (response?.error === 400) {
+                setShouldShowError(true)
+                setTimeout(()=> {
+                    setShouldShowError(false)
+                },5000)
             }
         } else {
             console.warn('patientId is not string:', patientId)

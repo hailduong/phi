@@ -12,6 +12,8 @@ const EventPatient = () => {
     const [total, setTotal] = useState(0)
     const [page, setPage] = useState(1)
 
+    const [shouldShowError, setShouldShowError] = useState(false)
+
     const handlePaginationChange = async (page: number) => {
         setPage(page)
         await getData(page)
@@ -28,16 +30,17 @@ const EventPatient = () => {
 
             // Update total number
             setTotal(data.total)
+        } else if (data?.error === 400) {
+            setShouldShowError(true)
+            setTimeout(()=>{
+                setShouldShowError(false)
+            },5000)
         }
     }
 
     useEffect(() => {
         getData(page)
-    }, [patientId])
-
-    useEffect(() => {
-        getData(page)
-    }, [page])
+    }, [])
 
     const handleDeleteEvent = async (eventId: number) => {
         await eventService.deleteEvent(patientId as string, eventId)
@@ -61,10 +64,15 @@ const EventPatient = () => {
     return <div className="tab-pane active show" id="tab-4">
         <div className="feed-activity-list">
             {eventData.length !== 0 ? <div>{eventList}
-                <div className="text-center mt-3">
+                {total>10 && <div className="text-center mt-3">
                     <Pagination onChange={handlePaginationChange} total={total}/>
-                </div>
+                </div>}
             </div> : <div className="text-center">There is no event.</div>}
+            {shouldShowError && <div className="col-sm-12">
+                <div className="alert alert-danger" role="alert">
+                    Data error.
+                </div>
+            </div>}
         </div>
     </div>
 }

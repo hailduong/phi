@@ -22,7 +22,7 @@ const DoctorItem = (props: TProps) => {
         <div className={`grid-container ibox-content ${s.patientItem}`}>
             <Link href={`patient/${doctorData.id}`}>
                 <div className="project-title">
-                    <a>{doctorData.id} {doctorData.firstName} {doctorData.lastName}
+                    <a>{doctorData.firstName} {doctorData.lastName}
                         <br/>
                         <small>Gender: {doctorData.gender} | Phone: {doctorData.phone} |
                             Email: {doctorData.email}</small>

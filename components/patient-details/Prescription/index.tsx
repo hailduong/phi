@@ -21,11 +21,18 @@ const PrescriptionPatient = () => {
     const [page, setPage] = useState(1)
     const [total, setTotal] = useState(0)
 
+    const [shouldShowError, setShouldShowError] = useState(false)
+
     const getData = async (page: number) => {
         const data = await prescriptionService.getAllPrescriptions(patientId as string, page)
         if (data?.status.code === 200) {
             setPresData(data.data)
             setTotal(data.total)
+        } else if (data?.error === 400) {
+            setShouldShowError(true)
+            setTimeout(()=>{
+                setShouldShowError(false)
+            }, 5000)
         }
     }
 
@@ -34,9 +41,10 @@ const PrescriptionPatient = () => {
         setPage(pageNo)
     }
 
+    //TODO set to one page before when current page has no item
     useEffect(() => {
         getData(page)
-    }, [patientId])
+    }, [])
 
     const handleDeletePrescription = async (prescriptionId: number) => {
         await prescriptionService.deletePrescription(patientId as string, prescriptionId)
@@ -60,11 +68,10 @@ const PrescriptionPatient = () => {
         <div className="tab-pane active show" id="tab-5">
             {presData.length !== 0 ? <div className="feed-activity-list">
                 {presList}
-                <div className="text-center mt-3">
+                {total>10 && <div className="text-center mt-3">
                     <Pagination onChange={handlePageChange} total={total}/>
-                </div>
+                </div>}
             </div> : <div className="feed-activity-list text-center">There is no prescription.</div>}
-
         </div>
     )
 }

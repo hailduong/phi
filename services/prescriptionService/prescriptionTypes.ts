@@ -5,6 +5,7 @@ export type TPrescriptionResponse = {
     };
     total: number;
     data: TPrescriptionEntity[];
+    error?: number
 }
 
 export type TPrescriptionEntity = {

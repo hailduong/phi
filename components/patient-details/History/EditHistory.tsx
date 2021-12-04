@@ -49,6 +49,11 @@ const EditHistory = (props: TProps) => {
                 const event = new Event('historyEdited')
                 window.dispatchEvent(event)
             }
+        } else if (response?.error === 400) {
+            setShouldShowError(true)
+            setTimeout(()=>{
+                setShouldShowError(false)
+            },5000)
         }
     }
 
@@ -82,8 +87,7 @@ const EditHistory = (props: TProps) => {
                           className="form-control"/>
             </div>
         </form>
-        {shouldShowError &&
-        <div className="alert alert-danger" role="alert">
+        {shouldShowError && <div className="alert alert-danger" role="alert">
             Invalid input or email existed
         </div>}
         <button className="btn btn-primary btn-sm" onClick={updateHistory}>Update History</button>

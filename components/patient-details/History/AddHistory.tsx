@@ -44,6 +44,11 @@ const AddHistory = (props: TProps) => {
                 const event = new Event('historyAdded')
                 window.dispatchEvent(event)
             }
+        } else if (response?.error === 400) {
+            setShouldShowError(true)
+            setTimeout(()=> {
+                setShouldShowError(false)
+            }, 5000)
         }
     }
 
@@ -110,7 +115,7 @@ const AddHistory = (props: TProps) => {
                         </div>
                     </div>
                     {shouldShowError && <div className="alert alert-danger" role="alert">
-                        Invalid input or email existed
+                        Invalid input or email existed!
                     </div>}
                 </div>
                 <button type='button' className="btn btn-primary btn-sm" onClick={validate}>Add History</button>

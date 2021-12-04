@@ -42,6 +42,11 @@ const EditPrescription = (props: TProps) => {
                     const event = new Event('prescriptionEdited')
                     window.dispatchEvent(event)
                 }
+            } else if (response?.error === 400) {
+                setShouldShowError(true)
+                setTimeout(()=>{
+                    setShouldShowError(false)
+                },5000)
             }
         }
     }
