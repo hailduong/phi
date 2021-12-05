@@ -9,13 +9,14 @@ import {useIsAdmin} from '../../common/SideBar'
 type TProps = {
     patientData: TPatientEntity
     onDeletePatient: (id: number) => void
+    doctorId?: string
 }
 
 const PatientItem = (props: TProps) => {
 
     const isAdmin = useIsAdmin()
 
-    const {patientData, onDeletePatient} = props
+    const {patientData, onDeletePatient, doctorId} = props
 
     const [showEditPatient, setShowEditPatient] = useState(false)
     const handleEditPatient = () => {
@@ -33,11 +34,20 @@ const PatientItem = (props: TProps) => {
     const cancelEdit = () => {
         setShowEditPatient(false)
     }
-    return (
 
+    const patientDetailLink = (() => {
+        if (doctorId) {
+            return `/patient-details/${patientData.id}?doctorId=${doctorId}`
+        }
+        return `/patient-details/${patientData.id}`
+
+    })()
+
+    /* Render */
+    return (
         <div className={`grid-container ibox-content ${s.patientItem}`}>
             <div className="project-title">
-                <Link href={`/patient-details/${patientData.id}`}>
+                <Link href={patientDetailLink}>
                     <a>{patientData.firstName} {patientData.lastName}
                         <br/>
                         <small>Gender: {patientData.gender} | Phone: {patientData.phone} |
@@ -69,7 +79,8 @@ const PatientItem = (props: TProps) => {
                 </Popover>
             </div>
             {showEditPatient ?
-                <EditPatient patientId={patientData.id} onPatientEdited={handleEdited} patientData={patientData} onCancelEditing={cancelEdit}/> : null}
+                <EditPatient patientId={patientData.id} onPatientEdited={handleEdited} patientData={patientData}
+                             onCancelEditing={cancelEdit}/> : null}
         </div>
     )
 }

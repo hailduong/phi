@@ -4,7 +4,7 @@ import {TPatientEntity} from './types'
 
 /* Thunk */
 export const getPatientList = createAsyncThunk('customers/fetchOneCustomer', async () => {
-    const response = await patientService.getPatientList()
+    const response = await patientService.getPatientListByCurrentDoctor()
     return response.data
 })
 

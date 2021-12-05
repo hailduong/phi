@@ -8,19 +8,24 @@ import {useRouter} from 'next/router'
 import adminPatientService from '../../services/adminPatientService/adminPatientService'
 import {useIsAdmin} from '../common/SideBar'
 
-const PatientPageContent = () => {
+type TProps = {
+    doctorId?: string
+}
+
+const PatientPageContent = (props: TProps) => {
 
     const isAdmin = useIsAdmin()
 
     const [data, setData] = useState<TPatientEntity[]>([])
-    const {doctorId} = useRouter().query
+    const {doctorId} = props
 
     const getData = async () => {
         let data
         if (doctorId) {
-            data = await adminPatientService.getPatientDoctor(doctorId as string)
+
+            data = await adminPatientService.getPatientListByDoctor(doctorId)
         } else {
-            data = await patientService.getPatientList()
+            data = await patientService.getPatientListByCurrentDoctor()
         }
 
         if (data?.status.code === 200) {
@@ -68,7 +73,9 @@ const PatientPageContent = () => {
 
     const buttonAdd = showAddPatientForm ? 'btn-default' : 'btn-primary'
 
-    const patientList = data.map(dataItem => <PatientItem onDeletePatient={handleDeletePatient} patientData={dataItem}
+    const patientList = data.map(dataItem => <PatientItem onDeletePatient={handleDeletePatient}
+                                                          doctorId={doctorId}
+                                                          patientData={dataItem}
                                                           key={dataItem.id}/>)
     return (
         <div className="wrapper wrapper-content animated fadeInUp">
