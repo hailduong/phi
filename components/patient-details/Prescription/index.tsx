@@ -37,14 +37,15 @@ const PrescriptionPatient = () => {
     }
 
     const handlePageChange = async (pageNo: number = page) => {
-        await getData(pageNo)
         setPage(pageNo)
     }
 
-    //TODO set to one page before when current page has no item
     useEffect(() => {
         getData(page)
-    }, [])
+    }, [page])
+
+    //TODO set to one page before when current page has no item
+
 
     const handleDeletePrescription = async (prescriptionId: number) => {
         await prescriptionService.deletePrescription(patientId as string, prescriptionId)
@@ -72,6 +73,11 @@ const PrescriptionPatient = () => {
                     <Pagination onChange={handlePageChange} total={total}/>
                 </div>}
             </div> : <div className="feed-activity-list text-center">There is no prescription.</div>}
+            {shouldShowError && <div className="col-sm-12">
+                <div className="alert alert-danger" role="alert">
+                    Data error.
+                </div>
+            </div>}
         </div>
     )
 }

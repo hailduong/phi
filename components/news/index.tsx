@@ -37,8 +37,18 @@ const NewsPageContent = () => {
 
     const handleNewsAdded = async () => {
         setShowAddNewsForm(false)
-        await getData()
     }
+
+    useEffect(() =>{
+        if (typeof window !== 'undefined') {
+            window.addEventListener('newsAdded',()=>{
+                getData()
+            })
+            window.addEventListener('newsEdited', ()=>{
+                getData()
+            })
+        }
+    },[])
 
     const buttonAdd = showAddNewsForm ? 'btn-default' : 'btn-primary'
 

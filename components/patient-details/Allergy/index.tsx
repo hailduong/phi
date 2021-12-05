@@ -18,8 +18,11 @@ const Allergy = () => {
 
     const handlePageChange = async (page: number) => {
         setPage(page)
-        await getData(page)
     }
+
+    useEffect(() => {
+        getData(page)
+    }, [page])
 
     const getData = async (pageNo: number = page) => {
         const data = await allergyService.getAllAllergies(patientId as string, pageNo)
@@ -41,10 +44,6 @@ const Allergy = () => {
             await getData(page)
         }
     }
-
-    useEffect(() => {
-        getData(page)
-    }, [])
 
     useEffect(() => {
         if (typeof window !== 'undefined') {
