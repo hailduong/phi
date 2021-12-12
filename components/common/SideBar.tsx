@@ -85,6 +85,18 @@ const SideBar = () => {
                                 <span className="nav-label">My Profile</span>
                             </a>
                         </Link>
+                        <Link href="/terms-and-condition">
+                            <a>
+                                <i className="fa fa-user-circle"/>
+                                <span className="nav-label">Terms and Condition</span>
+                            </a>
+                        </Link>
+                        <Link href="/privacy-policy">
+                            <a>
+                                <i className="fa fa-user-circle"/>
+                                <span className="nav-label">Privacy Policy</span>
+                            </a>
+                        </Link>
 
                     </li>
                 </ul>

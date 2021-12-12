@@ -21,7 +21,7 @@ const patientService = {
     deletePatient: (id: number) => {
         return apiClient.delete<TDeletePatientResponse>(`${API_URL}/doctor/info/patient/${id}`)
     },
-    getPatientInfo: (id: string) => {
+    getPatientInfo: (id: number) => {
         return apiClient.get<TPatientInfoResponse>(`${API_URL}/doctor-patient/${id}/info`)
     }
 }

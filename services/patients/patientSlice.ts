@@ -1,6 +1,6 @@
 import {createAsyncThunk, createEntityAdapter, createSlice} from '@reduxjs/toolkit'
 import patientService from './patientService'
-import {TPatientEntity} from './types'
+import {TPatientCreateBody, TPatientEntity} from './types'
 
 /* Thunk */
 // Get thunk
@@ -18,10 +18,27 @@ export const deletePatient = createAsyncThunk('deletePatient', async (params: TD
 })
 
 // TODO: Create Thunk
+type TCreatePatientParams = Partial<TPatientEntity> & {password: string}
+export const createPatient = createAsyncThunk('createPatient', async (patientBody: TCreatePatientParams) => {
+    const response = await patientService.createPatient(patientBody)
+    return response.data
+})
 
 // TODO: Update Thunk
 
+type TUpdatePatientParams = TPatientEntity & {password: string}
+export const updatePatient = createAsyncThunk('updatePatient', async (patientBody: TUpdatePatientParams) => {
+    const response = await patientService.updatePatientDetail(patientBody.id, patientBody)
+    return response.data
+})
+
+
 // TODO: Get Info Thunk
+export const getInfoPatient = createAsyncThunk('getInfoPatient', async (params: TDeletePatientParams) => {
+    const {id} = params
+    const response = await patientService.getPatientInfo(id)
+    return response.data
+})
 
 
 /* Adapter */
